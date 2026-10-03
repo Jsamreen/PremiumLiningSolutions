@@ -1,3 +1,24 @@
+:root {
+  --color-black: #111111;
+  --color-charcoal: #1b1b19;
+
+  --color-gold: #c89a32;
+  --color-gold-dark: #9f7420;
+  --color-gold-soft: #e3c57d;
+
+  --color-russet: #28170c;
+  --color-brown: #4b362e;
+  --color-material: #917160;
+
+  --color-surface: #f7f5f1;
+  --color-surface-warm: #efe2dd;
+  --color-white: #ffffff;
+
+  --color-text: #171715;
+  --color-text-muted: #6d6962;
+  --color-border: rgba(17, 17, 17, 0.12);
+}
+
 *,
 *::before,
 *::after {
@@ -20,8 +41,8 @@ body {
     "Segoe UI",
     sans-serif;
 
-  background: #f5f3ee;
-  color: #181816;
+  background: var(--color-surface);
+  color: var(--color-text);
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -58,13 +79,14 @@ main {
 /* Accessibility */
 
 :focus-visible {
-  outline: 2px solid #181816;
+  outline: 2px solid var(--color-gold);
   outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
+    background: var(--color-surface);
   }
 
   *,

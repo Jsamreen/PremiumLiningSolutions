@@ -1,14 +1,19 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
+
 import HouseScene from '../../components/three/HouseScene'
+import HouseInfoPanel from '../../components/ui/HouseInfoPanel'
+
 import './Hero.css'
 
 function Hero() {
   const reduceMotion = useReducedMotion()
+  const [selectedPart, setSelectedPart] = useState(null)
 
   const reveal = {
     hidden: {
       opacity: 0,
-      y: reduceMotion ? 0 : 28,
+      y: reduceMotion ? 0 : 24,
     },
 
     visible: {
@@ -18,9 +23,13 @@ function Hero() {
   }
 
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section
+      id="home"
+      className="hero"
+      aria-labelledby="hero-title"
+    >
+      {/* HERO COPY */}
       <div className="hero__content">
-
         <motion.p
           className="hero__eyebrow"
           variants={reveal}
@@ -28,7 +37,7 @@ function Hero() {
           animate="visible"
           transition={{ duration: 0.6 }}
         >
-          INTERACTIVE ARCHITECTURE
+          COMPLETE LINING SOLUTIONS
         </motion.p>
 
         <motion.h1
@@ -43,11 +52,9 @@ function Hero() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          See what
+          From frame
           <br />
-          makes a
-          <br />
-          <em>better home.</em>
+          to <em>finish.</em>
         </motion.h1>
 
         <motion.p
@@ -60,36 +67,48 @@ function Hero() {
             delay: 0.18,
           }}
         >
-          Explore every layer of the home — from structure and
-          insulation to materials and energy performance.
+          Explore the systems, materials and craftsmanship behind
+          a complete Premium Lining Solutions build.
         </motion.p>
 
         <motion.a
           href="#explore"
           className="hero__button"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
+          variants={reveal}
+          initial="hidden"
+          animate="visible"
+          transition={{
+            duration: 0.6,
+            delay: 0.28,
+          }}
         >
           Explore the house
-
           <span aria-hidden="true">→</span>
         </motion.a>
-
       </div>
 
+      {/* INTERACTIVE 3D HOUSE */}
       <div className="hero__visual">
         <div className="hero__canvas">
-            <HouseScene />
+          <HouseScene
+            selectedPart={selectedPart}
+            onSelect={setSelectedPart}
+          />
         </div>
 
-        <p className="hero__interaction" aria-hidden="true">
-            DRAG TO ROTATE · SCROLL TO ZOOM
+        <HouseInfoPanel
+          selectedPart={selectedPart}
+          onClose={() => setSelectedPart(null)}
+        />
+
+        <p
+          className="hero__interaction"
+          aria-hidden="true"
+        >
+          <span>DRAG TO ROTATE</span>
+          <span className="hero__interaction-dot">·</span>
+          <span>SCROLL TO ZOOM</span>
         </p>
-        </div>
-      <div className="hero__scroll" aria-hidden="true">
-        <span>SCROLL TO EXPLORE</span>
-        <span>↓</span>
       </div>
     </section>
   )

@@ -1,0 +1,103 @@
+.house-info {
+  position: absolute;
+  z-index: 10;
+
+  right: 1rem;
+  bottom: 4.5rem;
+
+  width: min(340px, calc(100% - 2rem));
+
+  padding: 1.5rem;
+
+  background: rgba(245, 243, 238, 0.94);
+
+  border: 1px solid rgba(24, 24, 22, 0.12);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.house-info__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.house-info__number {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+
+  opacity: 0.5;
+}
+
+.house-info__close {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.house-info__label {
+  margin: 2rem 0 0.75rem;
+
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  opacity: 0.55;
+}
+
+.house-info h2 {
+  max-width: 260px;
+
+  margin: 0;
+
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.house-info__description {
+  margin: 1.25rem 0 0;
+
+  font-size: 0.9rem;
+  line-height: 1.65;
+
+  color: #62615d;
+}
+
+.house-info__explore {
+  margin-top: 1.75rem;
+  padding: 0 0 0.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  border: 0;
+  border-bottom: 1px solid currentColor;
+
+  background: transparent;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .house-info {
+    right: 0;
+    bottom: 3rem;
+  }
+}
