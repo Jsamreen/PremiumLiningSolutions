@@ -1,0 +1,157 @@
+.hero {
+  position: relative;
+
+  width: min(100% - 64px, 1440px);
+  min-height: calc(100vh - 96px);
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+
+  padding: 4rem 0 7rem;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 620px;
+}
+
+.hero__eyebrow {
+  margin: 0 0 2rem;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+
+  opacity: 0.55;
+}
+
+.hero__title {
+  margin: 0;
+
+  font-size: clamp(3.5rem, 6.5vw, 7.2rem);
+  font-weight: 500;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+}
+
+.hero__title em {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+}
+
+.hero__description {
+  max-width: 430px;
+
+  margin: 2.5rem 0 0;
+
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: #62615d;
+}
+
+.hero__button {
+  width: fit-content;
+
+  margin-top: 2rem;
+  padding: 0.9rem 0;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  border-bottom: 1px solid currentColor;
+}
+
+.hero__button span {
+  transition: transform 180ms ease;
+}
+
+.hero__button:hover span {
+  transform: translateX(5px);
+}
+
+/* Future Three.js canvas */
+
+.hero__visual {
+  position: relative;
+
+  min-height: 620px;
+
+  display: grid;
+  place-items: center;
+}
+
+.hero__placeholder {
+  width: min(100%, 600px);
+  aspect-ratio: 1;
+
+  display: grid;
+  place-content: center;
+  text-align: center;
+
+  border: 1px solid rgba(24, 24, 22, 0.12);
+  border-radius: 50%;
+}
+
+.hero__placeholder span {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+}
+
+.hero__placeholder p {
+  margin: 0.75rem 0 0;
+
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+
+  color: #77746d;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+
+  opacity: 0.5;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+
+    width: min(100% - 32px, 1440px);
+    padding-top: 3rem;
+  }
+
+  .hero__title {
+    font-size: clamp(3.7rem, 15vw, 6.5rem);
+  }
+
+  .hero__visual {
+    min-height: 420px;
+  }
+
+  .hero__placeholder {
+    width: min(90vw, 440px);
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+}
