@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react'
+import HouseScene from '../../components/three/HouseScene'
 import './Hero.css'
 
 function Hero() {
@@ -78,17 +79,14 @@ function Hero() {
       </div>
 
       <div className="hero__visual">
-        <div className="hero__placeholder">
-
-          <span>3D EXPERIENCE</span>
-
-          <p>
-            Drag to explore
-          </p>
-
+        <div className="hero__canvas">
+            <HouseScene />
         </div>
-      </div>
 
+        <p className="hero__interaction" aria-hidden="true">
+            DRAG TO ROTATE · SCROLL TO ZOOM
+        </p>
+        </div>
       <div className="hero__scroll" aria-hidden="true">
         <span>SCROLL TO EXPLORE</span>
         <span>↓</span>
