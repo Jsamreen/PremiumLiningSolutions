@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { houseParts } from '../../data/houseParts'
+import houseParts from '../../data/houseParts'
 import './HouseInfoPanel.css'
-
 
 function HouseInfoPanel({ selectedPart, onClose }) {
   const part = selectedPart
@@ -13,47 +12,46 @@ function HouseInfoPanel({ selectedPart, onClose }) {
       {part && (
         <motion.aside
           className="house-info"
-          aria-live="polite"
           initial={{
             opacity: 0,
-            x: 30,
+            y: 16,
+            scale: 0.98,
           }}
           animate={{
             opacity: 1,
-            x: 0,
+            y: 0,
+            scale: 1,
           }}
           exit={{
             opacity: 0,
-            x: 20,
+            y: 12,
+            scale: 0.98,
           }}
           transition={{
-            duration: 0.35,
+            duration: 0.25,
             ease: [0.22, 1, 0.36, 1],
           }}
+          aria-live="polite"
         >
-          <div className="house-info__header">
+          <button
+            className="house-info__close"
+            type="button"
+            onClick={onClose}
+            aria-label="Close house information"
+          >
+            ×
+          </button>
 
-            <span className="house-info__number">
-              {part.number}
-            </span>
-
-            <button
-              type="button"
-              className="house-info__close"
-              onClick={onClose}
-              aria-label="Close information panel"
-            >
-              ×
-            </button>
-
+          <div className="house-info__number">
+            {part.number}
           </div>
 
-          <p className="house-info__label">
-            {part.label}
+          <p className="house-info__category">
+            {part.category}
           </p>
 
-          <h2>
-            {part.title}
+          <h2 className="house-info__title">
+            {part.name}
           </h2>
 
           <p className="house-info__description">
@@ -61,14 +59,12 @@ function HouseInfoPanel({ selectedPart, onClose }) {
           </p>
 
           <button
+            className="house-info__link"
             type="button"
-            className="house-info__explore"
           >
-            Explore material
-
+            Explore system
             <span aria-hidden="true">→</span>
           </button>
-
         </motion.aside>
       )}
     </AnimatePresence>

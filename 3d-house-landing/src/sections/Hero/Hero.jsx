@@ -1,117 +1,276 @@
-import { useState } from 'react'
-import { motion, useReducedMotion } from 'motion/react'
-
-import HouseScene from '../../components/three/HouseScene'
-import HouseInfoPanel from '../../components/ui/HouseInfoPanel'
+import { useRef } from 'react'
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useMotionValueEvent,
+} from 'motion/react'
 
 import './Hero.css'
 
+const hotspots = [
+  {
+    number: '01',
+    name: 'ROOF',
+    className: 'hotspot--roof',
+  },
+  {
+    number: '02',
+    name: 'WALLS',
+    className: 'hotspot--walls',
+  },
+  {
+    number: '03',
+    name: 'INSULATION',
+    className: 'hotspot--insulation',
+  },
+  {
+    number: '04',
+    name: 'PLASTER',
+    className: 'hotspot--plaster',
+  },
+  {
+    number: '05',
+    name: 'CLADDING',
+    className: 'hotspot--cladding',
+  },
+  {
+    number: '06',
+    name: 'PAINT',
+    className: 'hotspot--paint',
+  },
+]
+
 function Hero() {
+  const sectionRef = useRef(null)
+  const videoRef = useRef(null)
+
+  const targetProgress = useRef(0)
+  const currentProgress = useRef(0)
+  const animationFrame = useRef(null)
+
   const reduceMotion = useReducedMotion()
-  const [selectedPart, setSelectedPart] = useState(null)
 
-  const reveal = {
-    hidden: {
-      opacity: 0,
-      y: reduceMotion ? 0 : 24,
-    },
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
 
-    visible: {
-      opacity: 1,
-      y: 0,
-    },
-  }
+  /*
+   * Smooth scroll-controlled video.
+   */
+  useMotionValueEvent(
+    scrollYProgress,
+    'change',
+    (progress) => {
+      const video = videoRef.current
+
+      if (
+        !video ||
+        !video.duration ||
+        Number.isNaN(video.duration) ||
+        reduceMotion
+      ) {
+        return
+      }
+
+      targetProgress.current = progress
+
+      if (animationFrame.current) return
+
+      const animate = () => {
+        const video = videoRef.current
+
+        if (!video) {
+          animationFrame.current = null
+          return
+        }
+
+        const difference =
+          targetProgress.current -
+          currentProgress.current
+
+        /*
+         * Smooth cinematic response.
+         */
+        currentProgress.current +=
+          difference * 0.1
+
+        const progress = Math.max(
+          0,
+          Math.min(
+            currentProgress.current,
+            1
+          )
+        )
+
+        video.currentTime =
+          progress * video.duration
+
+        if (Math.abs(difference) > 0.001) {
+          animationFrame.current =
+            requestAnimationFrame(animate)
+        } else {
+          currentProgress.current =
+            targetProgress.current
+
+          video.currentTime =
+            targetProgress.current *
+            video.duration
+
+          animationFrame.current = null
+        }
+      }
+
+      animationFrame.current =
+        requestAnimationFrame(animate)
+    }
+  )
 
   return (
     <section
+      ref={sectionRef}
       id="home"
-      className="hero"
+      className="hero-film"
       aria-labelledby="hero-title"
     >
-      {/* HERO COPY */}
-      <div className="hero__content">
-        <motion.p
-          className="hero__eyebrow"
-          variants={reveal}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.6 }}
-        >
-          COMPLETE LINING SOLUTIONS
-        </motion.p>
+      <div className="hero-film__sticky">
 
-        <motion.h1
-          id="hero-title"
-          className="hero__title"
-          variants={reveal}
-          initial="hidden"
-          animate="visible"
-          transition={{
-            duration: 0.8,
-            delay: 0.08,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-        >
-          From frame
-          <br />
-          to <em>finish.</em>
-        </motion.h1>
+        {/* LEFT CONTENT */}
+        <div className="hero-film__content">
 
-        <motion.p
-          className="hero__description"
-          variants={reveal}
-          initial="hidden"
-          animate="visible"
-          transition={{
-            duration: 0.7,
-            delay: 0.18,
-          }}
-        >
-          Explore the systems, materials and craftsmanship behind
-          a complete Premium Lining Solutions build.
-        </motion.p>
+          <p className="hero-film__eyebrow">
+            COMPLETE LINING SOLUTIONS
+          </p>
 
-        <motion.a
-          href="#explore"
-          className="hero__button"
-          variants={reveal}
-          initial="hidden"
-          animate="visible"
-          transition={{
-            duration: 0.6,
-            delay: 0.28,
-          }}
-        >
-          Explore the house
-          <span aria-hidden="true">→</span>
-        </motion.a>
-      </div>
+          <h1
+            id="hero-title"
+            className="hero-film__title"
+          >
+            From frame
+            <br />
+            to <em>finish.</em>
+          </h1>
 
-      {/* INTERACTIVE 3D HOUSE */}
-      <div className="hero__visual">
-        <div className="hero__canvas">
-          <HouseScene
-            selectedPart={selectedPart}
-            onSelect={setSelectedPart}
-          />
+          <p className="hero-film__description">
+            Explore the systems, materials and
+            craftsmanship behind a complete Premium
+            Lining Solutions build.
+          </p>
+
+          <a
+            href="#systems"
+            className="hero-film__button"
+          >
+            EXPLORE THE HOUSE
+
+            <span aria-hidden="true">
+              →
+            </span>
+          </a>
+
         </div>
 
-        <HouseInfoPanel
-          selectedPart={selectedPart}
-          onClose={() => setSelectedPart(null)}
-        />
 
-        <p
-          className="hero__interaction"
+        {/* HOUSE */}
+        <div className="hero-film__visual">
+
+          {/*
+           * IMPORTANT:
+           * Video + hotspots share this exact
+           * 16:9 coordinate system.
+           */}
+          <div className="hero-film__media">
+
+            <video
+              ref={videoRef}
+              className="hero-film__video"
+              src="/videos/pls-house-hero-1s.mp4"
+              muted
+              playsInline
+              preload="auto"
+              disablePictureInPicture
+              aria-label="Premium Lining Solutions construction showcase"
+            />
+
+
+            {/* FLOATING LABELS */}
+            <div
+              className="hero-film__hotspots"
+              aria-hidden="true"
+            >
+              {hotspots.map((hotspot) => (
+                <div
+                  key={hotspot.number}
+                  className={
+                    `hero-hotspot ${hotspot.className}`
+                  }
+                >
+                  <span
+                    className="hero-hotspot__anchor"
+                  />
+
+                  <div
+                    className="hero-hotspot__label"
+                  >
+                    <span
+                      className="hero-hotspot__number"
+                    >
+                      {hotspot.number}
+                    </span>
+
+                    <strong
+                      className="hero-hotspot__name"
+                    >
+                      {hotspot.name}
+                    </strong>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        {/* SCROLL PROMPT */}
+        <motion.div
+          className="hero-film__scroll"
+          initial={{
+            opacity: 0,
+            y: 6,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.7,
+          }}
           aria-hidden="true"
         >
-          <span>DRAG TO ROTATE</span>
-          <span className="hero__interaction-dot">·</span>
-          <span>SCROLL TO ZOOM</span>
-        </p>
+          <span className="hero-film__mouse" />
+
+          <span>
+            SCROLL TO EXPLORE
+          </span>
+
+          <span className="hero-film__divider">
+            ·
+          </span>
+
+          <span>
+            DISCOVER THE BUILD
+          </span>
+
+        </motion.div>
+
       </div>
     </section>
   )
 }
 
-export default Hero
+export default Hero 

@@ -1,41 +1,59 @@
-export const houseParts = {
+const houseParts = {
   roof: {
     number: '01',
-    label: 'Roof',
-    title: 'Thermal Roof System',
+    name: 'Roof',
+    category: 'ROOF SYSTEM',
     description:
-      'A high-performance roof system designed to reduce heat transfer and improve year-round thermal comfort.',
+      'The roof system forms the upper protective layer of the home, helping shield the structure from Melbourne weather conditions.',
   },
 
   walls: {
     number: '02',
-    label: 'Walls',
-    title: 'External Wall System',
+    name: 'Walls',
+    category: 'WALL SYSTEM',
     description:
-      'The external wall assembly combines structure, insulation and protective layers to create an efficient building envelope.',
+      'Wall systems combine structural and lining components to create a durable building envelope ready for internal and external finishes.',
   },
 
-  windows: {
+  insulation: {
     number: '03',
-    label: 'Windows',
-    title: 'Performance Glazing',
+    name: 'Insulation',
+    category: 'THERMAL SYSTEM',
     description:
-      'High-performance glazing helps control heat transfer while allowing natural light into the home.',
+      'Insulation sits between the structural framing to support thermal performance, comfort and energy efficiency throughout the home.',
   },
 
-  door: {
+  plaster: {
     number: '04',
-    label: 'Entrance',
-    title: 'External Door',
+    name: 'Plaster',
+    category: 'INTERNAL LINING',
     description:
-      'A thermally considered entrance designed to complement the performance of the building envelope.',
+      'Internal plasterboard creates clean, consistent wall and ceiling surfaces ready for finishing and painting.',
+  },
+
+  cladding: {
+    number: '05',
+    name: 'Cladding',
+    category: 'EXTERNAL LINING',
+    description:
+      'External cladding provides a durable finished facade while contributing to the protection and architectural character of the home.',
+  },
+
+  frame: {
+    number: '06',
+    name: 'Frame',
+    category: 'STRUCTURE',
+    description:
+      'The structural frame creates the underlying skeleton of the building and provides the foundation for insulation, linings and external systems.',
   },
 
   foundation: {
-    number: '05',
-    label: 'Foundation',
-    title: 'Foundation System',
+    number: '07',
+    name: 'Foundation',
+    category: 'BASE STRUCTURE',
     description:
-      'The foundation provides a stable structural base while connecting the building safely to the ground.',
+      'The foundation provides the stable base supporting the structural frame and the building systems above it.',
   },
 }
+
+export default houseParts;
