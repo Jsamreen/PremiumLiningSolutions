@@ -1,0 +1,822 @@
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — WHY PLS
+   One booking. One team. One complete package.
+   ========================================================= */
+
+.why-pls {
+  position: relative;
+  background: #171613;
+  color: #f7f5f1;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   1. WARM → DARK TRANSITION
+   ========================================================= */
+
+.why-pls::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: clamp(70px, 7vw, 110px);
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #f7f5f1 0%,
+      #e7e2da 15%,
+      #aaa298 36%,
+      #5a554e 58%,
+      #292622 78%,
+      #171613 100%
+    );
+}
+
+.why-pls::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  right: -15%;
+
+  width: 70%;
+  height: 520px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgba(200, 154, 50, 0.08),
+      transparent 68%
+    );
+}
+
+
+/* =========================================================
+   2. INNER
+   ========================================================= */
+
+.why-pls__inner {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1600px);
+  margin: 0 auto;
+
+  padding:
+    clamp(8rem, 12vw, 12rem)
+    clamp(2rem, 5vw, 6rem)
+    clamp(6rem, 10vw, 10rem);
+}
+
+
+/* =========================================================
+   3. HEADER
+   ========================================================= */
+
+.why-pls__header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(280px, 0.7fr);
+
+  align-items: end;
+
+  gap: clamp(3rem, 8vw, 9rem);
+
+  padding-bottom:
+    clamp(4rem, 7vw, 7rem);
+}
+
+
+/* =========================================================
+   4. EYEBROW
+   ========================================================= */
+
+.why-pls__eyebrow {
+  margin: 0 0 1.4rem;
+
+  color: #c89a32;
+
+  font-size: clamp(
+    0.56rem,
+    0.55vw,
+    0.66rem
+  );
+
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: 0.32em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   5. TITLE
+   ========================================================= */
+
+.why-pls__title {
+  max-width: 760px;
+
+  margin: 0;
+
+  color: #f7f5f1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.7rem,
+    5.3vw,
+    6.8rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.055em;
+}
+
+.why-pls__title em {
+  color: #c89a32;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   6. INTRO COPY
+   ========================================================= */
+
+.why-pls__intro {
+  max-width: 390px;
+
+  padding-bottom: 0.3rem;
+}
+
+.why-pls__intro-number {
+  display: block;
+
+  margin-bottom: 1.3rem;
+
+  color: #c89a32;
+
+  font-size: 0.57rem;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+}
+
+.why-pls__intro p {
+  margin: 0;
+
+  color: rgba(247, 245, 241, 0.62);
+
+  font-size: clamp(
+    0.83rem,
+    0.82vw,
+    0.94rem
+  );
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   7. BENEFITS GRID
+   ========================================================= */
+
+.why-pls__benefits {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   8. BENEFIT
+   ========================================================= */
+
+.why-pls__benefit {
+  position: relative;
+
+  min-height: clamp(
+    300px,
+    26vw,
+    400px
+  );
+
+  padding:
+    clamp(2rem, 3vw, 3.2rem);
+
+  border-right:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  overflow: hidden;
+
+  transition:
+    background-color 500ms ease;
+}
+
+.why-pls__benefit:first-child {
+  border-left:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* subtle hover */
+
+.why-pls__benefit::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(200, 154, 50, 0.12),
+      transparent 45%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 600ms ease;
+}
+
+.why-pls__benefit:hover {
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+.why-pls__benefit:hover::after {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   9. BENEFIT TOP
+   ========================================================= */
+
+.why-pls__benefit-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom:
+    clamp(4rem, 7vw, 7rem);
+}
+
+.why-pls__number {
+  color: #c89a32;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.why-pls__line {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(200, 154, 50, 0.65),
+      rgba(200, 154, 50, 0.06)
+    );
+
+  transform-origin: left;
+
+  transition:
+    transform 700ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-pls__benefit:hover
+.why-pls__line {
+  transform: scaleX(0.9);
+}
+
+
+/* =========================================================
+   10. BENEFIT TITLE
+   ========================================================= */
+
+.why-pls__benefit h3 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    2rem,
+    2.7vw,
+    3.5rem
+  );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  transition:
+    transform 600ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-pls__benefit:hover h3 {
+  transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   11. BENEFIT DESCRIPTION
+   ========================================================= */
+
+.why-pls__benefit > p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 330px;
+
+  margin: 1.25rem 0 0;
+
+  color: rgba(247, 245, 241, 0.56);
+
+  font-size: clamp(
+    0.78rem,
+    0.75vw,
+    0.88rem
+  );
+
+  line-height: 1.7;
+
+  transition:
+    color 500ms ease;
+}
+
+.why-pls__benefit:hover > p {
+  color: rgba(247, 245, 241, 0.76);
+}
+
+
+/* =========================================================
+   12. LARGE BRAND STATEMENT
+   ========================================================= */
+
+.why-pls__statement {
+  position: relative;
+
+  min-height: clamp(
+    520px,
+    56vw,
+    760px
+  );
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* faint circle */
+
+.why-pls__statement::before {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: clamp(
+    300px,
+    42vw,
+    620px
+  );
+
+  aspect-ratio: 1;
+
+  border:
+    1px solid
+    rgba(200, 154, 50, 0.12);
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+
+/* inner glow */
+
+.why-pls__statement::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: min(65vw, 900px);
+  height: min(65vw, 900px);
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(200, 154, 50, 0.065),
+      transparent 64%
+    );
+}
+
+
+/* =========================================================
+   13. STATEMENT EYEBROW
+   ========================================================= */
+
+.why-pls__statement-small {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 1.6rem;
+
+  color: #c89a32;
+
+  font-size: clamp(
+    0.53rem,
+    0.55vw,
+    0.64rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: 0.32em;
+}
+
+
+/* =========================================================
+   14. STATEMENT
+   ========================================================= */
+
+.why-pls__statement p {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #f7f5f1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.2rem,
+    5.7vw,
+    7rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.88;
+
+  letter-spacing: -0.055em;
+}
+
+.why-pls__statement em {
+  color: #c89a32;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   15. CTA
+   ========================================================= */
+
+.why-pls__cta {
+  position: relative;
+  z-index: 2;
+
+  margin-top:
+    clamp(2.5rem, 4vw, 4rem);
+
+  min-width: 190px;
+
+  padding:
+    1rem
+    1.35rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  color: #f7f5f1;
+
+  border:
+    1px solid
+    rgba(200, 154, 50, 0.75);
+
+  text-decoration: none;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  transition:
+    color 400ms ease,
+    background-color 400ms ease,
+    border-color 400ms ease;
+}
+
+.why-pls__cta span {
+  font-size: 1rem;
+
+  transition:
+    transform 500ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-pls__cta:hover {
+  color: #111111;
+
+  background: #c89a32;
+
+  border-color: #c89a32;
+}
+
+.why-pls__cta:hover span {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   16. TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .why-pls__inner {
+    padding:
+      7.5rem
+      1.5rem
+      6rem;
+  }
+
+  .why-pls__header {
+    display: block;
+
+    padding-bottom: 3.5rem;
+  }
+
+  .why-pls__title {
+    max-width: 650px;
+
+    font-size: clamp(
+      3.2rem,
+      8vw,
+      5rem
+    );
+  }
+
+  .why-pls__intro {
+    max-width: 500px;
+
+    margin-top: 2rem;
+  }
+
+  .why-pls__benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .why-pls__benefit,
+  .why-pls__benefit:first-child {
+    min-height: auto;
+
+    padding:
+      2.5rem
+      1rem
+      3rem;
+
+    border-left: 0;
+    border-right: 0;
+
+    border-top:
+      1px solid
+      rgba(255, 255, 255, 0.12);
+  }
+
+  .why-pls__benefit:first-child {
+    border-top: 0;
+  }
+
+  .why-pls__benefit-top {
+    margin-bottom: 3rem;
+  }
+
+  .why-pls__benefit > p {
+    max-width: 520px;
+  }
+
+  .why-pls__statement {
+    min-height: 600px;
+  }
+}
+
+
+/* =========================================================
+   17. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .why-pls::before {
+    height: 60px;
+  }
+
+  .why-pls__inner {
+    padding:
+      6rem
+      1.15rem
+      4.5rem;
+  }
+
+  .why-pls__eyebrow {
+    margin-bottom: 1rem;
+
+    font-size: 0.51rem;
+  }
+
+  .why-pls__title {
+    font-size: clamp(
+      2.8rem,
+      12vw,
+      4rem
+    );
+
+    line-height: 0.95;
+  }
+
+  .why-pls__intro {
+    margin-top: 1.6rem;
+  }
+
+  .why-pls__intro p {
+    font-size: 0.81rem;
+
+    line-height: 1.65;
+  }
+
+  .why-pls__benefit {
+    padding:
+      2rem
+      0.2rem
+      2.5rem;
+  }
+
+  .why-pls__benefit-top {
+    margin-bottom: 2.4rem;
+  }
+
+  .why-pls__benefit h3 {
+    font-size: 2.3rem;
+  }
+
+  .why-pls__benefit > p {
+    font-size: 0.79rem;
+  }
+
+  .why-pls__statement {
+    min-height: 520px;
+  }
+
+  .why-pls__statement::before {
+    width: 290px;
+  }
+
+  .why-pls__statement p {
+    font-size: clamp(
+      2.8rem,
+      12vw,
+      4.3rem
+    );
+
+    line-height: 0.9;
+  }
+
+  .why-pls__cta {
+    width: min(100%, 260px);
+
+    margin-top: 2.5rem;
+  }
+}
+
+
+/* =========================================================
+   18. TOUCH
+   ========================================================= */
+
+@media (hover: none) {
+
+  .why-pls__benefit:hover {
+    background: transparent;
+  }
+
+  .why-pls__benefit:hover::after {
+    opacity: 0;
+  }
+
+  .why-pls__benefit:hover h3,
+  .why-pls__benefit:hover
+  .why-pls__line {
+    transform: none;
+  }
+
+  .why-pls__benefit:hover > p {
+    color: rgba(247, 245, 241, 0.56);
+  }
+}
+
+
+/* =========================================================
+   19. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .why-pls__benefit,
+  .why-pls__benefit::after,
+  .why-pls__benefit h3,
+  .why-pls__line,
+  .why-pls__benefit > p,
+  .why-pls__cta,
+  .why-pls__cta span {
+    transition: none;
+  }
+
+  .why-pls__benefit:hover h3,
+  .why-pls__benefit:hover
+  .why-pls__line,
+  .why-pls__cta:hover span {
+    transform: none;
+  }
+}

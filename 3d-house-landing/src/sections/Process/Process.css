@@ -1,0 +1,920 @@
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — PROCESS
+   Plan → Coordinate → Deliver → Finish
+   ========================================================= */
+
+.process {
+  position: relative;
+  overflow: hidden;
+
+  background: #efe2dd;
+  color: #171715;
+}
+
+
+/* =========================================================
+   1. SECTION ATMOSPHERE
+   ========================================================= */
+
+.process::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 88% 15%,
+      rgba(200, 154, 50, 0.09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 8% 85%,
+      rgba(145, 113, 96, 0.08),
+      transparent 32%
+    );
+}
+
+
+/* subtle architectural vertical line */
+
+.process::after {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: clamp(2rem, 5vw, 6rem);
+
+  width: 1px;
+
+  background:
+    rgba(17, 17, 17, 0.055);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   2. INNER
+   ========================================================= */
+
+.process__inner {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1600px);
+  margin: 0 auto;
+
+  padding:
+    clamp(7rem, 11vw, 11rem)
+    clamp(2rem, 5vw, 6rem)
+    clamp(7rem, 11vw, 11rem);
+}
+
+
+/* =========================================================
+   3. HEADER
+   ========================================================= */
+
+.process__header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(280px, 0.7fr);
+
+  align-items: end;
+
+  gap: clamp(3rem, 8vw, 9rem);
+
+  margin-bottom:
+    clamp(5rem, 9vw, 9rem);
+}
+
+
+/* =========================================================
+   4. EYEBROW
+   ========================================================= */
+
+.process__eyebrow {
+  margin: 0 0 1.4rem;
+
+  color: #9f7420;
+
+  font-size: clamp(
+    0.56rem,
+    0.55vw,
+    0.66rem
+  );
+
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: 0.32em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   5. TITLE
+   ========================================================= */
+
+.process__title {
+  max-width: 800px;
+
+  margin: 0;
+
+  color: #171715;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.7rem,
+    5.3vw,
+    6.8rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.055em;
+}
+
+.process__title em {
+  color: #917160;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   6. INTRO
+   ========================================================= */
+
+.process__intro {
+  max-width: 390px;
+
+  padding-bottom: 0.4rem;
+}
+
+.process__intro > span {
+  display: block;
+
+  margin-bottom: 1.25rem;
+
+  color: #9f7420;
+
+  font-size: 0.57rem;
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+}
+
+.process__intro p {
+  margin: 0;
+
+  color: #6d6962;
+
+  font-size: clamp(
+    0.83rem,
+    0.82vw,
+    0.94rem
+  );
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   7. TIMELINE
+   ========================================================= */
+
+.process__timeline {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  border-top:
+    1px solid
+    rgba(17, 17, 17, 0.12);
+
+  border-bottom:
+    1px solid
+    rgba(17, 17, 17, 0.12);
+}
+
+
+/* =========================================================
+   8. GOLD TRACK
+   ========================================================= */
+
+.process__track {
+  position: absolute;
+
+  z-index: 0;
+
+  top: 54px;
+  left: 3%;
+
+  width: 94%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(200, 154, 50, 0.12),
+      #c89a32 18%,
+      #c89a32 82%,
+      rgba(200, 154, 50, 0.12)
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   9. STEP
+   ========================================================= */
+
+.process__step {
+  position: relative;
+  z-index: 1;
+
+  min-height: clamp(
+    400px,
+    31vw,
+    500px
+  );
+
+  padding:
+    2rem
+    clamp(1.5rem, 2.4vw, 2.7rem)
+    3rem;
+
+  border-right:
+    1px solid
+    rgba(17, 17, 17, 0.11);
+
+  transition:
+    background-color 500ms ease;
+}
+
+.process__step:first-of-type {
+  border-left:
+    1px solid
+    rgba(17, 17, 17, 0.11);
+}
+
+.process__step:hover {
+  background:
+    rgba(255, 255, 255, 0.27);
+}
+
+
+/* subtle gold glow */
+
+.process__step::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(200, 154, 50, 0.06),
+      transparent 48%
+    );
+
+  transition:
+    opacity 500ms ease;
+}
+
+.process__step:hover::after {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   10. MARKER
+   ========================================================= */
+
+.process__marker {
+  position: relative;
+  z-index: 3;
+
+  width: 46px;
+  height: 46px;
+
+  margin-bottom:
+    clamp(5rem, 8vw, 8rem);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(159, 116, 32, 0.65);
+
+  border-radius: 50%;
+
+  background: #efe2dd;
+
+  transition:
+    background-color 450ms ease,
+    border-color 450ms ease,
+    transform 600ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process__marker span {
+  color: #9f7420;
+
+  font-size: 0.55rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  transition:
+    color 450ms ease;
+}
+
+.process__step:hover
+.process__marker {
+  background: #c89a32;
+
+  border-color: #c89a32;
+
+  transform: scale(1.06);
+}
+
+.process__step:hover
+.process__marker span {
+  color: #111111;
+}
+
+
+/* =========================================================
+   11. STEP CONTENT
+   ========================================================= */
+
+.process__step-content {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   12. STEP SUBTITLE
+   ========================================================= */
+
+.process__subtitle {
+  display: block;
+
+  margin-bottom: 0.9rem;
+
+  color: #9f7420;
+
+  font-size: clamp(
+    0.52rem,
+    0.52vw,
+    0.6rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   13. STEP TITLE
+   ========================================================= */
+
+.process__step h3 {
+  margin: 0;
+
+  color: #171715;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    2.4rem,
+    3.2vw,
+    4rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+
+  transition:
+    transform 600ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process__step:hover h3 {
+  transform:
+    translateY(-4px);
+}
+
+
+/* =========================================================
+   14. DESCRIPTION
+   ========================================================= */
+
+.process__step p {
+  max-width: 280px;
+
+  margin:
+    1.4rem
+    0
+    0;
+
+  color: #6d6962;
+
+  font-size: clamp(
+    0.78rem,
+    0.75vw,
+    0.87rem
+  );
+
+  line-height: 1.72;
+
+  transition:
+    color 400ms ease;
+}
+
+.process__step:hover p {
+  color: #4b4741;
+}
+
+
+/* =========================================================
+   15. BOTTOM STATEMENT
+   ========================================================= */
+
+.process__bottom {
+  position: relative;
+
+  margin-top:
+    clamp(6rem, 10vw, 11rem);
+
+  padding-top:
+    clamp(2rem, 3vw, 3rem);
+
+  display: grid;
+
+  grid-template-columns:
+    0.45fr
+    1.3fr
+    0.55fr;
+
+  align-items: end;
+
+  gap: clamp(2rem, 5vw, 5rem);
+
+  border-top:
+    1px solid
+    rgba(17, 17, 17, 0.14);
+}
+
+
+/* =========================================================
+   16. BOTTOM LABEL
+   ========================================================= */
+
+.process__bottom-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  padding-bottom: 0.55rem;
+}
+
+.process__bottom-label > span:first-child {
+  color: #9f7420;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+}
+
+.process__bottom-line {
+  width: 70px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #c89a32,
+      rgba(200, 154, 50, 0)
+    );
+}
+
+
+/* =========================================================
+   17. BOTTOM MESSAGE
+   ========================================================= */
+
+.process__bottom > p {
+  margin: 0;
+
+  color: #171715;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    2.5rem,
+    4vw,
+    5rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+}
+
+.process__bottom > p em {
+  color: #917160;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   18. CTA
+   ========================================================= */
+
+.process__bottom > a {
+  min-width: 205px;
+
+  padding:
+    1rem
+    1.25rem;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  color: #171715;
+
+  border:
+    1px solid
+    rgba(159, 116, 32, 0.65);
+
+  text-decoration: none;
+
+  font-size: 0.56rem;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  transition:
+    background-color 400ms ease,
+    border-color 400ms ease,
+    color 400ms ease;
+}
+
+.process__bottom > a span {
+  color: #9f7420;
+
+  font-size: 1rem;
+
+  transition:
+    transform 500ms
+    cubic-bezier(0.16, 1, 0.3, 1),
+    color 400ms ease;
+}
+
+.process__bottom > a:hover {
+  color: #111111;
+
+  background: #c89a32;
+
+  border-color: #c89a32;
+}
+
+.process__bottom > a:hover span {
+  color: #111111;
+
+  transform:
+    translateX(5px);
+}
+
+
+/* =========================================================
+   19. TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+  .process__inner {
+    padding:
+      7rem
+      1.5rem
+      6rem;
+  }
+
+  .process__header {
+    display: block;
+
+    margin-bottom: 4.5rem;
+  }
+
+  .process__title {
+    max-width: 700px;
+
+    font-size: clamp(
+      3.2rem,
+      8vw,
+      5.2rem
+    );
+  }
+
+  .process__intro {
+    max-width: 500px;
+
+    margin-top: 2rem;
+  }
+
+
+  /* 2 x 2 timeline */
+
+  .process__timeline {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .process__track {
+    display: none;
+  }
+
+  .process__step {
+    min-height: 370px;
+
+    border-top:
+      1px solid
+      rgba(17, 17, 17, 0.1);
+  }
+
+  .process__step:nth-child(2),
+  .process__step:nth-child(3) {
+    border-top: 0;
+  }
+
+  .process__marker {
+    margin-bottom: 5rem;
+  }
+
+  .process__bottom {
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
+    gap: 2rem;
+
+    margin-top: 6rem;
+  }
+
+  .process__bottom > p {
+    max-width: 700px;
+  }
+
+  .process__bottom > a {
+    width: fit-content;
+  }
+}
+
+
+/* =========================================================
+   20. MOBILE
+   ========================================================= */
+
+@media (max-width: 620px) {
+
+  .process::after {
+    display: none;
+  }
+
+  .process__inner {
+    padding:
+      5.5rem
+      1.1rem
+      5rem;
+  }
+
+  .process__eyebrow {
+    margin-bottom: 1rem;
+
+    font-size: 0.51rem;
+  }
+
+  .process__title {
+    font-size: clamp(
+      2.8rem,
+      12vw,
+      4rem
+    );
+
+    line-height: 0.95;
+  }
+
+  .process__intro {
+    margin-top: 1.6rem;
+  }
+
+  .process__intro p {
+    font-size: 0.81rem;
+  }
+
+
+  /* vertical timeline */
+
+  .process__timeline {
+    display: block;
+
+    border-bottom: 0;
+  }
+
+  .process__step {
+    min-height: auto;
+
+    padding:
+      2rem
+      0.4rem
+      3.5rem
+      4.5rem;
+
+    border: 0;
+
+    border-bottom:
+      1px solid
+      rgba(17, 17, 17, 0.11);
+  }
+
+  .process__step:first-of-type {
+    border-left: 0;
+  }
+
+
+  /* vertical gold line */
+
+  .process__step::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 22px;
+
+    width: 1px;
+
+    background:
+      rgba(200, 154, 50, 0.45);
+  }
+
+  .process__marker {
+    position: absolute;
+
+    top: 1.8rem;
+    left: 0;
+
+    width: 44px;
+    height: 44px;
+
+    margin: 0;
+
+    background: #efe2dd;
+  }
+
+  .process__step h3 {
+    font-size: 2.6rem;
+  }
+
+  .process__step p {
+    max-width: 430px;
+
+    font-size: 0.8rem;
+  }
+
+
+  /* bottom */
+
+  .process__bottom {
+    margin-top: 5rem;
+
+    padding-top: 2rem;
+  }
+
+  .process__bottom > p {
+    font-size: clamp(
+      2.5rem,
+      11vw,
+      3.8rem
+    );
+  }
+
+  .process__bottom > a {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   21. TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) {
+
+  .process__step:hover {
+    background: transparent;
+  }
+
+  .process__step:hover::after {
+    opacity: 0;
+  }
+
+  .process__step:hover
+  .process__marker {
+    background: #efe2dd;
+
+    border-color:
+      rgba(159, 116, 32, 0.65);
+
+    transform: none;
+  }
+
+  .process__step:hover
+  .process__marker span {
+    color: #9f7420;
+  }
+
+  .process__step:hover h3 {
+    transform: none;
+  }
+
+  .process__step:hover p {
+    color: #6d6962;
+  }
+}
+
+
+/* =========================================================
+   22. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .process__step,
+  .process__step::after,
+  .process__marker,
+  .process__marker span,
+  .process__step h3,
+  .process__step p,
+  .process__bottom > a,
+  .process__bottom > a span {
+    transition: none;
+  }
+
+  .process__step:hover
+  .process__marker,
+  .process__step:hover h3,
+  .process__bottom > a:hover span {
+    transform: none;
+  }
+}

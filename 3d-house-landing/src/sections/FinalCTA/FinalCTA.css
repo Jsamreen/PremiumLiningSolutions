@@ -1,0 +1,687 @@
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — FINAL CTA
+   ========================================================= */
+
+.final-cta {
+  position: relative;
+  overflow: hidden;
+
+  background: #111111;
+  color: #f7f5f1;
+}
+
+
+/* =========================================================
+   1. TRANSITION INTO CTA
+   ========================================================= */
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: clamp(70px, 8vw, 120px);
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #efe2dd 0%,
+      #d6c9c3 14%,
+      #958a84 34%,
+      #514b47 56%,
+      #292725 76%,
+      #111111 100%
+    );
+}
+
+
+/* subtle gold atmosphere */
+
+.final-cta::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 5%;
+  right: -20%;
+
+  width: 75vw;
+  height: 75vw;
+
+  max-width: 1100px;
+  max-height: 1100px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(200, 154, 50, 0.085),
+      rgba(200, 154, 50, 0.025) 38%,
+      transparent 68%
+    );
+}
+
+
+/* =========================================================
+   2. INNER
+   ========================================================= */
+
+.final-cta__inner {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1600px);
+
+  min-height: clamp(
+    760px,
+    90vh,
+    1000px
+  );
+
+  margin: 0 auto;
+
+  padding:
+    clamp(8rem, 12vw, 12rem)
+    clamp(2rem, 5vw, 6rem)
+    clamp(4rem, 6vw, 6rem);
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   3. TOP LINE
+   ========================================================= */
+
+.final-cta__top {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  align-items: center;
+
+  gap: clamp(1rem, 2vw, 2rem);
+
+  color: rgba(247, 245, 241, 0.52);
+
+  font-size: clamp(
+    0.52rem,
+    0.52vw,
+    0.61rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.final-cta__top > span:first-child {
+  color: #c89a32;
+}
+
+.final-cta__top-line {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(200, 154, 50, 0.65),
+      rgba(255, 255, 255, 0.1)
+    );
+}
+
+
+/* =========================================================
+   4. MAIN CONTENT
+   ========================================================= */
+
+.final-cta__content {
+  position: relative;
+  z-index: 3;
+
+  flex: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(300px, 0.65fr);
+
+  align-items: center;
+
+  gap: clamp(3rem, 8vw, 9rem);
+
+  padding:
+    clamp(5rem, 8vw, 8rem)
+    0;
+}
+
+
+/* =========================================================
+   5. MAIN TITLE
+   ========================================================= */
+
+.final-cta__content h2 {
+  max-width: 900px;
+
+  margin: 0;
+
+  color: #f7f5f1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    4.5rem,
+    8vw,
+    10rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.83;
+
+  letter-spacing: -0.065em;
+}
+
+.final-cta__content h2 em {
+  color: #c89a32;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   6. ACTION AREA
+   ========================================================= */
+
+.final-cta__action {
+  position: relative;
+
+  max-width: 390px;
+
+  padding-top: 1rem;
+}
+
+.final-cta__action::before {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 1px;
+
+  margin-bottom: 2rem;
+
+  background: #c89a32;
+}
+
+.final-cta__action p {
+  margin:
+    0
+    0
+    clamp(2rem, 3vw, 3rem);
+
+  color: rgba(247, 245, 241, 0.62);
+
+  font-size: clamp(
+    0.9rem,
+    0.95vw,
+    1.05rem
+  );
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   7. START PROJECT BUTTON
+   ========================================================= */
+
+.final-cta__button {
+  position: relative;
+
+  width: min(100%, 310px);
+
+  min-height: 62px;
+
+  padding:
+    0
+    1.5rem;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  border:
+    1px solid
+    rgba(200, 154, 50, 0.78);
+
+  color: #f7f5f1;
+
+  text-decoration: none;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  overflow: hidden;
+
+  transition:
+    color 450ms ease,
+    border-color 450ms ease,
+    background-color 450ms ease;
+}
+
+
+/* subtle hover fill */
+
+.final-cta__button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  background: #c89a32;
+
+  transform: translateY(101%);
+
+  transition:
+    transform 550ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.final-cta__button:hover {
+  color: #111111;
+
+  border-color: #c89a32;
+}
+
+.final-cta__button:hover::before {
+  transform: translateY(0);
+}
+
+.final-cta__arrow {
+  color: #c89a32;
+
+  font-size: 1.2rem;
+
+  transition:
+    transform 500ms
+    cubic-bezier(0.16, 1, 0.3, 1),
+    color 400ms ease;
+}
+
+.final-cta__button:hover
+.final-cta__arrow {
+  color: #111111;
+
+  transform: translateX(6px);
+}
+
+
+/* =========================================================
+   8. CONTACT STRIP
+   ========================================================= */
+
+.final-cta__contact {
+  position: relative;
+  z-index: 3;
+
+  display: grid;
+
+  grid-template-columns:
+    1.5fr
+    0.75fr
+    0.75fr;
+
+  gap: clamp(2rem, 5vw, 6rem);
+
+  padding:
+    clamp(2rem, 3vw, 3rem)
+    0;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   9. CONTACT ITEM
+   ========================================================= */
+
+.final-cta__contact-item {
+  min-width: 0;
+}
+
+.final-cta__contact-item > span {
+  display: block;
+
+  margin-bottom: 0.8rem;
+
+  color: #c89a32;
+
+  font-size: 0.52rem;
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+}
+
+.final-cta__contact-item a,
+.final-cta__contact-item p {
+  margin: 0;
+
+  color: rgba(247, 245, 241, 0.74);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1rem,
+    1.25vw,
+    1.35rem
+  );
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  transition:
+    color 350ms ease;
+}
+
+.final-cta__contact-item a {
+  overflow-wrap: anywhere;
+}
+
+.final-cta__contact-item a:hover {
+  color: #c89a32;
+}
+
+
+/* =========================================================
+   10. PLS WATERMARK
+   ========================================================= */
+
+.final-cta__watermark {
+  position: absolute;
+
+  z-index: 0;
+
+  left: 50%;
+  bottom: -0.17em;
+
+  transform: translateX(-50%);
+
+  color:
+    rgba(255, 255, 255, 0.018);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(
+    15rem,
+    39vw,
+    44rem
+  );
+
+  font-weight: 900;
+
+  line-height: 0.72;
+
+  letter-spacing: -0.09em;
+
+  white-space: nowrap;
+
+  user-select: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   11. LARGE SCREENS
+   ========================================================= */
+
+@media (min-width: 1500px) {
+
+  .final-cta__content {
+    grid-template-columns:
+      1.45fr
+      0.55fr;
+  }
+
+  .final-cta__action {
+    max-width: 420px;
+  }
+}
+
+
+/* =========================================================
+   12. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .final-cta__inner {
+    min-height: auto;
+
+    padding:
+      8rem
+      1.5rem
+      4rem;
+  }
+
+  .final-cta__content {
+    display: block;
+
+    padding:
+      6rem
+      0;
+  }
+
+  .final-cta__content h2 {
+    max-width: 700px;
+
+    font-size: clamp(
+      4.5rem,
+      12vw,
+      7.5rem
+    );
+  }
+
+  .final-cta__action {
+    max-width: 450px;
+
+    margin-top: 4rem;
+  }
+
+  .final-cta__contact {
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap:
+      2.5rem
+      3rem;
+  }
+
+  .final-cta__contact-item:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .final-cta__watermark {
+    font-size: 50vw;
+  }
+}
+
+
+/* =========================================================
+   13. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .final-cta::before {
+    height: 60px;
+  }
+
+  .final-cta__inner {
+    padding:
+      6.5rem
+      1.1rem
+      3rem;
+  }
+
+  .final-cta__top {
+    gap: 0.8rem;
+
+    font-size: 0.46rem;
+
+    letter-spacing: 0.15em;
+  }
+
+  .final-cta__top > span:last-child {
+    text-align: right;
+  }
+
+  .final-cta__content {
+    padding:
+      5rem
+      0;
+  }
+
+  .final-cta__content h2 {
+    font-size: clamp(
+      4rem,
+      19vw,
+      6rem
+    );
+
+    line-height: 0.86;
+  }
+
+  .final-cta__action {
+    margin-top: 3.5rem;
+  }
+
+  .final-cta__action p {
+    font-size: 0.87rem;
+  }
+
+  .final-cta__button {
+    width: 100%;
+  }
+
+
+  /* contact stack */
+
+  .final-cta__contact {
+    display: block;
+
+    padding:
+      0
+      0
+      1rem;
+  }
+
+  .final-cta__contact-item {
+    padding:
+      1.5rem
+      0;
+
+    border-bottom:
+      1px solid
+      rgba(255, 255, 255, 0.1);
+  }
+
+  .final-cta__contact-item:last-child {
+    border-bottom: 0;
+  }
+
+  .final-cta__contact-item a,
+  .final-cta__contact-item p {
+    font-size: 1.05rem;
+  }
+
+  .final-cta__watermark {
+    bottom: -0.08em;
+
+    font-size: 60vw;
+  }
+}
+
+
+/* =========================================================
+   14. TOUCH
+   ========================================================= */
+
+@media (hover: none) {
+
+  .final-cta__button:hover {
+    color: #f7f5f1;
+
+    background: transparent;
+  }
+
+  .final-cta__button:hover::before {
+    transform: translateY(101%);
+  }
+
+  .final-cta__button:hover
+  .final-cta__arrow {
+    color: #c89a32;
+
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   15. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .final-cta__button,
+  .final-cta__button::before,
+  .final-cta__arrow,
+  .final-cta__contact-item a {
+    transition: none;
+  }
+
+  .final-cta__button:hover
+  .final-cta__arrow {
+    transform: none;
+  }
+}
