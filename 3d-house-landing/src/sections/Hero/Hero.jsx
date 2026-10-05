@@ -1,10 +1,13 @@
-import { useRef } from 'react'
+import {
+  useEffect,
+  useRef,
+} from 'react'
+
 import {
   motion,
   useReducedMotion,
   useScroll,
   useMotionValueEvent,
-  useTransform,
 } from 'motion/react'
 
 import './Hero.css'
@@ -45,6 +48,7 @@ const hotspots = [
 
 
 function Hero() {
+
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
 
@@ -56,59 +60,81 @@ function Hero() {
 
 
   /* =======================================================
-     HERO SCROLL PROGRESS
+     HERO SCROLL
      ======================================================= */
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+
+    /*
+     * Navbar is fixed.
+     *
+     * Hero begins at document top and the sticky viewport
+     * itself handles navbar clearance in CSS.
+     */
+
+    offset: [
+      'start start',
+      'end end',
+    ],
   })
 
 
   /* =======================================================
-     PARALLAX MOVEMENT
-
-     Background = slow
-     Foreground = faster
+     VIDEO INITIAL STATE
      ======================================================= */
 
-  const treeY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [15, -35]
-  )
+  useEffect(() => {
 
-  const treeX = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [10, -10]
-  )
+    const video = videoRef.current
+
+    if (!video) return
 
 
-  const leavesLeftY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [30, -90]
-  )
+    const prepareVideo = () => {
 
-  const leavesLeftX = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [-20, 30]
-  )
+      /*
+       * Start precisely on first frame.
+       */
+
+      video.pause()
+
+      try {
+        video.currentTime = 0
+      } catch {
+        // Browser may not allow seeking until metadata exists.
+      }
+
+    }
 
 
-  const leavesRightY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [40, -120]
-  )
+    if (video.readyState >= 1) {
+      prepareVideo()
+    } else {
+      video.addEventListener(
+        'loadedmetadata',
+        prepareVideo,
+        { once: true }
+      )
+    }
 
-  const leavesRightX = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [20, -35]
-  )
+
+    return () => {
+
+      video.removeEventListener(
+        'loadedmetadata',
+        prepareVideo
+      )
+
+      if (animationFrame.current) {
+        cancelAnimationFrame(
+          animationFrame.current
+        )
+      }
+
+    }
+
+  }, [])
 
 
   /* =======================================================
@@ -119,27 +145,51 @@ function Hero() {
     scrollYProgress,
     'change',
     (progress) => {
+
       const video = videoRef.current
 
       if (
         !video ||
         !video.duration ||
-        Number.isNaN(video.duration) ||
-        reduceMotion
+        Number.isNaN(video.duration)
       ) {
         return
       }
 
+
+      /*
+       * Reduced motion:
+       * keep the architectural visual stationary.
+       */
+
+      if (reduceMotion) {
+        video.currentTime = 0
+        return
+      }
+
+
       targetProgress.current = progress
 
-      if (animationFrame.current) return
+
+      if (animationFrame.current) {
+        return
+      }
 
 
       const animate = () => {
-        const video = videoRef.current
 
-        if (!video) {
-          animationFrame.current = null
+        const video =
+          videoRef.current
+
+
+        if (
+          !video ||
+          !video.duration
+        ) {
+
+          animationFrame.current =
+            null
+
           return
         }
 
@@ -150,49 +200,71 @@ function Hero() {
 
 
         /*
-         * Smooth cinematic response
+         * 0.085 gives the camera movement a little
+         * more weight than the previous 0.1.
+         *
+         * Still responsive, but less twitchy.
          */
 
         currentProgress.current +=
-          difference * 0.1
+          difference * 0.085
 
 
-        const progress = Math.max(
-          0,
-          Math.min(
-            currentProgress.current,
-            1
+        const smoothProgress =
+          Math.max(
+            0,
+            Math.min(
+              currentProgress.current,
+              1
+            )
           )
-        )
 
 
         video.currentTime =
-          progress * video.duration
+          smoothProgress *
+          video.duration
 
 
-        if (Math.abs(difference) > 0.001) {
+        if (
+          Math.abs(difference) >
+          0.0008
+        ) {
+
           animationFrame.current =
-            requestAnimationFrame(animate)
+            requestAnimationFrame(
+              animate
+            )
+
         } else {
+
           currentProgress.current =
             targetProgress.current
+
 
           video.currentTime =
             targetProgress.current *
             video.duration
 
-          animationFrame.current = null
+
+          animationFrame.current =
+            null
+
         }
+
       }
 
 
       animationFrame.current =
-        requestAnimationFrame(animate)
+        requestAnimationFrame(
+          animate
+        )
+
     }
   )
 
 
   return (
+
     <section
       ref={sectionRef}
       id="home"
@@ -203,11 +275,25 @@ function Hero() {
       <div className="hero-film__sticky">
 
 
-        {/* =================================================
+        {/* ================================================
             LEFT CONTENT
-            ================================================= */}
+            ================================================ */}
 
-        <div className="hero-film__content">
+        <motion.div
+          className="hero-film__content"
+          initial={{
+            opacity: 0,
+            y: 18,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.9,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
 
           <p className="hero-film__eyebrow">
             COMPLETE LINING SOLUTIONS
@@ -220,6 +306,7 @@ function Hero() {
           >
             From frame
             <br />
+
             to <em>finish.</em>
           </h1>
 
@@ -235,31 +322,54 @@ function Hero() {
             href="#systems"
             className="hero-film__button"
           >
-            EXPLORE THE HOUSE
+            <span>
+              EXPLORE THE HOUSE
+            </span>
 
-            <span aria-hidden="true">
+            <span
+              className="hero-film__button-arrow"
+              aria-hidden="true"
+            >
               →
             </span>
           </a>
 
-        </div>
+        </motion.div>
 
 
-        {/* =================================================
-            HOUSE
-            ================================================= */}
+        {/* ================================================
+            HOUSE VISUAL
+            ================================================ */}
 
-        <div className="hero-film__visual">
+        <motion.div
+          className="hero-film__visual"
+          initial={{
+            opacity: 0,
+            scale: 0.985,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 1.1,
+            delay: 0.08,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
 
           {/*
-           * Video + hotspots share this
-           * exact 16:9 coordinate system.
+           * IMPORTANT:
+           *
+           * Video and labels stay inside the SAME 16:9
+           * coordinate system.
+           *
+           * Therefore resizing this container will not
+           * break hotspot positioning.
            */}
 
           <div className="hero-film__media">
 
-
-            {/* VIDEO */}
 
             <video
               ref={videoRef}
@@ -272,68 +382,67 @@ function Hero() {
               aria-label="Premium Lining Solutions construction showcase"
             />
 
-          
-
-            {/* FLOATING LABELS */}
 
             <div
               className="hero-film__hotspots"
               aria-hidden="true"
             >
 
-              {hotspots.map((hotspot) => (
-
-                <div
-                  key={hotspot.number}
-                  className={
-                    `hero-hotspot ${hotspot.className}`
-                  }
-                >
-
-                  <span
-                    className="hero-hotspot__anchor"
-                  />
-
+              {hotspots.map(
+                (hotspot) => (
 
                   <div
-                    className="hero-hotspot__label"
+                    key={hotspot.number}
+                    className={
+                      `hero-hotspot ${hotspot.className}`
+                    }
                   >
 
                     <span
-                      className="hero-hotspot__number"
-                    >
-                      {hotspot.number}
-                    </span>
+                      className="hero-hotspot__anchor"
+                    />
 
 
-                    <strong
-                      className="hero-hotspot__name"
+                    <div
+                      className="hero-hotspot__label"
                     >
-                      {hotspot.name}
-                    </strong>
+
+                      <span
+                        className="hero-hotspot__number"
+                      >
+                        {hotspot.number}
+                      </span>
+
+
+                      <strong
+                        className="hero-hotspot__name"
+                      >
+                        {hotspot.name}
+                      </strong>
+
+                    </div>
 
                   </div>
 
-                </div>
-
-              ))}
+                )
+              )}
 
             </div>
 
           </div>
 
-        </div>
+        </motion.div>
 
 
-        {/* =================================================
-            SCROLL PROMPT
-            ================================================= */}
+        {/* ================================================
+            SCROLL INDICATOR
+            ================================================ */}
 
         <motion.div
           className="hero-film__scroll"
           initial={{
             opacity: 0,
-            y: 6,
+            y: 8,
           }}
           animate={{
             opacity: 1,
@@ -341,12 +450,15 @@ function Hero() {
           }}
           transition={{
             duration: 0.8,
-            delay: 0.7,
+            delay: 0.8,
+            ease: [0.16, 1, 0.3, 1],
           }}
           aria-hidden="true"
         >
 
-          <span className="hero-film__mouse" />
+          <span
+            className="hero-film__mouse"
+          />
 
 
           <span>
@@ -354,7 +466,9 @@ function Hero() {
           </span>
 
 
-          <span className="hero-film__divider">
+          <span
+            className="hero-film__divider"
+          >
             ·
           </span>
 
@@ -365,9 +479,18 @@ function Hero() {
 
         </motion.div>
 
+
+        {/* subtle bottom fade into next section */}
+
+        <div
+          className="hero-film__bottom-fade"
+          aria-hidden="true"
+        />
+
       </div>
 
     </section>
+
   )
 }
 

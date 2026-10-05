@@ -4,42 +4,55 @@
 
 
 /* =========================================================
-   1. HERO SCROLL SECTION
+   1. SCROLL SECTION
    ========================================================= */
 
 .hero-film {
   position: relative;
-  height: 230vh;
+
+  height: 220vh;
+
   background: #f7f5f1;
 }
 
 
 /* =========================================================
-   2. STICKY HERO VIEWPORT
+   2. STICKY VIEWPORT
+
+   Navbar starts at 88px.
+   Hero occupies the remaining viewport.
    ========================================================= */
 
 .hero-film__sticky {
   position: sticky;
-  top: 0;
+
+  top: 88px;
 
   width: 100%;
-  height: calc(100vh - 88px);
-  min-height: 620px;
+  height: calc(100svh - 88px);
+
+  min-height: 600px;
 
   overflow: hidden;
+
+  isolation: isolate;
+
+  background-color: #f7f5f1;
 
   background-image:
     linear-gradient(
       90deg,
-      rgba(247, 245, 241, 0.20),
-      rgba(247, 245, 241, 0.08)
+      rgba(247, 245, 241, 0.2) 0%,
+      rgba(247, 245, 241, 0.08) 48%,
+      rgba(255, 255, 255, 0.03) 100%
     ),
-    url("images/hero_bg.png");
+    url("/images/hero_bg.png");
 
-  background-size: cover;
+  background-size: 100% 150%;
   background-position: center center;
   background-repeat: no-repeat;
 }
+
 
 /* =========================================================
    3. LEFT CONTENT
@@ -47,12 +60,13 @@
 
 .hero-film__content {
   position: absolute;
+
   z-index: 20;
 
-  top: 50%;
-  left: clamp(2.5rem, 4vw, 5rem);
+  top: 27%;
+  left: 250px !important;
 
-  width: min(370px, 28vw);
+  width: min(360px, 27vw);
 
   transform: translateY(-50%);
 }
@@ -61,22 +75,27 @@
 /* EYEBROW */
 
 .hero-film__eyebrow {
-  margin: 0 0 1.35rem;
+  margin:
+    0
+    0
+    1.25rem;
 
   color: #b47c19;
 
-  font-size: 0.64rem;
+  font-size: 0.62rem;
   font-weight: 700;
 
   line-height: 1.2;
 
-  letter-spacing: 0.34em;
+  letter-spacing: 0.32em;
 
   text-transform: uppercase;
 }
 
 
-/* TITLE */
+/* =========================================================
+   4. TITLE
+   ========================================================= */
 
 .hero-film__title {
   margin: 0;
@@ -88,36 +107,43 @@
     "Times New Roman",
     serif;
 
-  font-size: clamp(
-    3.5rem,
-    4.5vw,
-    5.25rem
-  );
+  font-size:
+    clamp(
+      3.6rem,
+      4.55vw,
+      5.3rem
+    );
 
   font-weight: 400;
 
-  line-height: 0.94;
+  line-height: 0.92;
 
-  letter-spacing: -0.052em;
+  letter-spacing: -0.055em;
 }
-
 
 .hero-film__title em {
   color: #a96739;
+
   font-weight: 400;
 }
 
 
-/* DESCRIPTION */
+/* =========================================================
+   5. DESCRIPTION
+   ========================================================= */
 
 .hero-film__description {
-  width: min(100%, 320px);
+  width: min(100%, 315px);
 
-  margin: 1.65rem 0 0;
+  margin:
+    1.55rem
+    0
+    0;
 
   color: #4b4842;
 
-  font-size: 0.88rem;
+  font-size: 0.86rem;
+
   font-weight: 400;
 
   line-height: 1.65;
@@ -127,15 +153,19 @@
 
 
 /* =========================================================
-   4. CTA
+   6. CTA
    ========================================================= */
 
 .hero-film__button {
-  min-height: 50px;
+  position: relative;
 
-  margin-top: 1.65rem;
+  min-height: 49px;
 
-  padding: 0 1.45rem;
+  margin-top: 1.55rem;
+
+  padding:
+    0
+    1.4rem;
 
   display: inline-flex;
 
@@ -144,15 +174,20 @@
 
   gap: 1.15rem;
 
+  overflow: hidden;
+
   background: #c89a32;
 
-  border: 1px solid #c89a32;
+  border:
+    1px solid
+    #c89a32;
 
   color: #ffffff;
 
   text-decoration: none;
 
-  font-size: 0.62rem;
+  font-size: 0.6rem;
+
   font-weight: 700;
 
   letter-spacing: 0.15em;
@@ -160,55 +195,73 @@
   text-transform: uppercase;
 
   transition:
-    background-color 220ms ease,
-    border-color 220ms ease,
-    transform 220ms ease,
-    box-shadow 220ms ease;
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 350ms ease;
 }
-
 
 .hero-film__button:hover {
   background: #a97921;
+
   border-color: #a97921;
 
   transform: translateY(-2px);
 
   box-shadow:
-    0 8px 22px
-    rgba(40, 23, 12, 0.12);
+    0 10px 25px
+    rgba(40, 23, 12, 0.14);
 }
 
+.hero-film__button-arrow {
+  font-size: 1rem;
+
+  line-height: 1;
+
+  transition:
+    transform 400ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-film__button:hover
+.hero-film__button-arrow {
+  transform: translateX(5px);
+}
 
 .hero-film__button:focus-visible {
-  outline: 2px solid #111111;
+  outline:
+    2px solid
+    #111111;
+
   outline-offset: 4px;
 }
 
 
 /* =========================================================
-   5. HOUSE VISUAL AREA
+   7. HOUSE VISUAL
+
+   Important:
+   reduced from the previous oversized 70%.
    ========================================================= */
 
 .hero-film__visual {
   position: absolute;
+
   z-index: 5;
 
-  top: 50%;
-  right: 1.5%;
+  top: 18%;
+  right: clamp(1rem, 1.8vw, 3.5rem);
 
-  width: 70%;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
+  width: min(64vw, 1050px);
 
   transform: translateY(-50%);
+
+  transform-origin: center center;
 }
 
 
 /* =========================================================
-   6. VIDEO COORDINATE SYSTEM
+   8. 16:9 VIDEO COORDINATE SYSTEM
    ========================================================= */
 
 .hero-film__media {
@@ -219,11 +272,18 @@
   aspect-ratio: 16 / 9;
 
   overflow: hidden;
+
+  /*
+   * Keep the video visually merged with the
+   * architectural background.
+   */
+
+  background: transparent;
 }
 
 
 /* =========================================================
-   7. VIDEO
+   9. VIDEO
    ========================================================= */
 
 .hero-film__video {
@@ -237,17 +297,20 @@
   height: 100%;
 
   object-fit: contain;
-  object-position: center center;
+
+  object-position:
+    left center;
 
   pointer-events: none;
 
   user-select: none;
+
   -webkit-user-select: none;
 }
 
 
 /* =========================================================
-   8. HOTSPOT LAYER
+   10. HOTSPOT LAYER
    ========================================================= */
 
 .hero-film__hotspots {
@@ -265,7 +328,7 @@
 
 
 /* =========================================================
-   9. HOTSPOT
+   11. HOTSPOT
    ========================================================= */
 
 .hero-hotspot {
@@ -275,13 +338,15 @@
 
   align-items: center;
 
-  gap: clamp(
-    5px,
-    0.4vw,
-    7px
-  );
+  gap:
+    clamp(
+      5px,
+      0.4vw,
+      7px
+    );
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 
   white-space: nowrap;
 
@@ -290,31 +355,36 @@
 
 
 /* =========================================================
-   10. GOLD ANCHOR DOT
+   12. HOTSPOT ANCHOR
    ========================================================= */
 
 .hero-hotspot__anchor {
   position: relative;
 
-  width: clamp(
-    8px,
-    0.58vw,
-    11px
-  );
+  width:
+    clamp(
+      8px,
+      0.58vw,
+      11px
+    );
 
-  height: clamp(
-    8px,
-    0.58vw,
-    11px
-  );
+  height:
+    clamp(
+      8px,
+      0.58vw,
+      11px
+    );
 
-  flex: 0 0 auto;
+  flex:
+    0 0 auto;
 
   border-radius: 50%;
 
   background: #c89a32;
 
-  border: 2px solid #ffffff;
+  border:
+    2px solid
+    #ffffff;
 
   box-shadow:
     0 0 0 1px
@@ -340,20 +410,22 @@
   background:
     rgba(40, 23, 12, 0.45);
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 }
 
 
 /* =========================================================
-   11. LABEL
+   13. HOTSPOT LABEL
    ========================================================= */
 
 .hero-hotspot__label {
-  min-height: clamp(
-    24px,
-    1.6vw,
-    30px
-  );
+  min-height:
+    clamp(
+      24px,
+      1.6vw,
+      30px
+    );
 
   display: inline-flex;
 
@@ -374,9 +446,11 @@
     0 5px 15px
     rgba(17, 17, 17, 0.16);
 
-  backdrop-filter: blur(7px);
+  backdrop-filter:
+    blur(7px);
 
-  -webkit-backdrop-filter: blur(7px);
+  -webkit-backdrop-filter:
+    blur(7px);
 }
 
 
@@ -404,11 +478,12 @@
     1px solid
     rgba(255, 255, 255, 0.12);
 
-  font-size: clamp(
-    7px,
-    0.46vw,
-    9px
-  );
+  font-size:
+    clamp(
+      7px,
+      0.46vw,
+      9px
+    );
 
   font-weight: 700;
 
@@ -429,11 +504,12 @@
 
   color: #ffffff;
 
-  font-size: clamp(
-    7px,
-    0.48vw,
-    9px
-  );
+  font-size:
+    clamp(
+      7px,
+      0.48vw,
+      9px
+    );
 
   font-weight: 700;
 
@@ -444,8 +520,9 @@
 
 
 /* =========================================================
-   12. HOTSPOT POSITIONS
-   KEEPING YOUR CURRENT POSITIONS
+   14. HOTSPOT POSITIONS
+
+   Deliberately unchanged.
    ========================================================= */
 
 .hotspot--roof {
@@ -453,30 +530,25 @@
   top: 17%;
 }
 
-
 .hotspot--walls {
   left: 31%;
   top: 38%;
 }
-
 
 .hotspot--insulation {
   left: 25%;
   top: 69%;
 }
 
-
 .hotspot--plaster {
   left: 87%;
   top: 39%;
 }
 
-
 .hotspot--cladding {
   left: 35%;
   top: 58%;
 }
-
 
 .hotspot--paint {
   left: 80%;
@@ -485,7 +557,9 @@
 
 
 /* =========================================================
-   13. SCROLL PROMPT
+   15. SCROLL PROMPT
+
+   Previously too close to viewport bottom.
    ========================================================= */
 
 .hero-film__scroll {
@@ -493,25 +567,35 @@
 
   z-index: 25;
 
-  right: 7%;
+  right:
+    clamp(
+      2rem,
+      5vw,
+      5rem
+    );
 
-  bottom: 1.55rem;
+  bottom:
+    clamp(
+      2rem,
+      4vh,
+      3.25rem
+    );
 
   display: flex;
 
   align-items: center;
 
-  gap: 0.75rem;
+  gap: 0.72rem;
 
   color: #37332d;
 
-  font-size: 0.51rem;
+  font-size: 0.5rem;
 
   font-weight: 700;
 
   line-height: 1;
 
-  letter-spacing: 0.18em;
+  letter-spacing: 0.17em;
 
   white-space: nowrap;
 }
@@ -525,13 +609,15 @@
   width: 17px;
   height: 25px;
 
-  flex: 0 0 auto;
+  flex:
+    0 0 auto;
 
-  border: 1.5px solid #37332d;
+  border:
+    1.5px solid
+    #37332d;
 
   border-radius: 10px;
 }
-
 
 .hero-film__mouse::after {
   content: "";
@@ -548,9 +634,37 @@
 
   background: #c89a32;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
+
+  animation:
+    hero-scroll-wheel
+    1.8s
+    ease-in-out
+    infinite;
 }
 
+@keyframes hero-scroll-wheel {
+
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform:
+      translate(-50%, 0);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, 6px);
+  }
+}
 
 .hero-film__divider {
   color:
@@ -559,128 +673,76 @@
 
 
 /* =========================================================
-   14. PARALLAX ENVIRONMENT
-
-   New.
-   Does NOT change house/video/hotspots.
+   16. BOTTOM TRANSITION
    ========================================================= */
 
-.hero-parallax {
+.hero-film__bottom-fade {
   position: absolute;
 
-  display: block;
+  z-index: 15;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height:
+    clamp(
+      20px,
+      3vh,
+      40px
+    );
 
   pointer-events: none;
 
-  user-select: none;
-  -webkit-user-select: none;
-
-  will-change: transform;
-
-  backface-visibility: hidden;
-
-  -webkit-backface-visibility: hidden;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(247, 245, 241, 0),
+      rgba(247, 245, 241, 0.65)
+    );
 }
 
 
 /* =========================================================
-   BACKGROUND TREE
-
-   Slowest layer.
-   Behind house.
-   ========================================================= 
-
-.hero-parallax--tree {
-  z-index: 1;
-
-  right: -5%;
-  bottom: 5%;
-
-  width: clamp(
-    230px,
-    22vw,
-    420px
-  );
-
-  max-height: 70%;
-
-  object-fit: contain;
-
-  object-position: bottom right;
-
-  opacity: 0.55;
-
-  filter:
-    saturate(0.78)
-    brightness(1.04);
-
-  transform-origin: bottom right;
-}
-*/
-
-/* =========================================================
-   LEFT FOREGROUND LEAVES
-
-   Strongest parallax.
-   ========================================================= */
-
-.hero-parallax--leaves-left {
-  z-index: 22;
-
-  left: -12%;
-  bottom: 5%;
-
-  width: clamp(380px, 38vw, 700px);
-
-  opacity: 0.68;
-
-  filter:
-    blur(1.2px)
-    saturate(0.82)
-    brightness(1.03);
-
-  transform-origin: bottom left;
-
-  pointer-events: none;
-
-  user-select: none;
-
-  will-change: transform;
-}
-
-
-/*======================================================
-   15. LARGE DESKTOP
+   17. LARGE DESKTOP
    ========================================================= */
 
 @media (min-width: 1600px) {
 
   .hero-film__content {
-    left: clamp(
-      4rem,
-      4.5vw,
-      6rem
-    );
+    left:
+      clamp(
+        5rem,
+        6vw,
+        7rem
+      );
 
     width: 390px;
   }
 
-
   .hero-film__visual {
-    right: 2%;
+    right: 3.5%;
 
-    width: 68%;
+    width:
+      min(
+        62vw,
+        1120px
+      );
   }
 
-
-  .hero-parallax--tree {
-    width: 400px;
+  .hero-film__title {
+    font-size:
+      clamp(
+        4.5rem,
+        4.7vw,
+        5.8rem
+      );
   }
 }
 
 
 /* =========================================================
-   16. LAPTOP
+   18. LAPTOP
    ========================================================= */
 
 @media (max-width: 1300px) {
@@ -688,37 +750,35 @@
   .hero-film__content {
     left: 3rem;
 
-    width: 330px;
+    width: 325px;
   }
-
 
   .hero-film__visual {
-    right: 0;
+    right: 0.5rem;
 
-    width: 69%;
+    width: 65vw;
   }
 
-
   .hero-film__title {
-    font-size: clamp(
-      3.3rem,
-      4.7vw,
-      4.7rem
-    );
+    font-size:
+      clamp(
+        3.3rem,
+        4.7vw,
+        4.7rem
+      );
   }
 }
 
 
 /* =========================================================
-   17. SMALL LAPTOP
+   19. SMALL LAPTOP
    ========================================================= */
 
 @media (max-width: 1050px) {
 
   .hero-film {
-    height: 210vh;
+    height: 205vh;
   }
-
 
   .hero-film__content {
     left: 2rem;
@@ -726,61 +786,59 @@
     width: 31%;
   }
 
-
   .hero-film__visual {
-    right: -2%;
+    right: -1%;
 
-    width: 72%;
+    width: 69%;
   }
-
 
   .hero-film__title {
-    font-size: clamp(
-      3rem,
-      5.5vw,
-      4rem
-    );
+    font-size:
+      clamp(
+        3rem,
+        5.4vw,
+        4rem
+      );
   }
-
 
   .hero-film__description {
-    font-size: 0.82rem;
-  }
-
-
-  .hero-parallax--tree {
-    right: -8%;
-
-    width: 30vw;
-
-    opacity: 0.48;
+    font-size: 0.8rem;
   }
 }
 
 
 /* =========================================================
-   18. TABLET
+   20. TABLET
+
+   Navbar = 72px here.
    ========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
 
   .hero-film {
-    height: 190vh;
+    height: 185vh;
   }
-
 
   .hero-film__sticky {
-    height:
-      calc(100vh - 76px);
+    top: 72px;
 
-    min-height: 650px;
+    height:
+      calc(100svh - 72px);
+
+    min-height: 620px;
   }
 
 
-  /* CONTENT */
+  /* COPY */
 
   .hero-film__content {
-    top: 2rem;
+    top:
+      clamp(
+        1.5rem,
+        4vh,
+        2.5rem
+      );
+
     left: 1.5rem;
 
     width:
@@ -789,38 +847,35 @@
     transform: none;
   }
 
-
   .hero-film__eyebrow {
     margin-bottom: 0.75rem;
 
-    font-size: 0.56rem;
+    font-size: 0.55rem;
   }
 
-
   .hero-film__title {
-    font-size: clamp(
-      3rem,
-      9vw,
-      4.2rem
-    );
+    font-size:
+      clamp(
+        3rem,
+        8.5vw,
+        4.1rem
+      );
 
     line-height: 0.92;
   }
-
 
   .hero-film__description {
     max-width: 320px;
 
     margin-top: 0.9rem;
 
-    font-size: 0.8rem;
+    font-size: 0.79rem;
   }
-
 
   .hero-film__button {
     min-height: 43px;
 
-    margin-top: 0.9rem;
+    margin-top: 0.95rem;
   }
 
 
@@ -829,26 +884,21 @@
   .hero-film__visual {
     top: auto;
 
-    right: -4%;
-    bottom: 1.5%;
+    right: 1%;
 
-    width: 90%;
+    bottom: 4%;
+
+    width: 88%;
 
     transform: none;
   }
 
 
-  /* LABELS */
-
-  .hero-film__hotspots {
-    display: block;
-  }
-
+  /* SMALLER HOTSPOTS */
 
   .hero-hotspot {
     gap: 4px;
   }
-
 
   .hero-hotspot__anchor {
     width: 8px;
@@ -857,31 +907,32 @@
     border-width: 1px;
   }
 
-
   .hero-hotspot__anchor::after {
     width: 5px;
   }
 
-
   .hero-hotspot__label {
     min-height: 22px;
 
-    backdrop-filter: blur(5px);
+    backdrop-filter:
+      blur(5px);
 
     -webkit-backdrop-filter:
       blur(5px);
   }
 
-
   .hero-hotspot__number {
-    padding: 0 5px;
+    padding:
+      0
+      5px;
 
     font-size: 6px;
   }
 
-
   .hero-hotspot__name {
-    padding: 0 6px;
+    padding:
+      0
+      6px;
 
     font-size: 6px;
 
@@ -889,149 +940,102 @@
   }
 
 
+  /* desktop prompt no longer useful */
+
   .hero-film__scroll {
     display: none;
-  }
-
-
-  /* PARALLAX */
-
-  .hero-parallax--tree {
-    right: -10%;
-
-    bottom: 4%;
-
-    width: 38vw;
-
-    opacity: 0.42;
-  }
-
-
-  .hero-parallax--leaves-left {
-    left: -12%;
-
-    bottom: -5%;
-
-    width: 30vw;
-
-    opacity: 0.52;
-
-    filter:
-      blur(3px)
-      saturate(0.8);
-  }
-
-
-  .hero-parallax--leaves-right {
-    right: -12%;
-
-    bottom: 1%;
-
-    width: 25vw;
-
-    opacity: 0.46;
-
-    filter:
-      blur(3px)
-      saturate(0.8);
   }
 }
 
 
 /* =========================================================
-   19. MOBILE
+   21. MOBILE
    ========================================================= */
 
 @media (max-width: 650px) {
 
   .hero-film {
-    height: 175vh;
+    height: 170vh;
   }
 
-
   .hero-film__sticky {
-    min-height: 620px;
+    min-height: 590px;
   }
 
 
   /* CONTENT */
 
   .hero-film__content {
-    top: 1.5rem;
+    top: 1.25rem;
+
     left: 1.15rem;
 
     width:
       calc(100% - 2.3rem);
   }
 
-
   .hero-film__eyebrow {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.55rem;
 
-    font-size: 0.5rem;
+    font-size: 0.49rem;
 
-    letter-spacing: 0.24em;
+    letter-spacing: 0.23em;
   }
-
 
   .hero-film__title {
-    font-size: clamp(
-      2.65rem,
-      13vw,
-      3.7rem
-    );
+    font-size:
+      clamp(
+        2.7rem,
+        12.5vw,
+        3.65rem
+      );
 
-    line-height: 0.92;
+    line-height: 0.91;
   }
 
-
   .hero-film__description {
-    max-width: 280px;
+    max-width: 275px;
 
-    margin-top: 0.75rem;
+    margin-top: 0.7rem;
 
-    font-size: 0.76rem;
+    font-size: 0.74rem;
 
     line-height: 1.5;
   }
-
 
   .hero-film__button {
     min-height: 40px;
 
     margin-top: 0.75rem;
 
-    padding: 0 1rem;
+    padding:
+      0
+      1rem;
 
-    font-size: 0.52rem;
+    font-size: 0.51rem;
   }
 
 
-  /* HOUSE */
+  /* HOUSE
+
+     Deliberately much less oversized than
+     the previous 120%.
+  */
 
   .hero-film__visual {
-    top: auto;
+    right: -6%;
 
-    right: -12%;
-    bottom: 2%;
+    bottom: 4%;
 
-    width: 120%;
-
-    transform: none;
+    width: 108%;
   }
 
 
   /* LABELS */
 
-  .hero-film__hotspots {
-    display: block;
-  }
-
-
   .hero-hotspot {
     gap: 3px;
   }
-
 
   .hero-hotspot__anchor {
     width: 7px;
@@ -1040,16 +1044,12 @@
     border-width: 1px;
   }
 
-
   .hero-hotspot__anchor::after {
     width: 4px;
   }
 
-
   .hero-hotspot__label {
     min-height: 19px;
-
-    border-radius: 999px;
 
     backdrop-filter:
       blur(4px);
@@ -1058,175 +1058,152 @@
       blur(4px);
   }
 
-
   .hero-hotspot__number {
-    padding: 0 4px;
+    padding:
+      0
+      4px;
 
     font-size: 5.5px;
   }
 
-
   .hero-hotspot__name {
-    padding: 0 5px;
+    padding:
+      0
+      5px;
 
     font-size: 5.5px;
 
     letter-spacing: 0.04em;
   }
-
-
-  /* PARALLAX */
-
-  .hero-parallax--tree {
-    right: -18%;
-
-    bottom: 5%;
-
-    width: 52vw;
-
-    opacity: 0.3;
-  }
-
-
-  .hero-parallax--leaves-left {
-    left: -18%;
-
-    bottom: -3%;
-
-    width: 42vw;
-
-    opacity: 0.42;
-
-    filter:
-      blur(3px)
-      saturate(0.76);
-  }
-
-
-  /*
-   * Only one foreground plant on mobile.
-   * Keeps the composition clean.
-   */
-
-  .hero-parallax--leaves-right {
-    display: none;
-  }
 }
 
 
 /* =========================================================
-   20. VERY SMALL MOBILE
+   22. VERY SMALL MOBILE
    ========================================================= */
 
 @media (max-width: 420px) {
 
   .hero-film__content {
-    top: 1.25rem;
+    top: 1rem;
   }
-
 
   .hero-film__title {
-    font-size: 2.75rem;
+    font-size:
+      clamp(
+        2.55rem,
+        13vw,
+        3.1rem
+      );
   }
-
 
   .hero-film__visual {
-    right: -17%;
+    right: -8%;
 
-    bottom: 3%;
+    bottom: 5%;
 
-    width: 130%;
+    width: 112%;
   }
-
-
-  .hero-film__hotspots {
-    display: block;
-  }
-
 
   .hero-hotspot__label {
     min-height: 18px;
   }
 
-
   .hero-hotspot__number,
   .hero-hotspot__name {
     font-size: 5px;
   }
-
-
-  .hero-parallax--tree {
-    opacity: 0.25;
-  }
-
-
-  .hero-parallax--leaves-left {
-    width: 46vw;
-
-    opacity: 0.38;
-  }
 }
 
 
 /* =========================================================
-   21. SHORT LAPTOP
+   23. SHORT LAPTOP
    ========================================================= */
 
-@media (min-width: 851px) and (max-height: 750px) {
+@media (
+  min-width: 901px
+) and (
+  max-height: 750px
+) {
 
   .hero-film__sticky {
-    min-height: 560px;
+    min-height: 540px;
   }
-
 
   .hero-film__content {
-    transform:
-      translateY(-46%);
+    top: 46%;
   }
-
 
   .hero-film__title {
-    font-size: clamp(
-      3rem,
-      4.3vw,
-      4.4rem
-    );
+    font-size:
+      clamp(
+        3rem,
+        4.1vw,
+        4.25rem
+      );
   }
-
 
   .hero-film__eyebrow {
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
-
 
   .hero-film__description {
-    margin-top: 1.15rem;
+    margin-top: 1rem;
   }
-
 
   .hero-film__button {
-    margin-top: 1.15rem;
+    margin-top: 1rem;
   }
 
-
   .hero-film__visual {
-    width: 68%;
+    width:
+      min(
+        62vw,
+        950px
+      );
+  }
+
+  .hero-film__scroll {
+    bottom: 1.5rem;
   }
 }
 
 
 /* =========================================================
-   22. REDUCED MOTION
+   24. TOUCH
+   ========================================================= */
+
+@media (hover: none) {
+
+  .hero-film__button:hover {
+    background: #c89a32;
+
+    border-color: #c89a32;
+
+    transform: none;
+
+    box-shadow: none;
+  }
+
+  .hero-film__button:hover
+  .hero-film__button-arrow {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   25. REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
-  .hero-film__button {
+  .hero-film__button,
+  .hero-film__button-arrow {
     transition: none;
   }
 
-
-  .hero-parallax {
-    transform: none !important;
+  .hero-film__mouse::after {
+    animation: none;
   }
 }
