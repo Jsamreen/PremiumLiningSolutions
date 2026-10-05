@@ -1,5 +1,6 @@
 import Navbar from './components/layout/Navbar'
 import Hero from './sections/Hero/Hero'
+import Systems from './sections/Systems/Systems'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
 
       <main>
         <Hero />
+        <Systems />
       </main>
     </>
   )

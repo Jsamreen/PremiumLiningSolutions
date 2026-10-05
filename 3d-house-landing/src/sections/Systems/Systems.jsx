@@ -7,63 +7,103 @@ const services = [
     name: 'HEBEL',
     description:
       'Lightweight wall systems designed for strength, durability and dependable performance.',
-    image: '/images/systems/hebel.jpg',
+    image: '/images/systems/hebel.png',
   },
   {
     number: '02',
     name: 'CLADDING',
     description:
       'Architectural exterior cladding systems that protect the building while defining its finish.',
-    image: '/images/systems/cladding.jpg',
+    image: '/images/systems/cladding.png',
   },
   {
     number: '03',
     name: 'WRAP',
     description:
       'High-performance building wrap supporting moisture management and long-term building protection.',
-    image: '/images/systems/wrap.jpg',
+    image: '/images/systems/wrap.png',
   },
   {
     number: '04',
     name: 'INSULATION',
     description:
       'Thermal insulation solutions designed to improve comfort and building performance throughout the year.',
-    image: '/images/systems/insulation.jpg',
+    image: '/images/systems/insulation.png',
   },
   {
     number: '05',
     name: 'PLASTER',
     description:
       'Precision plasterboard installation for clean walls, ceilings and consistently refined interiors.',
-    image: '/images/systems/plaster.jpg',
+    image: '/images/systems/plaster.png',
   },
   {
     number: '06',
     name: 'PAINT',
     description:
       'Professional finishing that brings every surface together with a clean and durable final result.',
-    image: '/images/systems/paint.jpg',
+    image: '/images/systems/paint.png',
   },
 ]
 
-const reveal = {
+/* =========================================================
+   INTRO ANIMATION
+   ========================================================= */
+
+const introReveal = {
   initial: {
     opacity: 0,
-    y: 26,
+    y: 18,
   },
+
   whileInView: {
     opacity: 1,
     y: 0,
   },
+
   viewport: {
     once: true,
-    amount: 0.2,
+    amount: 0.35,
   },
+
   transition: {
-    duration: 0.7,
-    ease: [0.22, 1, 0.36, 1],
+    duration: 0.75,
+    ease: [0.16, 1, 0.3, 1],
   },
 }
+
+
+/* =========================================================
+   CARD ANIMATION
+   ========================================================= */
+
+const cardReveal = {
+  initial: {
+    opacity: 0,
+    y: 28,
+    scale: 0.985,
+    filter: 'blur(5px)',
+  },
+
+  whileInView: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+  },
+
+  viewport: {
+    once: true,
+    amount: 0.22,
+    margin: '0px 0px -6% 0px',
+  },
+
+  transition: {
+    duration: 0.9,
+    ease: [0.16, 1, 0.3, 1],
+  },
+}
+
 
 function Systems() {
   return (
@@ -72,44 +112,93 @@ function Systems() {
       className="systems"
       aria-labelledby="systems-title"
     >
-      {/* Seamless continuation from Hero */}
-      <div className="systems__transition" aria-hidden="true">
+
+      {/* ================================================
+          HERO → SYSTEMS TRANSITION
+          ================================================ */}
+
+      <div
+        className="systems__transition"
+        aria-hidden="true"
+      >
         <span className="systems__transition-line" />
       </div>
 
+
       <div className="systems__inner">
-        {/* Sticky editorial introduction */}
+
+        {/* ================================================
+            LEFT EDITORIAL INTRO
+            ================================================ */}
+
         <div className="systems__intro">
+
           <div className="systems__intro-sticky">
+
             <motion.p
               className="systems__eyebrow"
-              {...reveal}
+              {...introReveal}
             >
               EXPLORE THE SYSTEMS
             </motion.p>
 
+
             <motion.h2
               id="systems-title"
               className="systems__title"
-              {...reveal}
+
+              initial={{
+                opacity: 0,
+                y: 22,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              viewport={{
+                once: true,
+                amount: 0.35,
+              }}
+
               transition={{
-                duration: 0.8,
-                delay: 0.06,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.85,
+                delay: 0.05,
+                ease: [0.16, 1, 0.3, 1],
               }}
             >
               Built with
               <br />
-              <em>better solutions.</em>
+
+              <em>
+                better solutions.
+              </em>
             </motion.h2>
+
 
             <motion.p
               className="systems__description"
-              {...reveal}
+
+              initial={{
+                opacity: 0,
+                y: 16,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+
+              viewport={{
+                once: true,
+                amount: 0.35,
+              }}
+
               transition={{
-                duration: 0.7,
+                duration: 0.75,
                 delay: 0.12,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.16, 1, 0.3, 1],
               }}
             >
               From exterior systems to the final coat,
@@ -118,67 +207,108 @@ function Systems() {
               experienced team.
             </motion.p>
 
+
             <motion.div
               className="systems__index"
-              {...reveal}
+
+              initial={{
+                opacity: 0,
+                x: -12,
+              }}
+
+              whileInView={{
+                opacity: 1,
+                x: 0,
+              }}
+
+              viewport={{
+                once: true,
+                amount: 0.35,
+              }}
+
               transition={{
                 duration: 0.7,
                 delay: 0.18,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.16, 1, 0.3, 1],
               }}
             >
               <span>01</span>
-              <span className="systems__index-line" />
+
+              <span
+                className="systems__index-line"
+              />
+
               <span>06</span>
             </motion.div>
+
           </div>
+
         </div>
 
-        {/* Large scrolling material panels */}
+
+        {/* ================================================
+            SYSTEM CARDS
+            ================================================ */}
+
         <div className="systems__services">
+
           {services.map((service) => (
+
             <motion.article
               key={service.number}
               className="system-card"
-              initial={{
-                opacity: 0,
-                y: 50,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-                amount: 0.18,
-              }}
-              transition={{
-                duration: 0.8,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+              {...cardReveal}
             >
+
               <div className="system-card__media">
+
+                {/* IMAGE */}
+
                 <img
                   src={service.image}
                   alt={`${service.name} lining system`}
                   loading="lazy"
+                  decoding="async"
                 />
+
+
+                {/* CINEMATIC IMAGE SHADE */}
 
                 <div
                   className="system-card__shade"
                   aria-hidden="true"
                 />
 
-                <span className="system-card__number">
+
+                {/* SYSTEM NUMBER */}
+
+                <span
+                  className="system-card__number"
+                  aria-hidden="true"
+                >
                   {service.number}
                 </span>
 
+
+                {/* CONTENT */}
+
                 <div className="system-card__content">
-                  <div className="system-card__rule" />
 
-                  <h3>{service.name}</h3>
+                  <div
+                    className="system-card__rule"
+                    aria-hidden="true"
+                  />
 
-                  <p>{service.description}</p>
+
+                  <h3>
+                    {service.name}
+                  </h3>
+
+
+                  <p>
+                    {service.description}
+                  </p>
+
 
                   <span
                     className="system-card__arrow"
@@ -186,12 +316,19 @@ function Systems() {
                   >
                     →
                   </span>
+
                 </div>
+
               </div>
+
             </motion.article>
+
           ))}
+
         </div>
+
       </div>
+
     </section>
   )
 }
