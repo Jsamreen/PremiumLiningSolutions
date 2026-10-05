@@ -4,9 +4,11 @@ import {
   useReducedMotion,
   useScroll,
   useMotionValueEvent,
+  useTransform,
 } from 'motion/react'
 
 import './Hero.css'
+
 
 const hotspots = [
   {
@@ -41,6 +43,7 @@ const hotspots = [
   },
 ]
 
+
 function Hero() {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
@@ -51,14 +54,67 @@ function Hero() {
 
   const reduceMotion = useReducedMotion()
 
+
+  /* =======================================================
+     HERO SCROLL PROGRESS
+     ======================================================= */
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
   })
 
-  /*
-   * Smooth scroll-controlled video.
-   */
+
+  /* =======================================================
+     PARALLAX MOVEMENT
+
+     Background = slow
+     Foreground = faster
+     ======================================================= */
+
+  const treeY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [15, -35]
+  )
+
+  const treeX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [10, -10]
+  )
+
+
+  const leavesLeftY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [30, -90]
+  )
+
+  const leavesLeftX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-20, 30]
+  )
+
+
+  const leavesRightY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [40, -120]
+  )
+
+  const leavesRightX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [20, -35]
+  )
+
+
+  /* =======================================================
+     SMOOTH SCROLL-CONTROLLED VIDEO
+     ======================================================= */
+
   useMotionValueEvent(
     scrollYProgress,
     'change',
@@ -78,6 +134,7 @@ function Hero() {
 
       if (animationFrame.current) return
 
+
       const animate = () => {
         const video = videoRef.current
 
@@ -86,15 +143,19 @@ function Hero() {
           return
         }
 
+
         const difference =
           targetProgress.current -
           currentProgress.current
 
+
         /*
-         * Smooth cinematic response.
+         * Smooth cinematic response
          */
+
         currentProgress.current +=
           difference * 0.1
+
 
         const progress = Math.max(
           0,
@@ -104,8 +165,10 @@ function Hero() {
           )
         )
 
+
         video.currentTime =
           progress * video.duration
+
 
         if (Math.abs(difference) > 0.001) {
           animationFrame.current =
@@ -122,10 +185,12 @@ function Hero() {
         }
       }
 
+
       animationFrame.current =
         requestAnimationFrame(animate)
     }
   )
+
 
   return (
     <section
@@ -134,14 +199,20 @@ function Hero() {
       className="hero-film"
       aria-labelledby="hero-title"
     >
+
       <div className="hero-film__sticky">
 
-        {/* LEFT CONTENT */}
+
+        {/* =================================================
+            LEFT CONTENT
+            ================================================= */}
+
         <div className="hero-film__content">
 
           <p className="hero-film__eyebrow">
             COMPLETE LINING SOLUTIONS
           </p>
+
 
           <h1
             id="hero-title"
@@ -152,11 +223,13 @@ function Hero() {
             to <em>finish.</em>
           </h1>
 
+
           <p className="hero-film__description">
             Explore the systems, materials and
             craftsmanship behind a complete Premium
             Lining Solutions build.
           </p>
+
 
           <a
             href="#systems"
@@ -172,15 +245,21 @@ function Hero() {
         </div>
 
 
-        {/* HOUSE */}
+        {/* =================================================
+            HOUSE
+            ================================================= */}
+
         <div className="hero-film__visual">
 
           {/*
-           * IMPORTANT:
-           * Video + hotspots share this exact
-           * 16:9 coordinate system.
+           * Video + hotspots share this
+           * exact 16:9 coordinate system.
            */}
+
           <div className="hero-film__media">
+
+
+            {/* VIDEO */}
 
             <video
               ref={videoRef}
@@ -193,41 +272,52 @@ function Hero() {
               aria-label="Premium Lining Solutions construction showcase"
             />
 
+          
 
             {/* FLOATING LABELS */}
+
             <div
               className="hero-film__hotspots"
               aria-hidden="true"
             >
+
               {hotspots.map((hotspot) => (
+
                 <div
                   key={hotspot.number}
                   className={
                     `hero-hotspot ${hotspot.className}`
                   }
                 >
+
                   <span
                     className="hero-hotspot__anchor"
                   />
 
+
                   <div
                     className="hero-hotspot__label"
                   >
+
                     <span
                       className="hero-hotspot__number"
                     >
                       {hotspot.number}
                     </span>
 
+
                     <strong
                       className="hero-hotspot__name"
                     >
                       {hotspot.name}
                     </strong>
+
                   </div>
 
                 </div>
+
               ))}
+
             </div>
 
           </div>
@@ -235,7 +325,10 @@ function Hero() {
         </div>
 
 
-        {/* SCROLL PROMPT */}
+        {/* =================================================
+            SCROLL PROMPT
+            ================================================= */}
+
         <motion.div
           className="hero-film__scroll"
           initial={{
@@ -252,15 +345,19 @@ function Hero() {
           }}
           aria-hidden="true"
         >
+
           <span className="hero-film__mouse" />
+
 
           <span>
             SCROLL TO EXPLORE
           </span>
 
+
           <span className="hero-film__divider">
             ·
           </span>
+
 
           <span>
             DISCOVER THE BUILD
@@ -269,8 +366,10 @@ function Hero() {
         </motion.div>
 
       </div>
+
     </section>
   )
 }
 
-export default Hero 
+
+export default Hero
