@@ -1,8 +1,26 @@
 import { useEffect, useState } from 'react'
+import {
+  Link,
+  useLocation,
+} from 'react-router-dom'
+
 import './Navbar.css'
+
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+
+  const location = useLocation()
+
+  const isHome = location.pathname === '/'
+  const isMaterials = location.pathname === '/materials'
+  const isAbout = location.pathname === '/about'
+  const isContact = location.pathname === '/contact'
+
+
+  /* =====================================================
+     NAVBAR SCROLL STATE
+     ===================================================== */
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,15 +38,21 @@ function Navbar() {
     }
   }, [])
 
+
   return (
     <header
-      className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}
+      className={`navbar ${
+        scrolled ? 'navbar--scrolled' : ''
+      }`}
     >
-      {/* BRAND */}
 
-      <a
+      {/* =================================================
+          BRAND
+          ================================================= */}
+
+      <Link
         className="navbar__brand"
-        href="#home"
+        to="/"
         aria-label="Premium Lining Solutions home"
       >
         <span
@@ -45,43 +69,56 @@ function Navbar() {
           <br />
           SOLUTIONS
         </span>
-      </a>
+      </Link>
 
-      {/* DESKTOP NAVIGATION */}
+
+      {/* =================================================
+          DESKTOP NAVIGATION
+          ================================================= */}
 
       <nav
         className="navbar__nav"
         aria-label="Main navigation"
       >
-        <a
-          className="active"
-          href="#home"
+
+        <Link
+          to="/"
+          className={isHome ? 'active' : ''}
         >
           Home
-        </a>
+        </Link>
 
-        <a href="#systems">
-          Systems
-        </a>
-
-        <a href="/materials">
+        <Link
+          to="/materials"
+          className={isMaterials ? 'active' : ''}
+        >
           Materials
-        </a>
+        </Link>
 
-        <a href="/about">
+        <Link
+          to="/about"
+          className={isAbout ? 'active' : ''}
+        >
           About
-        </a>
+        </Link>
 
-        <a href="#contact">
+        <Link
+          to="/contact"
+          className={isContact ? 'active' : ''}
+        >
           Contact
-        </a>
+        </Link>
+
       </nav>
 
-      {/* CTA */}
 
-      <a
+      {/* =================================================
+          START PROJECT CTA
+          ================================================= */}
+
+      <Link
         className="navbar__cta"
-        href="#contact"
+        to="/contact"
       >
         <span className="navbar__cta-text">
           Start a project
@@ -93,9 +130,11 @@ function Navbar() {
         >
           →
         </span>
-      </a>
+      </Link>
+
     </header>
   )
 }
+
 
 export default Navbar
