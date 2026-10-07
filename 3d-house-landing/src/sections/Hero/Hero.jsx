@@ -10,6 +10,8 @@ import {
   useMotionValueEvent,
 } from 'motion/react'
 
+import { Link } from 'react-router-dom'
+
 import './Hero.css'
 
 
@@ -18,31 +20,37 @@ const hotspots = [
     number: '01',
     name: 'ROOF',
     className: 'hotspot--roof',
+    to: 'architectural-systems#cladding',
   },
   {
     number: '02',
     name: 'WALLS',
     className: 'hotspot--walls',
+    to: 'architectural-systems#hebel',
   },
   {
     number: '03',
     name: 'INSULATION',
     className: 'hotspot--insulation',
+    to: 'architectural-systems#insulation',
   },
   {
     number: '04',
     name: 'PLASTER',
     className: 'hotspot--plaster',
+    to: 'architectural-systems#plaster',
   },
   {
     number: '05',
     name: 'CLADDING',
     className: 'hotspot--cladding',
+    to: 'architectural-systems#cladding',
   },
   {
     number: '06',
     name: 'PAINT',
     className: 'hotspot--paint',
+    to: 'architectural-systems#paint',
   },
 ]
 
@@ -66,13 +74,6 @@ function Hero() {
   const { scrollYProgress } = useScroll({
     target: sectionRef,
 
-    /*
-     * Navbar is fixed.
-     *
-     * Hero begins at document top and the sticky viewport
-     * itself handles navbar clearance in CSS.
-     */
-
     offset: [
       'start start',
       'end end',
@@ -93,10 +94,6 @@ function Hero() {
 
     const prepareVideo = () => {
 
-      /*
-       * Start precisely on first frame.
-       */
-
       video.pause()
 
       try {
@@ -109,13 +106,17 @@ function Hero() {
 
 
     if (video.readyState >= 1) {
+
       prepareVideo()
+
     } else {
+
       video.addEventListener(
         'loadedmetadata',
         prepareVideo,
         { once: true }
       )
+
     }
 
 
@@ -127,9 +128,11 @@ function Hero() {
       )
 
       if (animationFrame.current) {
+
         cancelAnimationFrame(
           animationFrame.current
         )
+
       }
 
     }
@@ -158,12 +161,14 @@ function Hero() {
 
 
       /*
-       * Reduced motion:
-       * keep the architectural visual stationary.
+       * Reduced motion keeps the architectural
+       * visual stationary.
        */
 
       if (reduceMotion) {
+
         video.currentTime = 0
+
         return
       }
 
@@ -200,10 +205,8 @@ function Hero() {
 
 
         /*
-         * 0.085 gives the camera movement a little
-         * more weight than the previous 0.1.
-         *
-         * Still responsive, but less twitchy.
+         * Weighted interpolation keeps the
+         * camera movement smooth.
          */
 
         currentProgress.current +=
@@ -276,162 +279,183 @@ function Hero() {
 
 
         {/* ================================================
-            LEFT CONTENT
+            RESPONSIVE HERO STAGE
+
+            This wrapper does NOT change the visual design.
+
+            It simply keeps the copy and house inside the
+            same responsive coordinate system so they cannot
+            overlap when browser zoom / viewport changes.
             ================================================ */}
 
-        <motion.div
-          className="hero-film__content"
-          initial={{
-            opacity: 0,
-            y: 18,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.9,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-
-          <p className="hero-film__eyebrow">
-            COMPLETE LINING SOLUTIONS
-          </p>
+        <div className="hero-film__stage">
 
 
-          <h1
-            id="hero-title"
-            className="hero-film__title"
+          {/* ==============================================
+              LEFT CONTENT
+              ============================================== */}
+
+          <motion.div
+            className="hero-film__content"
+            initial={{
+              opacity: 0,
+              y: 18,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.9,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
-            From frame
-            <br />
 
-            to <em>finish.</em>
-          </h1>
-
-
-          <p className="hero-film__description">
-            Explore the systems, materials and
-            craftsmanship behind a complete Premium
-            Lining Solutions build.
-          </p>
+            <p className="hero-film__eyebrow">
+              COMPLETE LINING SOLUTIONS
+            </p>
 
 
-          <a
-            href="#systems"
-            className="hero-film__button"
-          >
-            <span>
-              EXPLORE THE HOUSE
-            </span>
-
-            <span
-              className="hero-film__button-arrow"
-              aria-hidden="true"
+            <h1
+              id="hero-title"
+              className="hero-film__title"
             >
-              →
-            </span>
-          </a>
+              From frame
+              <br />
 
-        </motion.div>
-
-
-        {/* ================================================
-            HOUSE VISUAL
-            ================================================ */}
-
-        <motion.div
-          className="hero-film__visual"
-          initial={{
-            opacity: 0,
-            scale: 0.985,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          transition={{
-            duration: 1.1,
-            delay: 0.08,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-        >
-
-          {/*
-           * IMPORTANT:
-           *
-           * Video and labels stay inside the SAME 16:9
-           * coordinate system.
-           *
-           * Therefore resizing this container will not
-           * break hotspot positioning.
-           */}
-
-          <div className="hero-film__media">
+              to <em>finish.</em>
+            </h1>
 
 
-            <video
-              ref={videoRef}
-              className="hero-film__video"
-              src="/videos/pls-house-hero-1s.mp4"
-              muted
-              playsInline
-              preload="auto"
-              disablePictureInPicture
-              aria-label="Premium Lining Solutions construction showcase"
-            />
+            <p className="hero-film__description">
+              Explore the systems, materials and
+              craftsmanship behind a complete Premium
+              Lining Solutions build.
+            </p>
 
 
-            <div
-              className="hero-film__hotspots"
-              aria-hidden="true"
+            <a
+              href="#systems"
+              className="hero-film__button"
             >
 
-              {hotspots.map(
-                (hotspot) => (
-
-                  <div
-                    key={hotspot.number}
-                    className={
-                      `hero-hotspot ${hotspot.className}`
-                    }
-                  >
-
-                    <span
-                      className="hero-hotspot__anchor"
-                    />
+              <span>
+                EXPLORE THE HOUSE
+              </span>
 
 
-                    <div
-                      className="hero-hotspot__label"
+              <span
+                className="hero-film__button-arrow"
+                aria-hidden="true"
+              >
+                →
+              </span>
+
+            </a>
+
+          </motion.div>
+
+
+          {/* ==============================================
+              HOUSE VISUAL
+              ============================================== */}
+
+          <motion.div
+            className="hero-film__visual"
+            initial={{
+              opacity: 0,
+              scale: 0.985,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            transition={{
+              duration: 1.1,
+              delay: 0.08,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+
+            {/*
+             * IMPORTANT:
+             *
+             * Video and labels remain inside the SAME
+             * 16:9 coordinate system.
+             *
+             * The hotspot coordinates therefore remain
+             * unchanged when the house scales.
+             */}
+
+            <div className="hero-film__media">
+
+
+              <video
+                ref={videoRef}
+                className="hero-film__video"
+                src="/videos/pls-house-hero-1s.mp4"
+                muted
+                playsInline
+                preload="auto"
+                disablePictureInPicture
+                aria-label="Premium Lining Solutions construction showcase"
+              />
+
+
+              <div
+                className="hero-film__hotspots"
+                aria-hidden="true"
+              >
+
+                {hotspots.map(
+                  (hotspot) => (
+
+                    <Link
+                      to={hotspot.to}
+                      key={hotspot.number}
+                      className={
+                        `hero-hotspot ${hotspot.className}`
+                      }
+                      aria-label={`View ${hotspot.name.toLowerCase()} architectural system`}
                     >
 
                       <span
-                        className="hero-hotspot__number"
+                        className="hero-hotspot__anchor"
+                      />
+
+
+                      <div
+                        className="hero-hotspot__label"
                       >
-                        {hotspot.number}
-                      </span>
+
+                        <span
+                          className="hero-hotspot__number"
+                        >
+                          {hotspot.number}
+                        </span>
 
 
-                      <strong
-                        className="hero-hotspot__name"
-                      >
-                        {hotspot.name}
-                      </strong>
+                        <strong
+                          className="hero-hotspot__name"
+                        >
+                          {hotspot.name}
+                        </strong>
 
-                    </div>
+                      </div>
 
-                  </div>
+                    </Link>
 
-                )
-              )}
+                  )
+                )}
+
+              </div>
 
             </div>
 
-          </div>
+          </motion.div>
 
-        </motion.div>
+
+        </div>
 
 
         {/* ================================================
@@ -480,12 +504,15 @@ function Hero() {
         </motion.div>
 
 
-        {/* subtle bottom fade into next section */}
+        {/* ================================================
+            BOTTOM TRANSITION
+            ================================================ */}
 
         <div
           className="hero-film__bottom-fade"
           aria-hidden="true"
         />
+
 
       </div>
 

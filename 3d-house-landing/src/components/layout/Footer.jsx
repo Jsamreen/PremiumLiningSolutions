@@ -27,21 +27,15 @@ function Footer() {
           <div className="footer__brand">
 
             <a
-              href="#home"
+              href="/"
               className="footer__logo"
               aria-label="Premium Lining Solutions home"
             >
-              <span className="footer__monogram">
-                PLS
-              </span>
-
-              <span className="footer__brand-name">
-                PREMIUM
-                <br />
-                LINING
-                <br />
-                SOLUTIONS
-              </span>
+              <img
+                src="/images/pls-logo.png"
+                alt="Premium Lining Solutions"
+                className="footer__logo-image"
+              />
             </a>
 
             <p className="footer__tagline">
@@ -177,12 +171,17 @@ function Footer() {
           </div>
 
 
-          <a href="#home">
-            BACK TO TOP
-
-            <span aria-hidden="true">
-              ↑
-            </span>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+              })
+            }}
+          >
+            BACK TO TOP ↑
           </a>
 
         </div>

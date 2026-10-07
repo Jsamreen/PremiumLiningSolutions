@@ -4,18 +4,12 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import ScrollToTop from './components/layout/ScrollToTop'
 
-import Hero from './sections/Hero/Hero'
-import Systems from './sections/Systems/Systems'
-import CompleteSystem from './sections/CompleteSystem/CompleteSystem'
-import WhyPLS from './sections/WhyPLS/WhyPLS'
-import Projects from './sections/Projects/Projects'
-import Process from './sections/Process/Process'
-import FinalCTA from './sections/FinalCTA/FinalCTA'
 
-import Materials from './Pages/Materials/Materials'
+import Home from './Pages/Home/Home'
 import About from './Pages/About/About'
 import Contact from './Pages/Contact/Contact'
 import Feedback from './Pages/Feedback/Feedback'
+import ArchitecturalSystems from './Pages/ArchitecturalSystems/ArchitecturalSystems'
 
 
 /* =========================================================
@@ -32,25 +26,6 @@ function SiteLayout() {
       </main>
 
       <Footer />
-    </>
-  )
-}
-
-
-/* =========================================================
-   HOME PAGE
-   ========================================================= */
-
-function Home() {
-  return (
-    <>
-      <Hero />
-      <Systems />
-      <CompleteSystem />
-      <WhyPLS />
-      <Projects />
-      <Process />
-      <FinalCTA />
     </>
   )
 }
@@ -75,10 +50,6 @@ function App() {
             element={<Home />}
           />
 
-          <Route
-            path="/materials"
-            element={<Materials />}
-          />
 
           <Route
             path="/about"
@@ -93,6 +64,11 @@ function App() {
           <Route
             path="/feedback"
             element={<Feedback />}
+          />
+
+          <Route
+            path="/architectural-systems"
+            element={<ArchitecturalSystems />}
           />
 
         </Route>

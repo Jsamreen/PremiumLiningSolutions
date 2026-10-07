@@ -1,0 +1,24 @@
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — HOME
+   ========================================================= */
+
+/* SECTION STYLES */
+
+@import url('../../sections/Hero/Hero.css');
+@import url('../../sections/Systems/Systems.css');
+@import url('../../sections/CompleteSystem/CompleteSystem.css');
+@import url('../../sections/WhyPLS/WhyPLS.css');
+@import url('../../sections/Projects/Projects.css');
+@import url('../../sections/Process/Process.css');
+@import url('../../sections/FinalCTA/FinalCTA.css');
+
+
+/* =========================================================
+   HOME PAGE WRAPPER
+   ========================================================= */
+
+.home-page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}

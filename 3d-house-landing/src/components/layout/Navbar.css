@@ -88,50 +88,25 @@
 }
 
 
-/* TEMPORARY TEXT LOGO */
+/* LOGO */
 
-.navbar__monogram {
-  font-family:
-    Georgia,
-    'Times New Roman',
-    serif;
-
-  font-size: 3rem;
-
-  font-weight: 400;
-
-  line-height: 0.82;
-
-  letter-spacing: -0.06em;
+.navbar__logo {
+  display: block;
+  width: 120px;
+  height: 78px;
+  object-fit: contain;
 
   transition:
-    transform 450ms
-    cubic-bezier(0.16, 1, 0.3, 1);
+    height 450ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.navbar__brand:hover
-.navbar__monogram {
-  transform:
-    translateY(-1px);
+.navbar__brand:hover .navbar__logo {
+  transform: translateY(-1px);
 }
 
-
-/* BRAND TEXT */
-
-.navbar__brand-name {
-  font-family:
-    Georgia,
-    'Times New Roman',
-    serif;
-
-  font-size: 0.6rem;
-
-  line-height: 1.02;
-
-  letter-spacing: 0.08em;
-
-  color:
-    rgba(200, 154, 50, 0.88);
+.navbar--scrolled .navbar__logo {
+  height: 58px;
 }
 
 
@@ -407,17 +382,13 @@
   }
 
 
-  .navbar__monogram {
-    font-size:
-      2.55rem;
-  }
+  .navbar__logo {
+  height: 46px;
+}
 
-
-  .navbar__brand-name {
-    font-size:
-      0.53rem;
-  }
-
+.navbar--scrolled .navbar__logo {
+  height: 46px;
+}
 
   .navbar__cta {
     min-height:
@@ -454,17 +425,13 @@
   }
 
 
-  .navbar__monogram {
-    font-size:
-      2.25rem;
+  .navbar__logo {
+    height: 42px;
   }
 
-
-  .navbar__brand-name {
-    display:
-      none;
+  .navbar--scrolled .navbar__logo {
+    height: 42px;
   }
-
 
   .navbar__cta {
     min-height:
@@ -514,9 +481,8 @@
 @media (hover: none) {
 
   .navbar__brand:hover
-  .navbar__monogram {
-    transform:
-      none;
+  .navbar__logo {
+    transform: none;
   }
 
 
@@ -547,7 +513,7 @@
 @media (prefers-reduced-motion: reduce) {
 
   .navbar,
-  .navbar__monogram,
+  .navbar__logo,
   .navbar__nav a,
   .navbar__nav a::after,
   .navbar__cta,

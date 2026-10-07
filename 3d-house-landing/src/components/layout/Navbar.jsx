@@ -13,9 +13,10 @@ function Navbar() {
   const location = useLocation()
 
   const isHome = location.pathname === '/'
-  const isMaterials = location.pathname === '/materials'
   const isAbout = location.pathname === '/about'
+  const isArchitecturalSystems = location.pathname === '/architectural-systems'
   const isContact = location.pathname === '/contact'
+
 
 
   /* =====================================================
@@ -55,20 +56,11 @@ function Navbar() {
         to="/"
         aria-label="Premium Lining Solutions home"
       >
-        <span
-          className="navbar__monogram"
-          aria-hidden="true"
-        >
-          PLS
-        </span>
-
-        <span className="navbar__brand-name">
-          PREMIUM
-          <br />
-          LINING
-          <br />
-          SOLUTIONS
-        </span>
+        <img
+          className="navbar__logo"
+          src="/images/pls-logo.png"
+          alt="Premium Lining Solutions"
+        />
       </Link>
 
 
@@ -89,10 +81,10 @@ function Navbar() {
         </Link>
 
         <Link
-          to="/materials"
-          className={isMaterials ? 'active' : ''}
+          to="/architectural-systems"
+          className={isArchitecturalSystems ? 'active' : ''}
         >
-          Materials
+          Architectural Systems
         </Link>
 
         <Link
