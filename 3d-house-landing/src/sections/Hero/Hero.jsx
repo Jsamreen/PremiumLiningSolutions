@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useRef,
 } from 'react'
@@ -20,49 +21,50 @@ const hotspots = [
     number: '01',
     name: 'ROOF',
     className: 'hotspot--roof',
-    to: 'architectural-systems#cladding',
+    to: '/architectural-systems#roof',
   },
   {
     number: '02',
     name: 'WALLS',
     className: 'hotspot--walls',
-    to: 'architectural-systems#hebel',
+    to: '/architectural-systems#hebel',
   },
   {
     number: '03',
     name: 'INSULATION',
     className: 'hotspot--insulation',
-    to: 'architectural-systems#insulation',
+    to: '/architectural-systems#insulation',
   },
   {
     number: '04',
     name: 'PLASTER',
     className: 'hotspot--plaster',
-    to: 'architectural-systems#plaster',
+    to: '/architectural-systems#plaster',
   },
   {
     number: '05',
     name: 'CLADDING',
     className: 'hotspot--cladding',
-    to: 'architectural-systems#cladding',
+    to: '/architectural-systems#cladding',
   },
   {
     number: '06',
     name: 'PAINT',
     className: 'hotspot--paint',
-    to: 'architectural-systems#paint',
+    to: '/architectural-systems#paint',
   },
 ]
 
 
 function Hero() {
-
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
 
   const targetProgress = useRef(0)
   const currentProgress = useRef(0)
-  const animationFrame = useRef(null)
+
+  const frame = useRef(null)
+  const last = useRef(0)
 
   const reduceMotion = useReducedMotion()
 
@@ -73,7 +75,6 @@ function Hero() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-
     offset: [
       'start start',
       'end end',
@@ -82,73 +83,156 @@ function Hero() {
 
 
   /* =======================================================
-     VIDEO INITIAL STATE
+     FRAME-RATE-INDEPENDENT VIDEO SMOOTHING
+     ======================================================= */
+
+  const tick = useCallback((now) => {
+    const video = videoRef.current
+
+    if (
+      !video ||
+      !video.duration ||
+      Number.isNaN(video.duration)
+    ) {
+      frame.current = null
+      return
+    }
+
+    const dt = Math.min(
+      (now - last.current) / 1000,
+      0.05
+    )
+
+    last.current = now
+
+    const k =
+      1 - Math.exp(-dt * 7)
+
+    currentProgress.current +=
+      (
+        targetProgress.current -
+        currentProgress.current
+      ) * k
+
+    const progress = Math.max(
+      0,
+      Math.min(
+        currentProgress.current,
+        1
+      )
+    )
+
+    video.currentTime =
+      progress * video.duration
+
+    if (
+      Math.abs(
+        targetProgress.current -
+        currentProgress.current
+      ) > 0.0005
+    ) {
+      frame.current =
+        requestAnimationFrame(tick)
+    } else {
+      currentProgress.current =
+        targetProgress.current
+
+      video.currentTime =
+        targetProgress.current *
+        video.duration
+
+      frame.current = null
+    }
+  }, [])
+
+
+  /* =======================================================
+     VIDEO INITIAL STATE / LOAD SYNC
      ======================================================= */
 
   useEffect(() => {
-
     const video = videoRef.current
 
-    if (!video) return
-
+    if (!video) return undefined
 
     const prepareVideo = () => {
-
       video.pause()
 
-      try {
-        video.currentTime = 0
-      } catch {
-        // Browser may not allow seeking until metadata exists.
+      const rawProgress =
+        scrollYProgress.get()
+
+      const progress = Math.max(
+        0,
+        Math.min(rawProgress, 1)
+      )
+
+      if (reduceMotion) {
+        targetProgress.current = 0
+        currentProgress.current = 0
+
+        try {
+          video.currentTime = 0
+        } catch {
+          // Seeking can fail before metadata is fully available.
+        }
+
+        return
       }
 
+      targetProgress.current = progress
+      currentProgress.current = progress
+
+      try {
+        if (
+          video.duration &&
+          !Number.isNaN(video.duration)
+        ) {
+          video.currentTime =
+            progress * video.duration
+        }
+      } catch {
+        // Browser may briefly reject seeking during load.
+      }
     }
 
-
     if (video.readyState >= 1) {
-
       prepareVideo()
-
     } else {
-
       video.addEventListener(
         'loadedmetadata',
         prepareVideo,
         { once: true }
       )
-
     }
 
-
     return () => {
-
       video.removeEventListener(
         'loadedmetadata',
         prepareVideo
       )
 
-      if (animationFrame.current) {
-
+      if (frame.current !== null) {
         cancelAnimationFrame(
-          animationFrame.current
+          frame.current
         )
-
       }
 
+      frame.current = null
     }
-
-  }, [])
+  }, [
+    reduceMotion,
+    scrollYProgress,
+  ])
 
 
   /* =======================================================
-     SMOOTH SCROLL-CONTROLLED VIDEO
+     SCROLL-CONTROLLED VIDEO
      ======================================================= */
 
   useMotionValueEvent(
     scrollYProgress,
     'change',
-    (progress) => {
-
+    (rawProgress) => {
       const video = videoRef.current
 
       if (
@@ -159,137 +243,58 @@ function Hero() {
         return
       }
 
-
-      /*
-       * Reduced motion keeps the architectural
-       * visual stationary.
-       */
-
       if (reduceMotion) {
-
+        targetProgress.current = 0
+        currentProgress.current = 0
         video.currentTime = 0
+
+        if (frame.current !== null) {
+          cancelAnimationFrame(
+            frame.current
+          )
+
+          frame.current = null
+        }
 
         return
       }
 
+      const progress = Math.max(
+        0,
+        Math.min(rawProgress, 1)
+      )
 
       targetProgress.current = progress
 
+      if (frame.current === null) {
+        last.current =
+          performance.now()
 
-      if (animationFrame.current) {
-        return
+        frame.current =
+          requestAnimationFrame(tick)
       }
-
-
-      const animate = () => {
-
-        const video =
-          videoRef.current
-
-
-        if (
-          !video ||
-          !video.duration
-        ) {
-
-          animationFrame.current =
-            null
-
-          return
-        }
-
-
-        const difference =
-          targetProgress.current -
-          currentProgress.current
-
-
-        /*
-         * Weighted interpolation keeps the
-         * camera movement smooth.
-         */
-
-        currentProgress.current +=
-          difference * 0.085
-
-
-        const smoothProgress =
-          Math.max(
-            0,
-            Math.min(
-              currentProgress.current,
-              1
-            )
-          )
-
-
-        video.currentTime =
-          smoothProgress *
-          video.duration
-
-
-        if (
-          Math.abs(difference) >
-          0.0008
-        ) {
-
-          animationFrame.current =
-            requestAnimationFrame(
-              animate
-            )
-
-        } else {
-
-          currentProgress.current =
-            targetProgress.current
-
-
-          video.currentTime =
-            targetProgress.current *
-            video.duration
-
-
-          animationFrame.current =
-            null
-
-        }
-
-      }
-
-
-      animationFrame.current =
-        requestAnimationFrame(
-          animate
-        )
-
     }
   )
 
 
   return (
-
     <section
       ref={sectionRef}
       id="home"
-      className="hero-film"
+      className={
+        reduceMotion
+          ? 'hero-film hero-film--static'
+          : 'hero-film'
+      }
       aria-labelledby="hero-title"
     >
-
       <div className="hero-film__sticky">
-
 
         {/* ================================================
             RESPONSIVE HERO STAGE
-
-            This wrapper does NOT change the visual design.
-
-            It simply keeps the copy and house inside the
-            same responsive coordinate system so they cannot
-            overlap when browser zoom / viewport changes.
             ================================================ */}
 
         <div className="hero-film__stage">
-
 
           {/* ==============================================
               LEFT CONTENT
@@ -299,22 +304,22 @@ function Hero() {
             className="hero-film__content"
             initial={{
               opacity: 0,
-              y: 18,
+              y: reduceMotion ? 0 : 18,
             }}
             animate={{
               opacity: 1,
               y: 0,
             }}
             transition={{
-              duration: 0.9,
+              duration: reduceMotion
+                ? 0
+                : 0.9,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-
             <p className="hero-film__eyebrow">
               COMPLETE LINING SOLUTIONS
             </p>
-
 
             <h1
               id="hero-title"
@@ -322,10 +327,8 @@ function Hero() {
             >
               From frame
               <br />
-
               to <em>finish.</em>
             </h1>
-
 
             <p className="hero-film__description">
               Explore the systems, materials and
@@ -333,16 +336,13 @@ function Hero() {
               Lining Solutions build.
             </p>
 
-
             <a
               href="#systems"
               className="hero-film__button"
             >
-
               <span>
                 EXPLORE THE HOUSE
               </span>
-
 
               <span
                 className="hero-film__button-arrow"
@@ -350,9 +350,7 @@ function Hero() {
               >
                 →
               </span>
-
             </a>
-
           </motion.div>
 
 
@@ -364,36 +362,31 @@ function Hero() {
             className="hero-film__visual"
             initial={{
               opacity: 0,
-              scale: 0.985,
+              scale: reduceMotion
+                ? 1
+                : 0.985,
             }}
             animate={{
               opacity: 1,
               scale: 1,
             }}
             transition={{
-              duration: 1.1,
-              delay: 0.08,
+              duration: reduceMotion
+                ? 0
+                : 1.1,
+              delay: reduceMotion
+                ? 0
+                : 0.08,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-
-            {/*
-             * IMPORTANT:
-             *
-             * Video and labels remain inside the SAME
-             * 16:9 coordinate system.
-             *
-             * The hotspot coordinates therefore remain
-             * unchanged when the house scales.
-             */}
-
             <div className="hero-film__media">
-
 
               <video
                 ref={videoRef}
                 className="hero-film__video"
                 src="/videos/pls-house-hero-1s.mp4"
+                poster="/images/hero/pls-house-hero-poster.jpg"
                 muted
                 playsInline
                 preload="auto"
@@ -401,59 +394,40 @@ function Hero() {
                 aria-label="Premium Lining Solutions construction showcase"
               />
 
-
-              <div
-                className="hero-film__hotspots"
-                aria-hidden="true"
-              >
-
+              <div className="hero-film__hotspots">
                 {hotspots.map(
                   (hotspot) => (
-
                     <Link
                       to={hotspot.to}
                       key={hotspot.number}
                       className={
                         `hero-hotspot ${hotspot.className}`
                       }
-                      aria-label={`View ${hotspot.name.toLowerCase()} architectural system`}
+                      aria-label={
+                        `View ${hotspot.name.toLowerCase()} architectural system`
+                      }
                     >
-
                       <span
                         className="hero-hotspot__anchor"
+                        aria-hidden="true"
                       />
 
-
-                      <div
-                        className="hero-hotspot__label"
-                      >
-
-                        <span
-                          className="hero-hotspot__number"
-                        >
+                      <span className="hero-hotspot__label">
+                        <span className="hero-hotspot__number">
                           {hotspot.number}
                         </span>
 
-
-                        <strong
-                          className="hero-hotspot__name"
-                        >
+                        <strong className="hero-hotspot__name">
                           {hotspot.name}
                         </strong>
-
-                      </div>
-
+                      </span>
                     </Link>
-
                   )
                 )}
-
               </div>
 
             </div>
-
           </motion.div>
-
 
         </div>
 
@@ -462,46 +436,39 @@ function Hero() {
             SCROLL INDICATOR
             ================================================ */}
 
-        <motion.div
-          className="hero-film__scroll"
-          initial={{
-            opacity: 0,
-            y: 8,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.8,
-            delay: 0.8,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          aria-hidden="true"
-        >
-
-          <span
-            className="hero-film__mouse"
-          />
-
-
-          <span>
-            SCROLL TO EXPLORE
-          </span>
-
-
-          <span
-            className="hero-film__divider"
+        {!reduceMotion && (
+          <motion.div
+            className="hero-film__scroll"
+            initial={{
+              opacity: 0,
+              y: 8,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.8,
+              delay: 0.8,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            aria-hidden="true"
           >
-            ·
-          </span>
+            <span className="hero-film__mouse" />
 
+            <span>
+              SCROLL TO EXPLORE
+            </span>
 
-          <span>
-            DISCOVER THE BUILD
-          </span>
+            <span className="hero-film__divider">
+              ·
+            </span>
 
-        </motion.div>
+            <span>
+              DISCOVER THE BUILD
+            </span>
+          </motion.div>
+        )}
 
 
         {/* ================================================
@@ -513,11 +480,8 @@ function Hero() {
           aria-hidden="true"
         />
 
-
       </div>
-
     </section>
-
   )
 }
 
