@@ -110,7 +110,7 @@ function Navbar() {
 
       <Link
         className="navbar__cta"
-        to="/contact"
+        to="/contact#enquiry"
       >
         <span className="navbar__cta-text">
           Start a project
