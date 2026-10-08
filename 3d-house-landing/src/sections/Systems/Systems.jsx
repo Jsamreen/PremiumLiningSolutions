@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import './Systems.css'
 
 const services = [
@@ -8,6 +9,7 @@ const services = [
     description:
       'Lightweight wall systems designed for strength, durability and dependable performance.',
     image: '/images/systems/hebel.png',
+    to: '/architectural-systems#hebel',
   },
   {
     number: '02',
@@ -15,6 +17,7 @@ const services = [
     description:
       'Architectural exterior cladding systems that protect the building while defining its finish.',
     image: '/images/systems/cladding.png',
+    to: '/architectural-systems#cladding',
   },
   {
     number: '03',
@@ -22,6 +25,7 @@ const services = [
     description:
       'High-performance building wrap supporting moisture management and long-term building protection.',
     image: '/images/systems/wrap.png',
+    to: '/architectural-systems#wrap',
   },
   {
     number: '04',
@@ -29,6 +33,7 @@ const services = [
     description:
       'Thermal insulation solutions designed to improve comfort and building performance throughout the year.',
     image: '/images/systems/insulation.png',
+    to: '/architectural-systems#insulation',
   },
   {
     number: '05',
@@ -36,6 +41,7 @@ const services = [
     description:
       'Precision plasterboard installation for clean walls, ceilings and consistently refined interiors.',
     image: '/images/systems/plaster.png',
+    to: '/architectural-systems#plaster',
   },
   {
     number: '06',
@@ -43,6 +49,7 @@ const services = [
     description:
       'Professional finishing that brings every surface together with a clean and durable final result.',
     image: '/images/systems/paint.png',
+    to: '/architectural-systems#paint',
   },
 ]
 
@@ -310,12 +317,13 @@ function Systems() {
                   </p>
 
 
-                  <span
+                  <Link
+                    to={service.to}
                     className="system-card__arrow"
-                    aria-hidden="true"
+                    aria-label={`Explore ${service.name}`}
                   >
                     →
-                  </span>
+                  </Link>
 
                 </div>
 

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import './Process.css'
 
 const steps = [
@@ -195,10 +196,10 @@ function Process() {
             <em>More control over the build.</em>
           </p>
 
-          <a href="#contact">
+          <Link to="/contact#enquiry">
             TALK TO OUR TEAM
             <span aria-hidden="true">→</span>
-          </a>
+          </Link>
 
         </motion.div>
 

@@ -1,11 +1,11 @@
 import './Footer.css'
+import { Link } from 'react-router-dom'
 
 const navigation = [
-  { label: 'Home', href: '#home' },
-  { label: 'Systems', href: '#systems' },
-  { label: 'Materials', href: '/materials' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'Architectural Systems', to: '/architectural-systems' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 function Footer() {
@@ -26,7 +26,7 @@ function Footer() {
 
           <div className="footer__brand">
 
-            <a
+            <Link
               href="/"
               className="footer__logo"
               aria-label="Premium Lining Solutions home"
@@ -36,7 +36,7 @@ function Footer() {
                 alt="Premium Lining Solutions"
                 className="footer__logo-image"
               />
-            </a>
+            </Link>
 
             <p className="footer__tagline">
               Complete lining solutions.
@@ -60,16 +60,16 @@ function Footer() {
               aria-label="Footer navigation"
             >
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.label}
-                  href={item.href}
+                  to={item.to}
                 >
                   {item.label}
 
                   <span aria-hidden="true">
                     ↗
                   </span>
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -118,16 +118,15 @@ function Footer() {
               next lining package.
             </p>
 
-            <a
-              href="mailto:orders@premiumliningsolutions.com.au"
+            <Link
+              to="/contact#enquiry"
               className="footer__project-link"
             >
               START A PROJECT
-
               <span aria-hidden="true">
                 →
               </span>
-            </a>
+            </Link>
 
           </div>
 

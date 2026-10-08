@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import './Projects.css'
 
 const projects = [
@@ -7,7 +8,7 @@ const projects = [
     title: 'Residential',
     location: 'Melbourne, VIC',
     category: 'Complete Lining Package',
-    image: '/images/projects/project-01.jpg',
+    image: '/images/Projects/project-01.png',
     size: 'large',
   },
   {
@@ -15,7 +16,7 @@ const projects = [
     title: 'Exterior Systems',
     location: 'Victoria',
     category: 'Hebel · Cladding · Wrap',
-    image: '/images/projects/project-02.jpg',
+    image: '/images/Projects/project-02.png',
     size: 'small',
   },
   {
@@ -23,7 +24,7 @@ const projects = [
     title: 'Interior Finish',
     location: 'Melbourne, VIC',
     category: 'Plaster · Paint',
-    image: '/images/projects/project-03.jpg',
+    image: '/images/Projects/project-03.png',
     size: 'small',
   },
   {
@@ -31,7 +32,7 @@ const projects = [
     title: 'Complete Build',
     location: 'Victoria',
     category: 'Frame to Finish',
-    image: '/images/projects/project-04.jpg',
+    image: '/images/Projects/project-04.png',
     size: 'large',
   },
 ]
@@ -186,17 +187,6 @@ function Projects() {
                 </span>
 
 
-                {/* VIEW PROJECT */}
-
-                <span
-                  className="project-card__view"
-                  aria-hidden="true"
-                >
-                  <span>VIEW</span>
-                  <span>↗</span>
-                </span>
-
-
                 {/* PROJECT DETAILS */}
 
                 <div className="project-card__content">
@@ -263,13 +253,14 @@ function Projects() {
             Quality across every layer of the build.
           </p>
 
-          <a href="#contact">
+         <Link to="/contact#enquiry">
             DISCUSS YOUR PROJECT
 
             <span aria-hidden="true">
               →
             </span>
-          </a>
+          </Link>
+         
 
         </motion.div>
 

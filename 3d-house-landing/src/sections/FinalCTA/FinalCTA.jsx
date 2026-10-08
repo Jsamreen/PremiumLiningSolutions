@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 import './FinalCTA.css'
 
 function FinalCTA() {
@@ -68,9 +69,9 @@ function FinalCTA() {
               One complete lining package.
             </p>
 
-            <a
+            <Link
               className="final-cta__button"
-              href="mailto:orders@premiumliningsolutions.com.au"
+              to="/contact#enquiry"
             >
               <span>START A PROJECT</span>
 
@@ -80,7 +81,7 @@ function FinalCTA() {
               >
                 →
               </span>
-            </a>
+            </Link>
           </motion.div>
 
         </div>
