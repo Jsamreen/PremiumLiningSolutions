@@ -1,24 +1,4129 @@
-/* =========================================================
-   PREMIUM LINING SOLUTIONS — HOME
-   ========================================================= */
-
-/* SECTION STYLES */
-
-@import url('../../sections/Hero/Hero.css');
-@import url('../../sections/Systems/Systems.css');
-@import url('../../sections/CompleteSystem/CompleteSystem.css');
-@import url('../../sections/WhyPLS/WhyPLS.css');
-@import url('../../sections/Projects/Projects.css');
-@import url('../../sections/Process/Process.css');
-@import url('../../sections/FinalCTA/FinalCTA.css');
-
+/* =================================================================
+   SOURCE: Hero.css 
+   ================================================================= */
 
 /* =========================================================
-   HOME PAGE WRAPPER
+   PREMIUM LINING SOLUTIONS — HERO
+   Responsive / Zoom-Safe
+
+   NOTE: --nav-h must be the SAME value your navbar uses.
+   Ideally move these two rules into a global stylesheet and
+   set the navbar height to var(--nav-h).
    ========================================================= */
 
-.home-page {
+:root {
+  --nav-h: 88px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --nav-h: 72px;
+  }
+}
+
+.hero-film,
+.hero-film *,
+.hero-film *::before,
+.hero-film *::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   1. SCROLL SECTION
+   ========================================================= */
+
+.hero-film {
+  position: relative;
+
   width: 100%;
-  max-width: 100%;
+  height: 220svh;
+
+  overflow: visible;
+
+  background: #f7f5f1;
+}
+
+
+/* =========================================================
+   2. STICKY VIEWPORT
+   ========================================================= */
+
+.hero-film__sticky {
+  position: sticky;
+
+  top: var(--nav-h);
+
+  width: 100%;
+  height: calc(100svh - var(--nav-h));
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background-color: #f7f5f1;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(247, 245, 241, 0.2) 0%,
+      rgba(247, 245, 241, 0.08) 48%,
+      rgba(255, 255, 255, 0.03) 100%
+    ),
+    url("/images/home/hero-bg.webp");
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   3. RESPONSIVE STAGE
+   ========================================================= */
+
+.hero-film__stage {
+  position: absolute;
+  inset: 0;
+
+  width: min(calc(100% - 5rem), 1540px);
+  height: 100%;
+
+  margin-inline: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(320px, 0.75fr)
+    minmax(0, 1.75fr);
+
+  align-items: center;
+
+  gap: clamp(1.5rem, 3vw, 4rem);
+}
+
+
+/* =========================================================
+   4. LEFT CONTENT
+
+   IMPORTANT: this element is a motion.div. Motion writes an
+   inline `transform`, which overrides any CSS `transform`.
+   Use the standalone `translate` property for offsets.
+   ========================================================= */
+
+.hero-film__content {
+  position: relative;
+
+  z-index: 20;
+
+  width: 100%;
+  min-width: 0;
+  max-width: 380px;
+
+  margin: 0;
+
+  translate: 0 -8%;
+}
+
+
+/* EYEBROW */
+
+.hero-film__eyebrow {
+  margin: 0 0 1.25rem;
+
+  color: #8a5f0f;
+
+  font-size: clamp(0.6875rem, 0.72vw, 0.78rem);
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.32em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   5. TITLE
+   ========================================================= */
+
+.hero-film__title {
+  margin: 0;
+
+  color: #111111;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(3.6rem, 4.55vw, 5.3rem);
+
+  font-weight: 400;
+
+  line-height: 0.92;
+
+  letter-spacing: -0.055em;
+}
+
+.hero-film__title em {
+  color: #a96739;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   6. DESCRIPTION
+   ========================================================= */
+
+.hero-film__description {
+  width: min(100%, 315px);
+
+  margin: 1.55rem 0 0;
+
+  color: #4b4842;
+
+  font-size: clamp(0.75rem, 0.86vw, 0.86rem);
+
+  font-weight: 400;
+
+  line-height: 1.65;
+
+  letter-spacing: 0.005em;
+}
+
+
+/* =========================================================
+   7. CTA
+   ========================================================= */
+
+.hero-film__button {
+  position: relative;
+
+  min-height: 49px;
+
+  margin-top: 1.55rem;
+
+  padding: 0 1.4rem;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 1.15rem;
+
+  overflow: hidden;
+
+  background: #8a5f0f;
+
+  border: 1px solid #8a5f0f;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: clamp(0.6875rem, 0.7vw, 0.75rem);
+
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 350ms ease;
+}
+
+.hero-film__button:hover {
+  background: #704b09;
+
+  border-color: #704b09;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 25px rgba(40, 23, 12, 0.14);
+}
+
+.hero-film__button-arrow {
+  font-size: 1rem;
+
+  line-height: 1;
+
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-film__button:hover .hero-film__button-arrow {
+  transform: translateX(5px);
+}
+
+.hero-film__button:focus-visible {
+  outline: 2px solid #111111;
+
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   8. HOUSE VISUAL
+
+   Also a motion.div: use `translate`, not `transform`.
+   ========================================================= */
+
+.hero-film__visual {
+  position: relative;
+
+  z-index: 5;
+
+  min-width: 0;
+
+  width:
+    min(
+      100%,
+      calc((100svh - var(--nav-h) - 7rem) * 16 / 9)
+    );
+
+  max-width: 1080px;
+
+  margin: 0;
+
+  justify-self: end;
+
+  transform-origin: center;
+
+  translate: 0 -5%;
+}
+
+
+/* =========================================================
+   9. VIDEO COORDINATE SYSTEM
+
+   Actual asset: 1920 × 1080 / 60fps  (16:9)
+   Video and hotspots MUST stay inside this box.
+   ========================================================= */
+
+.hero-film__media {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: visible;
+
+  background: transparent;
+}
+
+
+/* =========================================================
+   10. VIDEO
+   ========================================================= */
+
+.hero-film__image {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  /* Keep identical at every breakpoint so hotspots stay aligned. */
+  object-position: center center;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+}
+
+
+/* =========================================================
+   11. HOTSPOT LAYER
+   ========================================================= */
+
+.hero-film__hotspots {
+  position: absolute;
+
+  z-index: 10;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   12. HOTSPOT
+   ========================================================= */
+
+.hero-hotspot {
+  position: absolute;
+
+  min-height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: clamp(5px, 0.4vw, 7px);
+
+  transform: translateY(-50%);
+
+  white-space: nowrap;
+
+  pointer-events: auto;
+
+  cursor: pointer;
+
+  text-decoration: none;
+}
+
+/* Keep the active hotspot above neighbouring ones. */
+.hero-hotspot:hover,
+.hero-hotspot:focus-visible {
+  z-index: 2;
+}
+
+.hero-hotspot:focus-visible {
+  outline: 2px solid #111111;
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   13. HOTSPOT ANCHOR
+   ========================================================= */
+
+.hero-hotspot__anchor {
+  position: relative;
+
+  width: clamp(9px, 0.58vw, 11px);
+  height: clamp(9px, 0.58vw, 11px);
+
+  flex: 0 0 auto;
+
+  border-radius: 50%;
+
+  background: #c89a32;
+
+  border: 2px solid #ffffff;
+
+  box-shadow:
+    0 0 0 1px rgba(200, 154, 50, 0.5),
+    0 2px 6px rgba(17, 17, 17, 0.15);
+}
+
+
+/* CONNECTOR */
+
+.hero-hotspot__anchor::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 100%;
+
+  width: 7px;
+  height: 1px;
+
+  background: rgba(40, 23, 12, 0.45);
+
+  transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   14. HOTSPOT LABEL
+
+   No backdrop-filter: the background is 94% opaque so the
+   blur is invisible, and it forces a re-composite on every
+   video seek.
+   ========================================================= */
+
+.hero-hotspot__label {
+  min-height: clamp(26px, 1.6vw, 30px);
+
+  display: inline-flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 999px;
+
+  background: rgba(25, 23, 20, 0.94);
+
+  box-shadow: 0 5px 15px rgba(17, 17, 17, 0.16);
+}
+
+
+/* NUMBER */
+
+.hero-hotspot__number {
+  align-self: stretch;
+
+  padding: 0 clamp(6px, 0.42vw, 8px);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #d6a23a;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+
+  font-size: clamp(11px, 0.72vw, 12px);
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* NAME */
+
+.hero-hotspot__name {
+  padding: 0 clamp(7px, 0.55vw, 10px);
+
+  color: #ffffff;
+
+  font-size: clamp(11px, 0.72vw, 12px);
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   15. HOTSPOT POSITIONS
+
+   EXACT DESKTOP POSITIONS PRESERVED.
+   ========================================================= */
+
+.hotspot--roof {
+  left: 60%;
+  top: 17%;
+}
+
+.hotspot--walls {
+  left: 31%;
+  top: 38%;
+}
+
+.hotspot--insulation {
+  left: 25%;
+  top: 69%;
+}
+
+.hotspot--plaster {
+  left: 87%;
+  top: 39%;
+}
+
+.hotspot--cladding {
+  left: 35%;
+  top: 58%;
+}
+
+.hotspot--paint {
+  left: 80%;
+  top: 68%;
+}
+
+
+/* =========================================================
+   16. SCROLL PROMPT
+   ========================================================= */
+
+.hero-film__scroll {
+  position: absolute;
+
+  z-index: 25;
+
+  right: clamp(2rem, 5vw, 5rem);
+
+  bottom: clamp(2rem, 4svh, 3.25rem);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.72rem;
+
+  color: #37332d;
+
+  font-size: 0.6875rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 0.17em;
+
+  white-space: nowrap;
+}
+
+
+/* MOUSE */
+
+.hero-film__mouse {
+  position: relative;
+
+  width: 17px;
+  height: 25px;
+
+  flex: 0 0 auto;
+
+  border: 1.5px solid #37332d;
+
+  border-radius: 10px;
+}
+
+.hero-film__mouse::after {
+  content: "";
+
+  position: absolute;
+
+  top: 5px;
+  left: 50%;
+
+  width: 2px;
+  height: 5px;
+
+  border-radius: 10px;
+
+  background: #c89a32;
+
+  transform: translateX(-50%);
+
+  animation: hero-scroll-wheel 1.8s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-wheel {
+  0%,
+  100% {
+    opacity: 0.35;
+
+    transform: translate(-50%, 0);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0;
+
+    transform: translate(-50%, 6px);
+  }
+}
+
+.hero-film__divider {
+  color: rgba(55, 51, 45, 0.35);
+}
+
+
+/* =========================================================
+   17. BOTTOM TRANSITION
+   ========================================================= */
+
+.hero-film__bottom-fade {
+  position: absolute;
+
+  z-index: 15;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: clamp(20px, 3svh, 40px);
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(247, 245, 241, 0),
+      rgba(247, 245, 241, 0.65)
+    );
+}
+
+
+/* =========================================================
+   18. LARGE DESKTOP / ZOOMED OUT
+   ========================================================= */
+
+@media (min-width: 1800px) {
+  .hero-film__stage {
+    width: min(calc(100% - 12rem), 1600px);
+
+    grid-template-columns:
+      390px
+      minmax(0, 1fr);
+
+    column-gap: 2rem;
+  }
+
+  .hero-film__content {
+    max-width: 390px;
+  }
+
+  .hero-film__visual {
+    max-width: 1120px;
+  }
+
+  .hero-film__title {
+    font-size: 5.3rem;
+  }
+}
+
+
+/* =========================================================
+   19. STANDARD DESKTOP
+   ========================================================= */
+
+@media (min-width: 1301px) and (max-width: 1799px) {
+  .hero-film__stage {
+    width: calc(100% - clamp(5rem, 8vw, 9rem));
+
+    max-width: 1540px;
+
+    grid-template-columns:
+      minmax(330px, 0.72fr)
+      minmax(0, 1.8fr);
+  }
+
+  .hero-film__content {
+    max-width: 370px;
+  }
+
+  .hero-film__visual {
+    max-width: 1050px;
+  }
+}
+
+
+/* =========================================================
+   20. LAPTOP / COMMON 110–125% ZOOM
+   ========================================================= */
+
+@media (min-width: 1101px) and (max-width: 1300px) {
+  .hero-film__stage {
+    width: calc(100% - 4rem);
+
+    grid-template-columns:
+      minmax(285px, 0.72fr)
+      minmax(0, 1.65fr);
+
+    column-gap: 1rem;
+  }
+
+  .hero-film__content {
+    max-width: 325px;
+
+    translate: 0 -8%;
+  }
+
+  .hero-film__visual {
+    max-width: 850px;
+
+    translate: 0 -7%;
+  }
+
+  .hero-film__title {
+    font-size: clamp(3.3rem, 5vw, 4.5rem);
+  }
+
+  .hero-film__description {
+    max-width: 300px;
+
+    font-size: 0.78rem;
+  }
+}
+
+
+/* =========================================================
+   21. NARROW LAPTOP / HEAVIER ZOOM
+   ========================================================= */
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .hero-film {
+    height: 205svh;
+  }
+
+  .hero-film__stage {
+    width: calc(100% - 3rem);
+
+    grid-template-columns:
+      minmax(255px, 0.78fr)
+      minmax(0, 1.55fr);
+
+    column-gap: 0.75rem;
+  }
+
+  .hero-film__content {
+    max-width: 290px;
+
+    translate: 0 -6%;
+  }
+
+  .hero-film__visual {
+    translate: 0 -5%;
+  }
+
+  .hero-film__eyebrow {
+    margin-bottom: 1rem;
+  }
+
+  .hero-film__title {
+    font-size: clamp(3rem, 5.6vw, 3.8rem);
+  }
+
+  .hero-film__description {
+    max-width: 260px;
+
+    margin-top: 1rem;
+
+    font-size: 0.75rem;
+
+    line-height: 1.55;
+  }
+
+  .hero-film__button {
+    min-height: 45px;
+
+    margin-top: 1rem;
+
+    padding: 0 1.15rem;
+  }
+
+  /* Prevent the prompt from sitting above right-side hotspots. */
+  .hero-film__scroll {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   22. TABLET
+   651px — 900px  (portrait / tall viewports only)
+   ========================================================= */
+
+@media (min-width: 651px) and (max-width: 900px) and (min-height: 521px) {
+  .hero-film {
+    height: 180svh;
+  }
+
+  .hero-film__sticky {
+    top: var(--nav-h);
+
+    height: calc(100svh - var(--nav-h));
+
+    min-height: 0;
+  }
+
+  .hero-film__stage {
+    width: calc(100% - 3rem);
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows:
+      auto
+      minmax(0, 1fr);
+
+    align-content: start;
+
+    align-items: start;
+
+    gap: clamp(0.75rem, 2svh, 1.5rem);
+
+    padding: clamp(1rem, 2.5svh, 1.75rem) 0 0;
+  }
+
+  .hero-film__content {
+    width: 100%;
+
+    max-width: 520px;
+
+    margin: 0;
+
+    translate: none;
+  }
+
+  .hero-film__eyebrow {
+    margin-bottom: 0.7rem;
+  }
+
+  .hero-film__title {
+    font-size: clamp(3rem, 7vw, 4rem);
+
+    line-height: 0.92;
+  }
+
+  .hero-film__description {
+    max-width: 320px;
+
+    margin-top: 0.8rem;
+  }
+
+  .hero-film__button {
+    min-height: 42px;
+
+    margin-top: 0.85rem;
+  }
+
+  .hero-film__visual {
+    width:
+      min(
+        88vw,
+        720px,
+        calc((100svh - var(--nav-h) - 15rem) * 16 / 9)
+      );
+
+    max-width: none;
+
+    margin: 0 auto;
+
+    align-self: start;
+
+    justify-self: center;
+
+    translate: none;
+  }
+
+  .hero-film__scroll {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   23. MOBILE
+   <= 650px
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .hero-film {
+    height: 155svh;
+  }
+
+  .hero-film__sticky {
+    top: var(--nav-h);
+
+    height: calc(100svh - var(--nav-h));
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    background-size: cover;
+
+    background-position: center;
+  }
+
+  .hero-film__stage {
+    width: calc(100% - 2rem);
+
+    height: 100%;
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows:
+      auto
+      minmax(0, 1fr);
+
+    align-content: start;
+
+    align-items: start;
+
+    gap: clamp(0.4rem, 1svh, 0.75rem);
+
+    padding: clamp(0.8rem, 1.8svh, 1.2rem) 0 0;
+  }
+
+
+  /* COPY */
+
+  .hero-film__content {
+    position: relative;
+
+    z-index: 20;
+
+    width: 100%;
+
+    max-width: none;
+
+    margin: 0;
+
+    translate: none;
+  }
+
+  .hero-film__eyebrow {
+    margin-bottom: 0.45rem;
+
+    font-size: 0.6875rem;
+
+    letter-spacing: 0.2em;
+  }
+
+  .hero-film__title {
+    max-width: 100%;
+
+    font-size: clamp(2.55rem, 12vw, 3.5rem);
+
+    line-height: 0.9;
+
+    letter-spacing: -0.05em;
+  }
+
+  .hero-film__description {
+    width: 100%;
+
+    max-width: 315px;
+
+    margin-top: 0.65rem;
+
+    font-size: 0.75rem;
+
+    line-height: 1.48;
+  }
+
+  .hero-film__button {
+    min-height: 42px;
+
+    margin-top: 0.7rem;
+
+    padding: 0 1rem;
+
+    gap: 0.85rem;
+
+    font-size: 0.6875rem;
+  }
+
+
+  /* HOUSE */
+
+  .hero-film__visual {
+    position: relative;
+
+    z-index: 5;
+
+    width:
+      min(
+        114vw,
+        650px,
+        calc((100svh - var(--nav-h) - 15.5rem) * 16 / 9)
+      );
+
+    max-width: none;
+
+    margin: clamp(0.2rem, 0.7svh, 0.45rem) auto 0;
+
+    align-self: start;
+
+    justify-self: center;
+
+    translate: none;
+  }
+
+
+  /* HOTSPOTS */
+
+  .hero-hotspot {
+    min-height: 32px;
+
+    gap: 3px;
+  }
+
+  .hero-hotspot__anchor {
+    width: 9px;
+    height: 9px;
+
+    border-width: 1px;
+  }
+
+  .hero-hotspot__anchor::after {
+    width: 4px;
+  }
+
+  .hero-hotspot__label {
+    min-height: 32px;
+  }
+
+  .hero-hotspot__number {
+    min-width: 32px;
+
+    padding: 0 7px;
+
+    border-right: 0;
+
+    font-size: 11px;
+  }
+
+  /* Phone labels default to number-only. */
+  .hero-hotspot__name {
+    width: 0;
+
+    max-width: 0;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    font-size: 11px;
+
+    letter-spacing: 0.04em;
+
+    transition:
+      max-width 220ms ease,
+      padding 220ms ease,
+      opacity 160ms ease;
+  }
+
+  /* Keyboard focus always reveals the name. */
+  .hero-hotspot:focus-visible .hero-hotspot__name {
+    width: auto;
+
+    max-width: 110px;
+
+    padding: 0 8px;
+
+    opacity: 1;
+  }
+
+  /*
+   * Right-side hotspots open inward.
+   * Their desktop percentage positions stay untouched.
+   */
+  .hotspot--plaster,
+  .hotspot--paint {
+    flex-direction: row-reverse;
+
+    transform: translate(-100%, -50%);
+  }
+
+  .hotspot--plaster .hero-hotspot__anchor::after,
+  .hotspot--paint .hero-hotspot__anchor::after {
+    left: auto;
+
+    right: 100%;
+  }
+
+  .hero-film__scroll {
+    display: none;
+  }
+}
+
+/*
+ * Hover reveal only on devices that really hover.
+ * On touch, a tap navigates, and iOS can need a double tap
+ * when :hover changes content.
+ */
+@media (max-width: 650px) and (hover: hover) {
+  .hero-hotspot:hover .hero-hotspot__name {
+    width: auto;
+
+    max-width: 110px;
+
+    padding: 0 8px;
+
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   24. VERY SMALL MOBILE
+   <= 420px
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .hero-film {
+    height: 150svh;
+  }
+
+  .hero-film__stage {
+    width: calc(100% - 1.5rem);
+
+    padding-top: 0.75rem;
+  }
+
+  .hero-film__title {
+    font-size: clamp(2.35rem, 12.4vw, 3rem);
+  }
+
+  .hero-film__description {
+    max-width: 290px;
+
+    margin-top: 0.55rem;
+  }
+
+  .hero-film__button {
+    margin-top: 0.6rem;
+  }
+
+  .hero-film__visual {
+    width:
+      min(
+        112vw,
+        calc((100svh - var(--nav-h) - 14.75rem) * 16 / 9)
+      );
+
+    margin-top: 0.2rem;
+  }
+}
+
+
+/* =========================================================
+   25. LANDSCAPE / VERY SHORT VIEWPORTS
+   Must come after tablet/mobile rules.
+
+   Uses var(--nav-h) so it always matches the navbar.
+   ========================================================= */
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .hero-film {
+    height: 180svh;
+  }
+
+  .hero-film__sticky {
+    top: var(--nav-h);
+
+    height: calc(100svh - var(--nav-h));
+
+    min-height: 0;
+  }
+
+  .hero-film__stage {
+    width: calc(100% - 2rem);
+
+    grid-template-columns:
+      minmax(220px, 0.8fr)
+      minmax(0, 1.4fr);
+
+    grid-template-rows: none;
+
+    align-items: center;
+
+    align-content: center;
+
+    gap: 1rem;
+
+    padding: 0;
+  }
+
+  .hero-film__content,
+  .hero-film__visual {
+    margin: 0;
+
+    translate: none;
+  }
+
+  .hero-film__content {
+    max-width: 300px;
+  }
+
+  .hero-film__eyebrow {
+    margin-bottom: 0.4rem;
+
+    font-size: 11px;
+  }
+
+  .hero-film__title {
+    font-size: clamp(2rem, 6svh, 3rem);
+
+    line-height: 0.9;
+  }
+
+  .hero-film__description {
+    display: none;
+  }
+
+  .hero-film__button {
+    min-height: 36px;
+
+    margin-top: 0.6rem;
+
+    padding: 0 0.9rem;
+  }
+
+  .hero-film__visual {
+    width:
+      min(
+        100%,
+        calc((100svh - var(--nav-h) - 2rem) * 16 / 9)
+      );
+
+    max-width: none;
+
+    justify-self: end;
+
+    align-self: center;
+  }
+
+  .hero-film__scroll {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   26. VERY SHORT DESKTOP
+   ========================================================= */
+
+@media (min-width: 901px) and (min-height: 521px) and (max-height: 620px) {
+  .hero-film__sticky {
+    min-height: 0;
+  }
+
+  .hero-film__stage {
+    width: calc(100% - 3rem);
+  }
+
+  .hero-film__content {
+    translate: 0 -3%;
+  }
+
+  .hero-film__visual {
+    max-width: 820px;
+
+    translate: 0 -3%;
+  }
+
+  .hero-film__title {
+    font-size: clamp(2.8rem, 4vw, 3.7rem);
+  }
+
+  .hero-film__eyebrow {
+    margin-bottom: 0.65rem;
+  }
+
+  .hero-film__description {
+    margin-top: 0.7rem;
+
+    line-height: 1.45;
+  }
+
+  .hero-film__button {
+    min-height: 42px;
+
+    margin-top: 0.7rem;
+  }
+
+  .hero-film__scroll {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   27. TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) {
+  .hero-film__button:hover {
+    background: #8a5f0f;
+
+    border-color: #8a5f0f;
+
+    transform: none;
+
+    box-shadow: none;
+  }
+
+  .hero-film__button:hover .hero-film__button-arrow {
+    transform: none;
+  }
+
+  .hero-hotspot {
+    min-height: 32px;
+  }
+}
+
+
+/* =========================================================
+   28. REDUCED MOTION
+   Static layout: no scroll runway, no leftover strip.
+   ========================================================= */
+
+.hero-film--static {
+  height: auto;
+}
+
+.hero-film--static .hero-film__sticky {
+  position: relative;
+
+  top: 0;
+
+  height: calc(100svh - var(--nav-h));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-film__button,
+  .hero-film__button-arrow,
+  .hero-hotspot__name {
+    transition: none;
+  }
+
+  .hero-film__button:hover {
+    transform: none;
+  }
+
+  .hero-film__button:hover .hero-film__button-arrow {
+    transform: none;
+  }
+
+  .hero-film__mouse::after {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   29. HASH TARGET OFFSET
+   ========================================================= */
+
+#cladding,
+#hebel,
+#insulation,
+#plaster,
+#paint,
+#roof,
+#systems {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* =========================================================
+   30. FIXES FROM DEVICE RECORDING
+   ========================================================= */
+
+/* 1. Hide the video's lighter backdrop box.
+      Blends the near-white video background into the hero image.
+      (Check house colors; they may look slightly darker.) */
+.hero-film__image {
+  mix-blend-mode: multiply;
+}
+
+/* 3. Tall phones: centre the copy + house instead of leaving
+      the bottom ~40% empty. */
+@media (max-width: 650px) and (min-height: 780px) {
+  .hero-film__stage {
+    grid-template-rows: auto auto;
+    align-content: center;
+  }
+}
+
+/* 4. Remove the hairline seam under the hero. */
+.hero-film__bottom-fade {
+  height: clamp(40px, 8svh, 90px);
+
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 245, 241, 0),
+    #f7f5f1
+  );
+}
+
+/* 2 (stopgap only). Stops sideways scrolling while you find the real
+      cause. `clip` (unlike `hidden`) does not break position: sticky. */
+html,
+body {
   overflow-x: clip;
+}
+
+/* Desktop: text a bit higher, house a bit lower */
+@media (min-width: 901px) and (min-height: 700px) {
+  .hero-film .hero-film__content { translate: 0 -14%; }
+  .hero-film .hero-film__visual  { translate: 0 4%; }
+}
+
+/* Tablet and phones (stacked): more space between text and house */
+@media (max-width: 900px) and (min-height: 700px) {
+  .hero-film .hero-film__stage {
+    row-gap: clamp(1.5rem, 4svh, 3rem);
+  }
+}
+
+/* =========================================================
+   HERO POSITION REFINEMENT — DESKTOP ONLY
+   ========================================================= */
+
+@media (min-width: 1101px) {
+  .hero-film__content {
+    position: relative;
+    left: 65px;
+  }
+
+  .hero-film__visual {
+    position: relative;
+    left: 75px;
+  }
+}
+
+/* =========================================================
+   TABLET & MOBILE — PRESERVE RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .hero-film__content,
+  .hero-film__visual {
+    left: auto;
+  }
+}
+
+
+/* =================================================================
+   SOURCE: Systems.css — preserved unchanged
+   ================================================================= */
+
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — SYSTEMS
+   Clean consolidated version
+   ========================================================= */
+
+.systems {
+  position: relative;
+  background: #171613;
+  color: #ffffff;
+  overflow: clip;
+}
+
+
+/* =========================================================
+   1. HERO → SYSTEMS SEAM
+   ========================================================= */
+
+.systems__transition {
+  position: relative;
+  z-index: 3;
+
+  height: clamp(55px, 6vw, 90px);
+  margin-top: -1px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #f7f5f1 0%,
+      #f7f5f1 8%,
+      #e9e4dc 22%,
+      #b5aca0 40%,
+      #615b53 62%,
+      #2c2925 80%,
+      #171613 100%
+    );
+}
+
+.systems__transition::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse 60% 100% at 65% 0%,
+      rgba(255, 255, 255, 0.28),
+      transparent 72%
+    );
+}
+
+.systems__transition-line {
+  display: none;
+}
+
+
+/* =========================================================
+   2. MAIN LAYOUT
+   ========================================================= */
+
+.systems__inner {
+  position: relative;
+
+  width: min(100%, 1600px);
+  margin: 0 auto;
+
+  padding:
+    clamp(3.5rem, 6vw, 6rem)
+    clamp(2rem, 5vw, 6rem)
+    clamp(6rem, 10vw, 11rem);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, 0.34fr)
+    minmax(0, 0.66fr);
+
+  gap: clamp(3rem, 7vw, 8rem);
+}
+
+
+/* subtle divider between editorial copy and cards */
+
+.systems__inner::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 36%;
+
+  width: 1px;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.07) 10%,
+      rgba(255, 255, 255, 0.07) 90%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   3. LEFT INTRO
+   ========================================================= */
+
+.systems__intro {
+  position: relative;
+  min-width: 0;
+}
+
+.systems__intro-sticky {
+  position: sticky;
+
+  top: clamp(105px, 13vh, 145px);
+
+  align-self: start;
+
+  padding-right: clamp(1rem, 2vw, 2rem);
+}
+
+
+/* EYEBROW */
+
+.systems__eyebrow {
+  margin: 0 0 1.35rem;
+
+  color: #c89a32;
+
+  font-size: clamp(
+    0.56rem,
+    0.55vw,
+    0.66rem
+  );
+
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+
+/* TITLE */
+
+.systems__title {
+  max-width: 430px;
+
+  margin: 0;
+
+  color: #f7f5f1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.1rem,
+    3.8vw,
+    5rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.96;
+
+  letter-spacing: -0.05em;
+}
+
+.systems__title em {
+  color: #c89a32;
+  font-weight: 400;
+}
+
+
+/* DESCRIPTION */
+
+.systems__description {
+  max-width: 350px;
+
+  margin: 1.8rem 0 0;
+
+  color: rgba(247, 245, 241, 0.62);
+
+  font-size: clamp(
+    0.82rem,
+    0.8vw,
+    0.92rem
+  );
+
+  line-height: 1.72;
+}
+
+
+/* =========================================================
+   4. 01 — 06 INDEX
+   ========================================================= */
+
+.systems__index {
+  width: min(250px, 100%);
+
+  margin-top: clamp(
+    2.3rem,
+    4vw,
+    3.8rem
+  );
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  color: rgba(247, 245, 241, 0.48);
+
+  font-size: 0.57rem;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.systems__index-line {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      #c89a32,
+      rgba(200, 154, 50, 0.12)
+    );
+}
+
+
+/* =========================================================
+   5. SERVICES COLUMN
+   ========================================================= */
+
+.systems__services {
+  position: relative;
+
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: clamp(1rem, 1.8vw, 1.8rem);
+}
+
+
+/* =========================================================
+   6. SYSTEM CARD
+   ========================================================= */
+
+.system-card {
+  position: relative;
+
+  width: 100%;
+
+  min-height: clamp(
+    400px,
+    42vw,
+    570px
+  );
+
+  overflow: hidden;
+
+  background: #24211d;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  isolation: isolate;
+}
+
+
+/*
+   Keep every panel aligned.
+   No alternating 92% widths.
+*/
+
+.system-card:nth-child(even) {
+  width: 100%;
+  margin-left: 0;
+}
+
+
+/* =========================================================
+   7. IMAGE
+   ========================================================= */
+
+.system-card__media {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #342d25,
+      #1b1b19
+    );
+}
+
+.system-card__media img {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.015);
+
+  filter:
+    saturate(0.9)
+    contrast(1.02);
+
+  transition:
+    transform 1.2s
+      cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms ease;
+
+  will-change: transform;
+}
+
+.system-card:hover .system-card__media img {
+  transform: scale(1.055);
+
+  filter:
+    saturate(1)
+    contrast(1.03);
+}
+
+
+/* =========================================================
+   8. CINEMATIC OVERLAY
+   ========================================================= */
+
+.system-card__shade {
+  position: absolute;
+  z-index: 2;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(17, 17, 17, 0.04) 0%,
+      rgba(17, 17, 17, 0.05) 35%,
+      rgba(17, 17, 17, 0.38) 67%,
+      rgba(17, 17, 17, 0.94) 100%
+    );
+}
+
+
+/* warm PLS atmosphere */
+
+.system-card::after {
+  content: "";
+
+  position: absolute;
+  z-index: 3;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(200, 154, 50, 0.12),
+      transparent 35%
+    );
+
+  opacity: 0.75;
+
+  transition:
+    opacity 700ms ease;
+}
+
+.system-card:hover::after {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   9. NUMBER BADGE
+   ========================================================= */
+
+.system-card__number {
+  position: absolute;
+  z-index: 5;
+
+  top: clamp(1.3rem, 2.2vw, 2rem);
+  left: clamp(1.3rem, 2.2vw, 2rem);
+
+  width: 38px;
+  height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #d6a83f;
+
+  border: 1px solid rgba(200, 154, 50, 0.65);
+  border-radius: 50%;
+
+  background: rgba(17, 17, 17, 0.28);
+
+  backdrop-filter: blur(8px);
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   10. CARD CONTENT
+   ========================================================= */
+
+.system-card__content {
+  position: absolute;
+  z-index: 5;
+
+  left: clamp(1.4rem, 3vw, 2.8rem);
+  right: clamp(1.4rem, 3vw, 2.8rem);
+  bottom: clamp(1.5rem, 3vw, 2.8rem);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  align-items: end;
+
+  column-gap: 2rem;
+}
+
+
+/* GOLD RULE */
+
+.system-card__rule {
+  grid-column: 1 / -1;
+
+  width: 100%;
+  height: 1px;
+
+  margin-bottom:
+    clamp(1rem, 1.8vw, 1.5rem);
+
+  background:
+    linear-gradient(
+      90deg,
+      #c89a32 0%,
+      rgba(200, 154, 50, 0.55) 35%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+
+  transform-origin: left center;
+
+  transition:
+    transform 700ms
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.system-card:hover .system-card__rule {
+  transform: scaleX(0.94);
+}
+
+
+/* =========================================================
+   11. CARD TITLE
+   ========================================================= */
+
+.system-card__content h3 {
+  grid-column: 1;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    2.2rem,
+    3.4vw,
+    4.2rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.04em;
+
+  transform: translateY(0);
+
+  transition:
+    transform 650ms
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.system-card:hover
+.system-card__content h3 {
+  transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   12. CARD DESCRIPTION
+   ========================================================= */
+
+.system-card__content p {
+  grid-column: 1;
+
+  max-width: 500px;
+
+  margin: 0.9rem 0 0;
+
+  color: rgba(255, 255, 255, 0.66);
+
+  font-size: clamp(
+    0.76rem,
+    0.78vw,
+    0.88rem
+  );
+
+  line-height: 1.65;
+
+  transition:
+    color 500ms ease,
+    transform 650ms
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.system-card:hover
+.system-card__content p {
+  color: rgba(255, 255, 255, 0.82);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   13. ARROW
+   ========================================================= */
+
+.system-card__arrow {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffffff;
+
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 50%;
+
+  background: rgba(17, 17, 17, 0.15);
+
+  backdrop-filter: blur(6px);
+
+  font-size: 1.15rem;
+
+  transition:
+    color 450ms ease,
+    background 450ms ease,
+    border-color 450ms ease,
+    transform 600ms
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.system-card:hover
+.system-card__arrow {
+  color: #111111;
+
+  background: #c89a32;
+
+  border-color: #c89a32;
+
+  transform:
+    translateX(4px)
+    rotate(-5deg);
+}
+
+
+/* =========================================================
+   14. LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1600px) {
+
+  .systems__inner {
+    grid-template-columns:
+      minmax(330px, 0.32fr)
+      minmax(0, 0.68fr);
+  }
+
+  .systems__inner::before {
+    left: 34%;
+  }
+
+  /*
+     Keep the cards controlled.
+     Do NOT restore the old 680px height.
+  */
+
+  .system-card {
+    min-height: 570px;
+  }
+}
+
+
+/* =========================================================
+   15. LAPTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+  .systems__inner {
+    grid-template-columns:
+      minmax(250px, 32%)
+      minmax(0, 68%);
+
+    gap: 3rem;
+  }
+
+  .systems__inner::before {
+    left: 34%;
+  }
+
+  .systems__title {
+    font-size: clamp(
+      2.9rem,
+      4.2vw,
+      4.2rem
+    );
+  }
+
+  .system-card {
+    min-height: 500px;
+  }
+}
+
+
+/* =========================================================
+   16. TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .systems__transition {
+    height: 70px;
+  }
+
+  .systems__inner {
+    display: block;
+
+    padding:
+      4.5rem
+      1.5rem
+      6rem;
+  }
+
+  .systems__inner::before {
+    display: none;
+  }
+
+  /*
+     IMPORTANT:
+     sticky is intentionally disabled on tablet.
+  */
+
+  .systems__intro-sticky {
+    position: relative;
+    top: auto;
+
+    padding-right: 0;
+
+    margin-bottom: 3.5rem;
+  }
+
+  .systems__title {
+    max-width: 600px;
+
+    font-size: clamp(
+      3.1rem,
+      8vw,
+      4.8rem
+    );
+  }
+
+  .systems__description {
+    max-width: 480px;
+  }
+
+  .systems__index {
+    max-width: 220px;
+
+    margin-top: 2rem;
+  }
+
+  .systems__services {
+    gap: 1.25rem;
+  }
+
+  .system-card,
+  .system-card:nth-child(even) {
+    width: 100%;
+
+    min-height: 490px;
+
+    margin-left: 0;
+  }
+}
+
+
+/* =========================================================
+   17. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .systems__transition {
+    height: 55px;
+  }
+
+  .systems__inner {
+    padding:
+      3.5rem
+      1.15rem
+      5rem;
+  }
+
+  .systems__eyebrow {
+    margin-bottom: 1rem;
+
+    font-size: 0.52rem;
+  }
+
+  .systems__title {
+    max-width: 100%;
+
+    font-size: clamp(
+      2.75rem,
+      12vw,
+      3.8rem
+    );
+
+    line-height: 0.95;
+  }
+
+  .systems__description {
+    margin-top: 1.35rem;
+
+    font-size: 0.81rem;
+
+    line-height: 1.65;
+  }
+
+  .systems__intro-sticky {
+    margin-bottom: 2.8rem;
+  }
+
+  .systems__index {
+    margin-top: 1.8rem;
+  }
+
+  .systems__services {
+    gap: 1rem;
+  }
+
+  .system-card,
+  .system-card:nth-child(even) {
+    min-height: 430px;
+  }
+
+  .system-card__number {
+    top: 1.15rem;
+    left: 1.15rem;
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 0.54rem;
+  }
+
+  .system-card__content {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.3rem;
+
+    display: block;
+  }
+
+  .system-card__rule {
+    margin-bottom: 1rem;
+  }
+
+  .system-card__content h3 {
+    font-size: clamp(
+      2.4rem,
+      11vw,
+      3.5rem
+    );
+  }
+
+  .system-card__content p {
+    max-width: calc(100% - 62px);
+
+    margin-top: 0.75rem;
+
+    font-size: 0.77rem;
+
+    line-height: 1.55;
+  }
+
+  .system-card__arrow {
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 44px;
+    height: 44px;
+  }
+}
+
+
+/* =========================================================
+   18. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .systems__inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .system-card,
+  .system-card:nth-child(even) {
+    min-height: 400px;
+  }
+
+  .system-card__content p {
+    max-width: calc(100% - 54px);
+  }
+
+  .system-card__arrow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* =========================================================
+   19. TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) {
+
+  .system-card__media img {
+    transform: scale(1.02);
+  }
+
+  .system-card__content p {
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .system-card:hover
+  .system-card__media img {
+    transform: scale(1.02);
+  }
+
+  .system-card:hover
+  .system-card__content h3,
+  .system-card:hover
+  .system-card__content p,
+  .system-card:hover
+  .system-card__arrow,
+  .system-card:hover
+  .system-card__rule {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .system-card__media img,
+  .system-card__content h3,
+  .system-card__content p,
+  .system-card__arrow,
+  .system-card__rule,
+  .system-card::after {
+    transition: none;
+  }
+
+  .system-card:hover
+  .system-card__media img,
+  .system-card:hover
+  .system-card__content h3,
+  .system-card:hover
+  .system-card__content p,
+  .system-card:hover
+  .system-card__arrow,
+  .system-card:hover
+  .system-card__rule {
+    transform: none;
+  }
+}
+
+
+/* =================================================================
+   SOURCE: CompleteSystem.css — preserved unchanged
+   ================================================================= */
+
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — COMPLETE SYSTEM
+   Systems → Complete coordinated build
+   ========================================================= */
+
+.complete-system {
+  position: relative;
+
+  background: #f7f5f1;
+  color: #171715;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   1. DARK → LIGHT TRANSITION
+   ========================================================= */
+
+.complete-system::before {
+  content: "";
+
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: clamp(80px, 9vw, 140px);
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #171613 0%,
+      #24211d 15%,
+      #5b554d 34%,
+      #a79f94 54%,
+      #ddd8d0 73%,
+      #f7f5f1 100%
+    );
+}
+
+
+/* subtle light bloom */
+
+.complete-system::after {
+  content: "";
+
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  right: -12%;
+
+  width: 70%;
+  height: 420px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgba(255, 255, 255, 0.85),
+      transparent 68%
+    );
+}
+
+
+/* =========================================================
+   2. INNER CONTAINER
+   ========================================================= */
+
+.complete-system__inner {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1600px);
+  margin: 0 auto;
+
+  padding:
+    clamp(9rem, 13vw, 13rem)
+    clamp(2rem, 5vw, 6rem)
+    clamp(6rem, 10vw, 10rem);
+}
+
+
+/* =========================================================
+   3. HEADER
+   ========================================================= */
+
+.complete-system__header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.25fr)
+    minmax(280px, 0.75fr);
+
+  gap: clamp(3rem, 8vw, 9rem);
+
+  align-items: end;
+
+  padding-bottom:
+    clamp(3rem, 5vw, 5rem);
+}
+
+
+/* =========================================================
+   4. EYEBROW
+   ========================================================= */
+
+.complete-system__eyebrow {
+  margin: 0 0 1.4rem;
+
+  color: #9f7420;
+
+  font-size: clamp(
+    0.56rem,
+    0.55vw,
+    0.66rem
+  );
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.32em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   5. MAIN HEADING
+   ========================================================= */
+
+.complete-system__title {
+  max-width: 780px;
+
+  margin: 0;
+
+  color: #171715;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.7rem,
+    5.5vw,
+    7rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.93;
+
+  letter-spacing: -0.055em;
+}
+
+.complete-system__title em {
+  color: #917160;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   6. HEADER DESCRIPTION
+   ========================================================= */
+
+.complete-system__header-right {
+  max-width: 420px;
+
+  padding-bottom: 0.4rem;
+}
+
+.complete-system__header-right p {
+  margin: 0;
+
+  color: #6d6962;
+
+  font-size: clamp(
+    0.84rem,
+    0.82vw,
+    0.95rem
+  );
+
+  line-height: 1.75;
+}
+
+.complete-system__header-right p + p {
+  margin-top: 1.2rem;
+}
+
+
+/* =========================================================
+   7. MAIN ARCHITECTURAL IMAGE
+   ========================================================= */
+
+.complete-system__visual {
+  position: relative;
+
+  width: 100%;
+
+  height: clamp(
+    480px,
+    57vw,
+    760px
+  );
+
+  overflow: hidden;
+
+  background: #e5e0d8;
+
+  isolation: isolate;
+}
+
+
+/* IMAGE */
+
+.complete-system__visual img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.01);
+
+  transition:
+    transform 1.4s
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.complete-system__visual:hover img {
+  transform: scale(1.035);
+}
+
+
+/* =========================================================
+   8. IMAGE SHADING
+   ========================================================= */
+
+.complete-system__visual-shade {
+  position: absolute;
+  z-index: 2;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(17, 17, 17, 0.02) 35%,
+      rgba(17, 17, 17, 0.08) 60%,
+      rgba(17, 17, 17, 0.58) 100%
+    );
+}
+
+
+/* slight warm architectural treatment */
+
+.complete-system__visual::after {
+  content: "";
+
+  position: absolute;
+  z-index: 3;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(200, 154, 50, 0.08),
+      transparent 35%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.05)
+    );
+}
+
+
+/* =========================================================
+   9. IMAGE CAPTION
+   ========================================================= */
+
+.complete-system__visual-copy {
+  position: absolute;
+  z-index: 5;
+
+  left: clamp(1.5rem, 3vw, 3rem);
+  right: clamp(1.5rem, 3vw, 3rem);
+  bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: clamp(
+    0.52rem,
+    0.52vw,
+    0.62rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: 0.25em;
+}
+
+.complete-system__visual-line {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.15)
+    );
+}
+
+
+/* =========================================================
+   10. BUILD STAGES
+   ========================================================= */
+
+.complete-system__stages {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  border-top:
+    1px solid
+    rgba(17, 17, 17, 0.13);
+
+  border-bottom:
+    1px solid
+    rgba(17, 17, 17, 0.13);
+}
+
+
+/* =========================================================
+   11. INDIVIDUAL STAGE
+   ========================================================= */
+
+.complete-system__stage {
+  position: relative;
+
+  min-height: 270px;
+
+  padding:
+    clamp(2rem, 3vw, 3rem)
+    clamp(1.2rem, 2.2vw, 2.4rem);
+
+  border-right:
+    1px solid
+    rgba(17, 17, 17, 0.13);
+
+  transition:
+    background-color 500ms ease;
+}
+
+.complete-system__stage:first-child {
+  border-left:
+    1px solid
+    rgba(17, 17, 17, 0.13);
+}
+
+.complete-system__stage:hover {
+  background:
+    rgba(239, 226, 221, 0.52);
+}
+
+
+/* =========================================================
+   12. STAGE NUMBER
+   ========================================================= */
+
+.complete-system__stage-top {
+  display: flex;
+  align-items: center;
+
+  gap: 0.8rem;
+
+  margin-bottom:
+    clamp(3rem, 5vw, 5rem);
+}
+
+.complete-system__stage-number {
+  color: #9f7420;
+
+  font-size: 0.58rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.complete-system__stage-dot {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #c89a32;
+}
+
+
+/* =========================================================
+   13. STAGE TITLE
+   ========================================================= */
+
+.complete-system__stage h3 {
+  margin: 0;
+
+  color: #171715;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1.8rem,
+    2.1vw,
+    2.8rem
+  );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.035em;
+}
+
+
+/* =========================================================
+   14. STAGE DESCRIPTION
+   ========================================================= */
+
+.complete-system__stage p {
+  max-width: 250px;
+
+  margin: 1rem 0 0;
+
+  color: #6d6962;
+
+  font-size: clamp(
+    0.76rem,
+    0.72vw,
+    0.86rem
+  );
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   15. BOTTOM STATEMENT
+   ========================================================= */
+
+.complete-system__statement {
+  position: relative;
+
+  min-height:
+    clamp(300px, 31vw, 470px);
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* subtle architectural lines */
+
+.complete-system__statement::before,
+.complete-system__statement::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+
+  width: min(24vw, 330px);
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(17, 17, 17, 0.15)
+    );
+}
+
+.complete-system__statement::before {
+  left: 0;
+}
+
+.complete-system__statement::after {
+  right: 0;
+
+  transform: scaleX(-1);
+}
+
+
+/* PLS MARK */
+
+.complete-system__statement-mark {
+  margin-bottom: 1.3rem;
+
+  color: #c89a32;
+
+  font-size: 0.66rem;
+  font-weight: 800;
+
+  letter-spacing: 0.32em;
+}
+
+
+/* STATEMENT */
+
+.complete-system__statement p {
+  margin: 0;
+
+  color: #171715;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    2.6rem,
+    4vw,
+    5rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+}
+
+.complete-system__statement em {
+  color: #917160;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   16. LAPTOP
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .complete-system__header {
+    grid-template-columns:
+      minmax(0, 1.15fr)
+      minmax(260px, 0.85fr);
+
+    gap: 3rem;
+  }
+
+  .complete-system__title {
+    font-size: clamp(
+      3.4rem,
+      5.5vw,
+      5.4rem
+    );
+  }
+
+  .complete-system__visual {
+    height: 600px;
+  }
+
+  .complete-system__stage {
+    min-height: 250px;
+  }
+}
+
+
+/* =========================================================
+   17. TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .complete-system__inner {
+    padding:
+      8rem
+      1.5rem
+      6rem;
+  }
+
+  .complete-system__header {
+    display: block;
+
+    padding-bottom: 3rem;
+  }
+
+  .complete-system__header-right {
+    max-width: 500px;
+
+    margin-top: 2rem;
+  }
+
+  .complete-system__title {
+    max-width: 650px;
+
+    font-size: clamp(
+      3.2rem,
+      8vw,
+      5rem
+    );
+  }
+
+  .complete-system__visual {
+    height: clamp(
+      440px,
+      75vw,
+      620px
+    );
+  }
+
+  .complete-system__stages {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .complete-system__stage {
+    min-height: 240px;
+  }
+
+  .complete-system__stage:nth-child(2) {
+    border-right:
+      1px solid
+      rgba(17, 17, 17, 0.13);
+  }
+
+  .complete-system__stage:nth-child(3),
+  .complete-system__stage:nth-child(4) {
+    border-top:
+      1px solid
+      rgba(17, 17, 17, 0.13);
+  }
+
+  .complete-system__stage:nth-child(3) {
+    border-left:
+      1px solid
+      rgba(17, 17, 17, 0.13);
+  }
+
+  .complete-system__statement::before,
+  .complete-system__statement::after {
+    width: 18vw;
+  }
+}
+
+
+/* =========================================================
+   18. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .complete-system::before {
+    height: 70px;
+  }
+
+  .complete-system__inner {
+    padding:
+      6.5rem
+      1.15rem
+      4.5rem;
+  }
+
+  .complete-system__eyebrow {
+    margin-bottom: 1rem;
+
+    font-size: 0.52rem;
+  }
+
+  .complete-system__title {
+    font-size: clamp(
+      2.8rem,
+      12vw,
+      4rem
+    );
+
+    line-height: 0.95;
+  }
+
+  .complete-system__header-right {
+    margin-top: 1.6rem;
+  }
+
+  .complete-system__header-right p {
+    font-size: 0.82rem;
+
+    line-height: 1.65;
+  }
+
+
+  /* IMAGE */
+
+  .complete-system__visual {
+    height: 470px;
+  }
+
+  .complete-system__visual img {
+    object-position: center;
+  }
+
+  .complete-system__visual-copy {
+    left: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.3rem;
+
+    gap: 0.65rem;
+
+    font-size: 0.48rem;
+
+    letter-spacing: 0.17em;
+  }
+
+
+  /* STAGES */
+
+  .complete-system__stages {
+    display: block;
+  }
+
+  .complete-system__stage,
+  .complete-system__stage:first-child,
+  .complete-system__stage:nth-child(3) {
+    min-height: auto;
+
+    padding:
+      2rem
+      0.25rem
+      2.2rem;
+
+    border-left: 0;
+    border-right: 0;
+
+    border-top:
+      1px solid
+      rgba(17, 17, 17, 0.13);
+  }
+
+  .complete-system__stage:first-child {
+    border-top: 0;
+  }
+
+  .complete-system__stage-top {
+    margin-bottom: 2rem;
+  }
+
+  .complete-system__stage h3 {
+    font-size: 2rem;
+  }
+
+  .complete-system__stage p {
+    max-width: 420px;
+
+    font-size: 0.79rem;
+  }
+
+
+  /* STATEMENT */
+
+  .complete-system__statement {
+    min-height: 300px;
+  }
+
+  .complete-system__statement::before,
+  .complete-system__statement::after {
+    display: none;
+  }
+
+  .complete-system__statement p {
+    font-size: clamp(
+      2.4rem,
+      10vw,
+      3.5rem
+    );
+  }
+}
+
+
+/* =========================================================
+   19. TOUCH
+   ========================================================= */
+
+@media (hover: none) {
+
+  .complete-system__visual:hover img {
+    transform: scale(1.01);
+  }
+
+  .complete-system__stage:hover {
+    background: transparent;
+  }
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .complete-system__visual img,
+  .complete-system__stage {
+    transition: none;
+  }
+
+  .complete-system__visual:hover img {
+    transform: none;
+  }
+}
+
+
+/* =================================================================
+   SOURCE: WhyPLS.css — preserved unchanged
+   ================================================================= */
+
+/* =========================================================
+   PREMIUM LINING SOLUTIONS — WHY PLS
+   One booking. One team. One complete package.
+   ========================================================= */
+
+.why-pls {
+  position: relative;
+  background: #171613;
+  color: #f7f5f1;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   1. WARM → DARK TRANSITION
+   ========================================================= */
+
+.why-pls::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: clamp(70px, 7vw, 110px);
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #f7f5f1 0%,
+      #e7e2da 15%,
+      #aaa298 36%,
+      #5a554e 58%,
+      #292622 78%,
+      #171613 100%
+    );
+}
+
+.why-pls::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+
+  top: 0;
+  right: -15%;
+
+  width: 70%;
+  height: 520px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgba(200, 154, 50, 0.08),
+      transparent 68%
+    );
+}
+
+
+/* =========================================================
+   2. INNER
+   ========================================================= */
+
+.why-pls__inner {
+  position: relative;
+  z-index: 1;
+
+  width: min(100%, 1600px);
+  margin: 0 auto;
+
+  padding:
+    clamp(8rem, 12vw, 12rem)
+    clamp(2rem, 5vw, 6rem)
+    clamp(6rem, 10vw, 10rem);
+}
+
+
+/* =========================================================
+   3. HEADER
+   ========================================================= */
+
+.why-pls__header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.3fr)
+    minmax(280px, 0.7fr);
+
+  align-items: end;
+
+  gap: clamp(3rem, 8vw, 9rem);
+
+  padding-bottom:
+    clamp(4rem, 7vw, 7rem);
+}
+
+
+/* =========================================================
+   4. EYEBROW
+   ========================================================= */
+
+.why-pls__eyebrow {
+  margin: 0 0 1.4rem;
+
+  color: #c89a32;
+
+  font-size: clamp(
+    0.56rem,
+    0.55vw,
+    0.66rem
+  );
+
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: 0.32em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   5. TITLE
+   ========================================================= */
+
+.why-pls__title {
+  max-width: 760px;
+
+  margin: 0;
+
+  color: #f7f5f1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.7rem,
+    5.3vw,
+    6.8rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.055em;
+}
+
+.why-pls__title em {
+  color: #c89a32;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   6. INTRO COPY
+   ========================================================= */
+
+.why-pls__intro {
+  max-width: 390px;
+
+  padding-bottom: 0.3rem;
+}
+
+.why-pls__intro-number {
+  display: block;
+
+  margin-bottom: 1.3rem;
+
+  color: #c89a32;
+
+  font-size: 0.57rem;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+}
+
+.why-pls__intro p {
+  margin: 0;
+
+  color: rgba(247, 245, 241, 0.62);
+
+  font-size: clamp(
+    0.83rem,
+    0.82vw,
+    0.94rem
+  );
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   7. BENEFITS GRID
+   ========================================================= */
+
+.why-pls__benefits {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   8. BENEFIT
+   ========================================================= */
+
+.why-pls__benefit {
+  position: relative;
+
+  min-height: clamp(
+    300px,
+    26vw,
+    400px
+  );
+
+  padding:
+    clamp(2rem, 3vw, 3.2rem);
+
+  border-right:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  overflow: hidden;
+
+  transition:
+    background-color 500ms ease;
+}
+
+.why-pls__benefit:first-child {
+  border-left:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+}
+
+
+/* subtle hover */
+
+.why-pls__benefit::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(200, 154, 50, 0.12),
+      transparent 45%
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 600ms ease;
+}
+
+.why-pls__benefit:hover {
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+.why-pls__benefit:hover::after {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   9. BENEFIT TOP
+   ========================================================= */
+
+.why-pls__benefit-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom:
+    clamp(4rem, 7vw, 7rem);
+}
+
+.why-pls__number {
+  color: #c89a32;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.why-pls__line {
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(200, 154, 50, 0.65),
+      rgba(200, 154, 50, 0.06)
+    );
+
+  transform-origin: left;
+
+  transition:
+    transform 700ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-pls__benefit:hover
+.why-pls__line {
+  transform: scaleX(0.9);
+}
+
+
+/* =========================================================
+   10. BENEFIT TITLE
+   ========================================================= */
+
+.why-pls__benefit h3 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    2rem,
+    2.7vw,
+    3.5rem
+  );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+
+  transition:
+    transform 600ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-pls__benefit:hover h3 {
+  transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   11. BENEFIT DESCRIPTION
+   ========================================================= */
+
+.why-pls__benefit > p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 330px;
+
+  margin: 1.25rem 0 0;
+
+  color: rgba(247, 245, 241, 0.56);
+
+  font-size: clamp(
+    0.78rem,
+    0.75vw,
+    0.88rem
+  );
+
+  line-height: 1.7;
+
+  transition:
+    color 500ms ease;
+}
+
+.why-pls__benefit:hover > p {
+  color: rgba(247, 245, 241, 0.76);
+}
+
+
+/* =========================================================
+   12. LARGE BRAND STATEMENT
+   ========================================================= */
+
+.why-pls__statement {
+  position: relative;
+
+  min-height: clamp(
+    520px,
+    56vw,
+    760px
+  );
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* faint circle */
+
+.why-pls__statement::before {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: clamp(
+    300px,
+    42vw,
+    620px
+  );
+
+  aspect-ratio: 1;
+
+  border:
+    1px solid
+    rgba(200, 154, 50, 0.12);
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+
+/* inner glow */
+
+.why-pls__statement::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: min(65vw, 900px);
+  height: min(65vw, 900px);
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(200, 154, 50, 0.065),
+      transparent 64%
+    );
+}
+
+
+/* =========================================================
+   13. STATEMENT EYEBROW
+   ========================================================= */
+
+.why-pls__statement-small {
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: 1.6rem;
+
+  color: #c89a32;
+
+  font-size: clamp(
+    0.53rem,
+    0.55vw,
+    0.64rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: 0.32em;
+}
+
+
+/* =========================================================
+   14. STATEMENT
+   ========================================================= */
+
+.why-pls__statement p {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #f7f5f1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    3.2rem,
+    5.7vw,
+    7rem
+  );
+
+  font-weight: 400;
+
+  line-height: 0.88;
+
+  letter-spacing: -0.055em;
+}
+
+.why-pls__statement em {
+  color: #c89a32;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   15. CTA
+   ========================================================= */
+
+.why-pls__cta {
+  position: relative;
+  z-index: 2;
+
+  margin-top:
+    clamp(2.5rem, 4vw, 4rem);
+
+  min-width: 190px;
+
+  padding:
+    1rem
+    1.35rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  color: #f7f5f1;
+
+  border:
+    1px solid
+    rgba(200, 154, 50, 0.75);
+
+  text-decoration: none;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  transition:
+    color 400ms ease,
+    background-color 400ms ease,
+    border-color 400ms ease;
+}
+
+.why-pls__cta span {
+  font-size: 1rem;
+
+  transition:
+    transform 500ms
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-pls__cta:hover {
+  color: #111111;
+
+  background: #c89a32;
+
+  border-color: #c89a32;
+}
+
+.why-pls__cta:hover span {
+  transform: translateX(5px);
+}
+
+
+/* =========================================================
+   16. TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .why-pls__inner {
+    padding:
+      7.5rem
+      1.5rem
+      6rem;
+  }
+
+  .why-pls__header {
+    display: block;
+
+    padding-bottom: 3.5rem;
+  }
+
+  .why-pls__title {
+    max-width: 650px;
+
+    font-size: clamp(
+      3.2rem,
+      8vw,
+      5rem
+    );
+  }
+
+  .why-pls__intro {
+    max-width: 500px;
+
+    margin-top: 2rem;
+  }
+
+  .why-pls__benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .why-pls__benefit,
+  .why-pls__benefit:first-child {
+    min-height: auto;
+
+    padding:
+      2.5rem
+      1rem
+      3rem;
+
+    border-left: 0;
+    border-right: 0;
+
+    border-top:
+      1px solid
+      rgba(255, 255, 255, 0.12);
+  }
+
+  .why-pls__benefit:first-child {
+    border-top: 0;
+  }
+
+  .why-pls__benefit-top {
+    margin-bottom: 3rem;
+  }
+
+  .why-pls__benefit > p {
+    max-width: 520px;
+  }
+
+  .why-pls__statement {
+    min-height: 600px;
+  }
+}
+
+
+/* =========================================================
+   17. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .why-pls::before {
+    height: 60px;
+  }
+
+  .why-pls__inner {
+    padding:
+      6rem
+      1.15rem
+      4.5rem;
+  }
+
+  .why-pls__eyebrow {
+    margin-bottom: 1rem;
+
+    font-size: 0.51rem;
+  }
+
+  .why-pls__title {
+    font-size: clamp(
+      2.8rem,
+      12vw,
+      4rem
+    );
+
+    line-height: 0.95;
+  }
+
+  .why-pls__intro {
+    margin-top: 1.6rem;
+  }
+
+  .why-pls__intro p {
+    font-size: 0.81rem;
+
+    line-height: 1.65;
+  }
+
+  .why-pls__benefit {
+    padding:
+      2rem
+      0.2rem
+      2.5rem;
+  }
+
+  .why-pls__benefit-top {
+    margin-bottom: 2.4rem;
+  }
+
+  .why-pls__benefit h3 {
+    font-size: 2.3rem;
+  }
+
+  .why-pls__benefit > p {
+    font-size: 0.79rem;
+  }
+
+  .why-pls__statement {
+    min-height: 520px;
+  }
+
+  .why-pls__statement::before {
+    width: 290px;
+  }
+
+  .why-pls__statement p {
+    font-size: clamp(
+      2.8rem,
+      12vw,
+      4.3rem
+    );
+
+    line-height: 0.9;
+  }
+
+  .why-pls__cta {
+    width: min(100%, 260px);
+
+    margin-top: 2.5rem;
+  }
+}
+
+
+/* =========================================================
+   18. TOUCH
+   ========================================================= */
+
+@media (hover: none) {
+
+  .why-pls__benefit:hover {
+    background: transparent;
+  }
+
+  .why-pls__benefit:hover::after {
+    opacity: 0;
+  }
+
+  .why-pls__benefit:hover h3,
+  .why-pls__benefit:hover
+  .why-pls__line {
+    transform: none;
+  }
+
+  .why-pls__benefit:hover > p {
+    color: rgba(247, 245, 241, 0.56);
+  }
+}
+
+
+/* =========================================================
+   19. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .why-pls__benefit,
+  .why-pls__benefit::after,
+  .why-pls__benefit h3,
+  .why-pls__line,
+  .why-pls__benefit > p,
+  .why-pls__cta,
+  .why-pls__cta span {
+    transition: none;
+  }
+
+  .why-pls__benefit:hover h3,
+  .why-pls__benefit:hover
+  .why-pls__line,
+  .why-pls__cta:hover span {
+    transform: none;
+  }
 }

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 
@@ -18,12 +19,8 @@ const systems = [
     title: 'A solid foundation for the building envelope.',
     description:
       'Hebel provides a lightweight autoclaved aerated concrete wall system suited to modern residential construction. PLS coordinates the system as part of the broader external lining package.',
-    image: '/images/systems/hebel.png',
-    details: [
-      'External wall systems',
-      'Residential applications',
-      'Coordinated installation',
-    ],
+    image: '/images/services/hebel-01.webp',
+    images: ['/images/services/hebel-01.webp', '/images/services/hebel-02.webp', '/images/services/hebel-03.webp'],
   },
 
   {
@@ -35,11 +32,11 @@ const systems = [
     title: 'Character, protection and architectural definition.',
     description:
       'Cladding plays both a practical and visual role in the finished home. PLS works with James Hardie systems including Linea, Stria and Axon depending on the architectural requirements of the project.',
-    image: '/images/systems/cladding.png',
-    details: [
-      'Linea',
-      'Stria',
-      'Axon',
+    image: '/images/services/cladding-01.webp',
+    images: ['/images/services/cladding-01.webp', '/images/services/cladding-02.webp', '/images/services/cladding-03.webp'],
+    externalLinks: [
+      { label: 'EXPLORE JAMES HARDIE CLADDING', url: 'https://www.jameshardie.com.au/products/hardie-brushed-concrete-cladding' },
+      { label: 'EXPLORE NRG GREENBOARD', url: 'https://nrggreenboard.com.au/' },
     ],
   },
 
@@ -52,12 +49,8 @@ const systems = [
     title: 'A considered layer behind the finished wall.',
     description:
       'Building wrap forms an important part of the external wall build-up. It is incorporated into the construction sequence before the external lining system is completed.',
-    image: '/images/systems/wrap.png',
-    details: [
-      'Wall protection',
-      'Building envelope',
-      'Sequenced installation',
-    ],
+    image: '/images/services/wrap-01.webp',
+    images: ['/images/services/wrap-01.webp', '/images/services/wrap-02.webp', '/images/services/wrap-03.webp'],
   },
 
   {
@@ -69,12 +62,8 @@ const systems = [
     title: 'Performance starts inside the building envelope.',
     description:
       'Insulation is coordinated within wall and ceiling areas before internal linings are completed, helping the project progress through the next stage of the lining sequence.',
-    image: '/images/systems/insulation.png',
-    details: [
-      'Wall insulation',
-      'Ceiling insulation',
-      'Coordinated before plaster',
-    ],
+    image: '/images/services/insulation-01.webp',
+    images: ['/images/services/insulation-01.webp'],
   },
 
   {
@@ -86,29 +75,21 @@ const systems = [
     title: 'Where structure begins to feel like interior space.',
     description:
       'Internal plasterboard creates the surfaces that define rooms, ceilings and interior architecture. PLS coordinates plaster installation as the project moves toward its finished state.',
-    image: '/images/systems/plaster.png',
-    details: [
-      'Wall linings',
-      'Ceiling linings',
-      'Interior preparation',
-    ],
+    image: '/images/services/plaster-01.webp',
+    images: ['/images/services/plaster-01.webp', '/images/services/plaster-02.webp', '/images/services/plaster-03.webp'],
+    resource: { label: 'EXPLORE KNAUF WALL SYSTEMS', url: 'https://knauf.com/en-AU/applications/walls' },
   },
-
   {
     number: '06',
-    id: 'paint',
-    name: 'Paint',
-    category: 'FINISH',
-    brand: 'DULUX',
-    title: 'The final layer that brings the interior together.',
-    description:
-      'Painting completes the visual transition from construction to finished interior. It forms the final stage of the PLS lining sequence where included within the project scope.',
-    image: '/images/systems/paint.png',
-    details: [
-      'Interior finishes',
-      'Final surface preparation',
-      'Project completion',
-    ],
+    id: 'steel-framing',
+    name: 'Steel Stud & Track',
+    category: 'INTERNAL WALL FRAMING',
+    brand: 'RONDO',
+    title: 'Precision behind every finished wall.',
+    description: 'Steel stud and track systems provide the framework for internal plasterboard walls. PLS can discuss the appropriate framing and lining scope for your project.',
+    image: '/images/services/stud-track-01.webp',
+    images: ['/images/services/stud-track-01.webp'],
+    resource: { label: 'EXPLORE RONDO STUD & TRACK', url: 'https://www.rondo.com.au/products/walls/steel-stud-track-wall-framing-system' },
   },
 ]
 
@@ -139,6 +120,161 @@ const reveal = {
 /* =========================================================
    ARCHITECTURAL SYSTEMS
    ========================================================= */
+
+function ProjectGallery({ system, index }) {
+  const [active, setActive] = useState(0)
+  const images = system.images || (system.image ? [system.image] : [])
+  const hasMultiple = images.length > 1
+  const change = (direction) => setActive((current) => (current + direction + images.length) % images.length)
+
+  return (
+    <motion.figure className="system-chapter__visual" initial={{ opacity: 0, scale: 0.985 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.8 }}>
+      <div className="system-chapter__image-wrap system-gallery">
+        {images.length ? (
+          <img key={images[active]} src={images[active]} alt={`${system.name} project photograph ${active + 1}`} className="system-chapter__image" loading={index > 0 ? 'lazy' : 'eager'} />
+        ) : (
+          <div className="system-gallery__placeholder"><span>PROJECT PHOTOGRAPH</span><strong>{system.name}</strong><small>Image to be added</small></div>
+        )}
+        <div className="system-chapter__image-overlay" aria-hidden="true" />
+        <span className="system-chapter__image-number">{system.number}</span>
+        <div className="system-chapter__image-caption"><span>PREMIUM LINING SOLUTIONS</span><span>{system.category}</span></div>
+        {hasMultiple && (
+          <div className="system-gallery__controls">
+            <button type="button" onClick={() => change(-1)} aria-label={`Previous ${system.name} photo`}>←</button>
+            <span>{String(active + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}</span>
+            <button type="button" onClick={() => change(1)} aria-label={`Next ${system.name} photo`}>→</button>
+          </div>
+        )}
+      </div>
+    </motion.figure>
+  )
+}
+
+const gallerySlides = [
+  {
+    src: '/images/services/services-crsl-01.webp',
+    name: 'Modern Residential Façade',
+    category: 'EXTERNAL WALL SYSTEMS',
+    description:
+      'External wall linings and architectural detailing on a contemporary double-storey residence.',
+  },
+  {
+    src: '/images/services/services-crsl-02.webp',
+    name: 'Contemporary Home Exterior',
+    category: 'RESIDENTIAL EXTERIORS',
+    description:
+      'A double-storey residence combining rendered surfaces, brickwork and architectural façade details.',
+  },
+  {
+    src: '/images/services/services-crsl-03.webp',
+    name: 'Curved Feature Cladding',
+    category: 'ARCHITECTURAL CLADDING',
+    description:
+      'Timber-look cladding forming a distinctive curved entrance canopy on a contemporary building.',
+  },
+  {
+    src: '/images/services/services-crsl-04.webp',
+    name: 'Vertical Feature Cladding',
+    category: 'FEATURE WALL CLADDING',
+    description:
+      'Vertical timber-look cladding creating a refined architectural feature on a residential exterior.',
+  },
+  {
+    src: '/images/services/services-crsl-05.webp',
+    name: 'Entrance Canopy Detailing',
+    category: 'EXTERIOR FINISHES',
+    description:
+      'Timber-look cladding and trim detailing around a contemporary residential entrance.',
+  },
+  {
+    src: '/images/services/services-crsl-06.webp',
+    name: 'Timber-Look Façade Cladding',
+    category: 'EXTERNAL CLADDING',
+    description:
+      'Vertical cladding panels creating a clean, modern exterior finish with a natural timber appearance.',
+  },
+  {
+    src: '/images/services/services-crsl-07.webp',
+    name: 'Contemporary Weatherboard Home',
+    category: 'COMPLETED RESIDENTIAL EXTERIORS',
+    description:
+      'A double-storey residence featuring horizontal exterior cladding and illuminated architectural details.',
+  },
+  {
+    src: '/images/services/services-crsl-08.webp',
+    name: 'Interior Plasterboard Finishing',
+    category: 'INTERNAL PLASTER SYSTEMS',
+    description:
+      'Plasterboard walls and detailed ceilings during the jointing and finishing stage of construction.',
+  },
+]
+
+function SystemsShowcase() {
+  const [active, setActive] = useState(0)
+  const [failed, setFailed] = useState([])
+  const slides = gallerySlides.filter((item) => !failed.includes(item.src))
+  const safeActive = slides.length ? active % slides.length : 0
+  const slide = slides[safeActive]
+
+  const change = (direction) => {
+    if (slides.length > 1) {
+      setActive((current) => (current + direction + slides.length) % slides.length)
+    }
+  }
+
+  return (
+    <section className="systems-showcase" aria-label="Project photo carousel">
+      <div className="systems-shell">
+        <div className="systems-showcase__header">
+          <div>
+            <span className="systems-showcase__eyebrow">PLS / PROJECT GALLERY</span>
+            <h2>Our work <em>in focus.</em></h2>
+          </div>
+          <p>Explore photographs of the lining systems and finishes featured in our work.</p>
+        </div>
+
+        <div className="systems-showcase__frame">
+          {slide ? (
+            <>
+              <div className="systems-showcase__info">
+                <span className="systems-showcase__index">SELECTED WORK / {String(safeActive + 1).padStart(2, '0')}</span>
+                <div className="systems-showcase__details" aria-live="polite">
+                  <span className="systems-showcase__category">{slide.category}</span>
+                  <h3 key={slide.name}>{slide.name}</h3>
+                  <span className="systems-showcase__rule" aria-hidden="true" />
+                  <p>Premium Lining Solutions · Project gallery</p>
+                </div>
+                <div className="systems-showcase__navigation">
+                  <span className="systems-showcase__counter">{String(safeActive + 1).padStart(2, '0')} <span>/</span> {String(slides.length).padStart(2, '0')}</span>
+                  <div className="systems-showcase__actions">
+                    <button type="button" onClick={() => change(-1)} disabled={slides.length < 2} aria-label="Previous project image">←</button>
+                    <button type="button" onClick={() => change(1)} disabled={slides.length < 2} aria-label="Next project image">→</button>
+                  </div>
+                </div>
+              </div>
+              <div className="systems-showcase__media">
+                <img
+                  key={slide.src}
+                  src={slide.src}
+                  alt={`${slide.name} project photograph`}
+                  loading="lazy"
+                  onError={() => {
+                    console.warn('Project image could not be loaded:', slide.src)
+                    setFailed((previous) => previous.includes(slide.src) ? previous : [...previous, slide.src])
+                    setActive(0)
+                  }}
+                />
+                <span className="systems-showcase__photo-label">PLS / PROJECT {String(safeActive + 1).padStart(2, '0')}</span>
+              </div>
+            </>
+          ) : (
+            <p className="systems-showcase__empty">Project images could not be loaded. Check the filenames in public/images/projects.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 function Services() {
 
@@ -233,7 +369,7 @@ function Services() {
               </p>
 
               <span>
-                06 SYSTEM CATEGORIES
+                06 SYSTEM CATEGORIES · EST. 2022
               </span>
             </motion.div>
 
@@ -244,6 +380,9 @@ function Services() {
       </section>
 
 
+
+      {/* Featured project / systems image carousel */}
+      <SystemsShowcase />
 
       {/* =====================================================
           SYSTEM INDEX
@@ -302,6 +441,7 @@ function Services() {
 
 
 
+
       {/* =====================================================
           SYSTEM CHAPTERS
           ===================================================== */}
@@ -329,62 +469,7 @@ function Services() {
                     IMAGE
                     =========================================== */}
 
-                <motion.figure
-                  className="system-chapter__visual"
-                  initial={{
-                    opacity: 0,
-                    scale: 0.985,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.15,
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                >
-
-                  <div className="system-chapter__image-wrap">
-
-                    <img
-                      src={system.image}
-                      alt={`${system.name} service`}
-                      className="system-chapter__image"
-                      loading={index > 0 ? 'lazy' : 'eager'}
-                    />
-
-
-                    <div
-                      className="system-chapter__image-overlay"
-                      aria-hidden="true"
-                    />
-
-
-                    <span className="system-chapter__image-number">
-                      {system.number}
-                    </span>
-
-
-                    <div className="system-chapter__image-caption">
-
-                      <span>
-                        PREMIUM LINING SOLUTIONS
-                      </span>
-
-                      <span>
-                        {system.category}
-                      </span>
-
-                    </div>
-
-                  </div>
-
-                </motion.figure>
+                <ProjectGallery system={system} index={index} />
 
 
 
@@ -430,28 +515,11 @@ function Services() {
                   </p>
 
 
-                  <div className="system-chapter__details">
-
-                    {system.details.map((detail) => (
-
-                      <div
-                        key={detail}
-                        className="system-chapter__detail"
-                      >
-                        <span
-                          aria-hidden="true"
-                        >
-                          +
-                        </span>
-
-                        <p>
-                          {detail}
-                        </p>
-                      </div>
-
-                    ))}
-
-                  </div>
+                  {(system.externalLinks || (system.resource ? [system.resource] : [])).map((link) => (
+                    <a key={link.url} className="system-chapter__resource" href={link.url} target="_blank" rel="noopener noreferrer">
+                      {link.label} <span aria-hidden="true">↗</span>
+                    </a>
+                  ))}
 
                 </motion.div>
 
@@ -461,154 +529,6 @@ function Services() {
           )
 
         })}
-
-      </section>
-
-
-
-      {/* =====================================================
-          COMPLETE BUILD SEQUENCE
-          ===================================================== */}
-
-      <section className="systems-sequence">
-
-        <div className="systems-shell">
-
-          <motion.div
-            className="systems-sequence__header"
-            {...reveal}
-          >
-
-            <span>
-              THE PLS SEQUENCE
-            </span>
-
-            <p>
-              Individual systems. Considered as part of the
-              wider build.
-            </p>
-
-          </motion.div>
-
-
-          <motion.div
-            className="systems-sequence__flow"
-            {...reveal}
-          >
-
-            {systems.map((system, index) => (
-
-              <div
-                key={system.id}
-                className="systems-sequence__item"
-              >
-
-                <span className="systems-sequence__number">
-                  {system.number}
-                </span>
-
-                <strong>
-                  {system.name}
-                </strong>
-
-
-                {index < systems.length - 1 && (
-
-                  <span
-                    className="systems-sequence__arrow"
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-
-                )}
-
-              </div>
-
-            ))}
-
-          </motion.div>
-
-        </div>
-
-      </section>
-
-
-
-      {/* =====================================================
-          MATERIAL PARTNERS
-          ===================================================== */}
-
-      <section className="systems-partners">
-
-        <div className="systems-shell systems-partners__grid">
-
-          <motion.div
-            className="systems-partners__intro"
-            {...reveal}
-          >
-
-            <span className="systems-partners__number">
-              07
-            </span>
-
-            <p className="systems-partners__eyebrow">
-              MATERIAL SYSTEMS
-            </p>
-
-            <h2>
-              Recognised names.
-              <br />
-              <em>Specified with purpose.</em>
-            </h2>
-
-          </motion.div>
-
-
-          <motion.div
-            className="systems-partners__list"
-            {...reveal}
-          >
-
-            <div>
-              <span>01</span>
-              <strong>CSR Hebel</strong>
-              <small>External wall systems</small>
-            </div>
-
-            <div>
-              <span>02</span>
-              <strong>James Hardie</strong>
-              <small>Architectural cladding</small>
-            </div>
-
-            <div>
-              <span>03</span>
-              <strong>PGF Clima</strong>
-              <small>Building wrap</small>
-            </div>
-
-            <div>
-              <span>04</span>
-              <strong>Bradford</strong>
-              <small>Insulation</small>
-            </div>
-
-            <div>
-              <span>05</span>
-              <strong>Knauf Sheetrock</strong>
-              <small>Internal plaster systems</small>
-            </div>
-
-            <div>
-              <span>06</span>
-              <strong>Dulux</strong>
-              <small>Paint finishes</small>
-            </div>
-
-          </motion.div>
-
-        </div>
 
       </section>
 

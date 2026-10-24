@@ -26,7 +26,7 @@ export default function About() {
       {/* 01 — Sponsorship feature is the first section, directly below the site navbar. */}
       <section className="about-feature" aria-labelledby="about-feature-title">
         <div className="about-feature__photo">
-          <img src="/images/About/sydenham-park.jpeg" alt="Sydenham Park Soccer Club's 2026 club partner announcement featuring Premium Lining Solutions" fetchPriority="high" />
+          <img src="/images/about/sydenham-park.webp" alt="Sydenham Park Soccer Club's 2026 club partner announcement featuring Premium Lining Solutions" fetchPriority="high" />
         </div>
         <div className="about-feature__content">
           <motion.div {...reveal}>

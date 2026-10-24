@@ -58,7 +58,7 @@ function Navbar() {
       >
         <img
           className="navbar__logo"
-          src="/images/pls-logo.png"
+          src="/images/logos/pls-logo.svg"
           alt="Premium Lining Solutions"
         />
       </Link>

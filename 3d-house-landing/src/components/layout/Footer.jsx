@@ -32,7 +32,7 @@ function Footer() {
               aria-label="Premium Lining Solutions home"
             >
               <img
-                src="/images/pls-logo.png"
+                src="/images/logos/pls-logo.svg"
                 alt="Premium Lining Solutions"
                 className="footer__logo-image"
               />
