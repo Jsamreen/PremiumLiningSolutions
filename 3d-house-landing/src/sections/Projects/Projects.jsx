@@ -8,7 +8,7 @@ const projects = [
     title: 'Residential',
     location: 'Melbourne, VIC',
     category: 'Complete Lining Package',
-    image: '/images/Projects/project-01.png',
+    image: '/images/Projects/project-01.jpeg',
     size: 'large',
   },
   {
@@ -16,7 +16,7 @@ const projects = [
     title: 'Exterior Systems',
     location: 'Victoria',
     category: 'Hebel · Cladding · Wrap',
-    image: '/images/Projects/project-02.png',
+    image: '/images/Projects/project-02.jpeg',
     size: 'small',
   },
   {
@@ -24,7 +24,7 @@ const projects = [
     title: 'Interior Finish',
     location: 'Melbourne, VIC',
     category: 'Plaster · Paint',
-    image: '/images/Projects/project-03.png',
+    image: '/images/Projects/project-03.jpeg',
     size: 'small',
   },
   {
@@ -32,7 +32,7 @@ const projects = [
     title: 'Complete Build',
     location: 'Victoria',
     category: 'Frame to Finish',
-    image: '/images/Projects/project-04.png',
+    image: '/images/Projects/project-04.jpeg',
     size: 'large',
   },
 ]

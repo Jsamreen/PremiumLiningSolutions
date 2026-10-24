@@ -322,7 +322,7 @@
    10. VIDEO
    ========================================================= */
 
-.hero-film__video {
+.hero-film__image {
   position: absolute;
 
   inset: 0;
@@ -1421,7 +1421,7 @@
 /* 1. Hide the video's lighter backdrop box.
       Blends the near-white video background into the hero image.
       (Check house colors; they may look slightly darker.) */
-.hero-film__video {
+.hero-film__image {
   mix-blend-mode: multiply;
 }
 
@@ -1462,5 +1462,32 @@ body {
 @media (max-width: 900px) and (min-height: 700px) {
   .hero-film .hero-film__stage {
     row-gap: clamp(1.5rem, 4svh, 3rem);
+  }
+}
+
+/* =========================================================
+   HERO POSITION REFINEMENT — DESKTOP ONLY
+   ========================================================= */
+
+@media (min-width: 1101px) {
+  .hero-film__content {
+    position: relative;
+    left: 65px;
+  }
+
+  .hero-film__visual {
+    position: relative;
+    left: 75px;
+  }
+}
+
+/* =========================================================
+   TABLET & MOBILE — PRESERVE RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .hero-film__content,
+  .hero-film__visual {
+    left: auto;
   }
 }

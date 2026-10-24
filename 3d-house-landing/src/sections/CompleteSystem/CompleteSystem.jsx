@@ -144,7 +144,7 @@ function CompleteSystem() {
         >
 
           <img
-            src="/images/CompleteSystem/Complete_house.png"
+            src="/images/CompleteSystem/Complete_house.jpeg"
             alt="Completed Premium Lining Solutions residential project"
             loading="lazy"
             decoding="async"

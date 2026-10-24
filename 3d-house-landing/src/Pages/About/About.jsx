@@ -1,748 +1,98 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
-import { Link } from 'react-router-dom'
-
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import './About.css'
 
-
-/* =========================================================
-   DATA
-   ========================================================= */
-
-const projectFlow = [
-  {
-    number: '01',
-    title: 'Project received',
-    text: 'You send through the project details, drawings and required services.',
-  },
-  {
-    number: '02',
-    title: 'Scope reviewed',
-    text: 'We review the requirements and establish the relevant lining scope.',
-  },
-  {
-    number: '03',
-    title: 'Work coordinated',
-    text: 'Materials, trades and sequencing are considered around the project program.',
-  },
-  {
-    number: '04',
-    title: 'Delivery',
-    text: 'The agreed works progress with clear communication throughout the project.',
-  },
-]
-
-
+const clubs = ['Sydenham Park', 'Westgate', 'Preston Lions', 'Lalor Sloga']
 const faqs = [
-  {
-    question: 'What type of projects does PLS work on?',
-    answer:
-      'Premium Lining Solutions supports residential and construction projects across Melbourne and Victoria. Send us your project details and our team can review the scope and availability.',
-  },
-  {
-    question: 'Can I engage PLS for an individual service?',
-    answer:
-      'Yes. Project requirements can vary. Send through the service you require and our team can discuss the appropriate scope for your project.',
-  },
-  {
-    question: 'What services can be included?',
-    answer:
-      'Our service offering includes Hebel and external wall systems, cladding, building wrap, insulation, plaster and painting.',
-  },
-  {
-    question: 'What materials and systems do you work with?',
-    answer:
-      'Depending on project requirements, the PLS offering includes systems and products from suppliers such as CSR Hebel, James Hardie, PGF Clima, Bradford, Knauf Sheetrock and Dulux.',
-  },
-  {
-    question: 'Where does PLS operate?',
-    answer:
-      'Premium Lining Solutions services projects across Melbourne and Victoria.',
-  },
-  {
-    question: 'How do I request a quote?',
-    answer:
-      'Send your project details through our enquiry form, including the project location and required services. Our team can then review the scope with you.',
-  },
+  { question: 'What types of projects does PLS work on?', answer: 'We support residential construction projects across Melbourne and Victoria. Send through your project details and we can discuss the scope and availability.' },
+  { question: 'Can PLS provide an individual service?', answer: 'Yes. You can enquire about a single lining service or multiple systems for the same project.' },
+  { question: 'What services does PLS offer?', answer: 'Our services include AAC / Hebel systems, external cladding, wall wrap, insulation, Rondo stud and track, and plaster systems. The scope depends on your project requirements.' },
+  { question: 'Where does PLS operate?', answer: 'Premium Lining Solutions is based in Melbourne and works on projects across Victoria.' },
+  { question: 'How do I request a quote?', answer: 'Send your project location, drawings if available, and required services through our contact page. Our team will review your enquiry.' },
 ]
 
-
-const reveal = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-
-  viewport: {
-    once: true,
-    amount: 0.15,
-  },
-
-  transition: {
-    duration: 0.65,
-    ease: [0.16, 1, 0.3, 1],
-  },
-}
-
-
-/* =========================================================
-   ABOUT PAGE
-   ========================================================= */
-
-function About() {
+export default function About() {
   const [openFaq, setOpenFaq] = useState(null)
-
-  const toggleFaq = (index) => {
-    setOpenFaq((current) => (
-      current === index ? null : index
-    ))
+  const reduceMotion = useReducedMotion()
+  const reveal = {
+    initial: reduceMotion ? false : { opacity: 0, y: 18 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.12 },
+    transition: { duration: reduceMotion ? 0 : 0.55 },
   }
 
-
   return (
-    <div className="about-page">
-
-      {/* =====================================================
-          EDITORIAL OPENING + TEAM IMAGE
-          ===================================================== */}
-
-      <section className="about-opening">
-
-        <div
-          className="about-opening__mark"
-          aria-hidden="true"
-        >
-          PLS / 01
+    <main className="about-page">
+      {/* 01 — Sponsorship feature is the first section, directly below the site navbar. */}
+      <section className="about-feature" aria-labelledby="about-feature-title">
+        <div className="about-feature__photo">
+          <img src="/images/About/sydenham-park.jpeg" alt="Sydenham Park Soccer Club's 2026 club partner announcement featuring Premium Lining Solutions" fetchPriority="high" />
         </div>
-
-
-        <div className="about-shell about-opening__grid">
-
-          {/* LABEL */}
-
-          <motion.div
-            className="about-opening__label"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7 }}
-          >
-            <span>ABOUT PLS</span>
-
-            <span className="about-opening__line" />
-          </motion.div>
-
-
-          {/* TITLE */}
-
-          <motion.div
-            className="about-opening__title"
-            initial={{
-              opacity: 0,
-              y: 28,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.85,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <h1>
-              We coordinate
-              <br />
-              the parts that make
-              <br />
-              a house <em>feel complete.</em>
-            </h1>
-
-            <p className="about-opening__description">
-              A Melbourne-based construction service bringing
-              complementary lining trades together through a
-              more coordinated approach to project delivery.
-            </p>
-          </motion.div>
-
-
-          {/* TEAM IMAGE */}
-
-          <motion.figure
-            className="about-opening__visual"
-            initial={{
-              opacity: 0,
-              scale: 0.985,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              duration: 1,
-              delay: 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            <div className="about-opening__image-wrap">
-
-              <img
-                src="/images/About/About Hero.png"
-                alt="Premium Lining Solutions construction team on a residential building site"
-                className="about-opening__image"
-              />
-
-              <div
-                className="about-opening__image-shade"
-                aria-hidden="true"
-              />
-
-              <div className="about-opening__image-caption">
-                <span>PLS / MELBOURNE</span>
-
-                <span>
-                  Coordinated construction delivery
-                </span>
-              </div>
-
-            </div>
-          </motion.figure>
-
-        </div>
-
-      </section>
-
-
-
-      {/* =====================================================
-          COMPANY STORY + OFFICE IMAGE
-          ===================================================== */}
-
-      <section className="about-profile">
-
-        <div className="about-shell">
-
-          {/* SECTION INDEX */}
-
-          <motion.div
-            className="about-profile__heading"
-            {...reveal}
-          >
-            <div className="about-profile__index">
-              <strong>01</strong>
-
-              <span>
-                OUR STORY
-              </span>
-            </div>
-
-            <div className="about-profile__headline">
-              <p className="about-kicker">
-                WHY PLS
-              </p>
-
-              <h2>
-                Construction has enough
-                <br />
-                <em>moving parts already.</em>
-              </h2>
-            </div>
-          </motion.div>
-
-
-
-          {/* EDITORIAL STORY */}
-
-          <div className="about-profile__content">
-
-            <motion.div
-              className="about-profile__story"
-              {...reveal}
-            >
-              <p className="about-profile__lead">
-                A residential build can involve multiple
-                contractors, suppliers, schedules and
-                handovers before the lining work is complete.
-              </p>
-
-              <div className="about-profile__body">
-                <p>
-                  Premium Lining Solutions takes a practical
-                  approach to that challenge by bringing
-                  complementary lining services into a more
-                  coordinated workflow.
-                </p>
-
-                <p>
-                  The objective is straightforward: understand
-                  the scope, organise the work around the build
-                  and make communication easier throughout the
-                  project.
-                </p>
-              </div>
-            </motion.div>
-
-
-
-            {/* OFFICE / PLANNING IMAGE */}
-
-            <motion.figure
-              className="about-profile__visual"
-              {...reveal}
-            >
-              <div className="about-profile__image-wrap">
-
-                <img
-                  src="/images/About/About PLS office.png"
-                  alt="Premium Lining Solutions team discussing residential construction plans"
-                  className="about-profile__image"
-                  loading="lazy"
-                />
-
-              </div>
-
-              <figcaption>
-                <span>PLANNING + COORDINATION</span>
-
-                <p>
-                  Understanding the project before the work
-                  begins.
-                </p>
-              </figcaption>
-            </motion.figure>
-
-
-
-            {/* FACTS */}
-
-            <motion.aside
-              className="about-profile__facts"
-              {...reveal}
-            >
-
-              <div className="about-fact">
-                <span>BASED IN</span>
-
-                <strong>
-                  Melbourne
-                  <br />
-                  Victoria
-                </strong>
-              </div>
-
-
-              <div className="about-fact">
-                <span>CORE SERVICES</span>
-
-                <strong>
-                  Six lining
-                  <br />
-                  categories
-                </strong>
-              </div>
-
-
-              <div className="about-fact">
-                <span>PROJECT FOCUS</span>
-
-                <strong>
-                  Residential
-                  <br />
-                  construction
-                </strong>
-              </div>
-
-
-              <div className="about-fact">
-                <span>ENQUIRIES</span>
-
-                <a href="tel:0451215223">
-                  0451 215 223
-                </a>
-              </div>
-
-            </motion.aside>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-
-      {/* =====================================================
-          MANIFESTO
-          ===================================================== */}
-
-      <section className="about-manifesto">
-
-        <div className="about-shell">
-
-          <motion.div
-            className="about-manifesto__inner"
-            {...reveal}
-          >
-
-            <span
-              className="about-manifesto__quote"
-              aria-hidden="true"
-            >
-              “
-            </span>
-
-            <p>
-              Good construction isn't only about
-              <br />
-              each trade doing its job.
-              <br />
-              <em>It's about how the work connects.</em>
-            </p>
-
-          </motion.div>
-
-        </div>
-
-      </section>
-
-
-
-      {/* =====================================================
-          PROJECT JOURNEY
-          ===================================================== */}
-
-      <section className="about-journey">
-
-        <div className="about-shell">
-
-          <motion.header
-            className="about-journey__header"
-            {...reveal}
-          >
-
-            <div>
-              <span className="about-section-number">
-                02
-              </span>
-
-              <span className="about-section-label">
-                WORKING WITH PLS
-              </span>
-            </div>
-
-            <p>
-              From the first project details through to
-              delivery, the process is kept clear and
-              practical.
-            </p>
-
-          </motion.header>
-
-
-
-          <div className="about-journey__timeline">
-
-            <div
-              className="about-journey__track"
-              aria-hidden="true"
-            />
-
-
-            {projectFlow.map((step, index) => (
-
-              <motion.article
-                key={step.number}
-                className="about-journey__step"
-                initial={{
-                  opacity: 0,
-                  y: 20,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                  amount: 0.25,
-                }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
-
-                <div className="about-journey__point">
-                  <span />
+        <div className="about-feature__content">
+          <motion.div {...reveal}>
+            <span className="about-eyebrow">PLS / COMMUNITY PARTNERSHIPS</span>
+            <h1 id="about-feature-title">Backing the<br /><em>local game.</em></h1>
+            <p>Premium Lining Solutions proudly supports local football and the communities that bring people together.</p>
+            <span className="about-feature__subheading">CLUBS WE SUPPORT</span>
+            <div className="about-feature__clubs">
+              {clubs.map((club, i) => (
+                <div className="about-feature__club" key={club}>
+                  <span>{String(i + 1).padStart(2, '0')}</span><strong>{club}</strong>
                 </div>
-
-                <span className="about-journey__number">
-                  {step.number}
-                </span>
-
-                <h3>
-                  {step.title}
-                </h3>
-
-                <p>
-                  {step.text}
-                </p>
-
-              </motion.article>
-
-            ))}
-
-          </div>
-
+              ))}
+            </div>
+          </motion.div>
         </div>
-
       </section>
 
-
-
-      {/* =====================================================
-          FAQ
-          ===================================================== */}
-
-      <section className="about-questions">
-
-        <div className="about-shell about-questions__grid">
-
-          {/* LEFT */}
-
-          <motion.div
-            className="about-questions__intro"
-            {...reveal}
-          >
-
-            <div
-              className="about-questions__number"
-              aria-hidden="true"
-            >
-              03
-            </div>
-
-            <p className="about-kicker">
-              COMMON QUESTIONS
-            </p>
-
-            <h2>
-              Things worth
-              <br />
-              knowing <em>beforehand.</em>
-            </h2>
-
-            <p className="about-questions__description">
-              Straightforward answers to some of the questions
-              we receive about projects, services and
-              enquiries.
-            </p>
-
+      {/* 02 — Company introduction */}
+      <section className="about-company" aria-labelledby="about-company-title">
+        <div className="about-container about-company__grid">
+          <motion.div {...reveal}>
+            <span className="about-eyebrow">01 / ABOUT THE COMPANY</span>
+            <h2 id="about-company-title">From frame<br /><em>to finish.</em></h2>
+            <span className="about-company__est">ESTABLISHED 2022 · MELBOURNE, VICTORIA</span>
           </motion.div>
+          <motion.div className="about-company__text" {...reveal}>
+            <p>Established in 2022, Premium Lining Solutions is a Melbourne-based construction services business focused on residential lining and exterior wall systems.</p>
+            <p>We bring complementary services together through a practical, coordinated approach — with attention to workmanship, communication and the details that help projects progress smoothly.</p>
+            <p>Our work includes AAC / Hebel systems, cladding, wall wrap, insulation, stud and track, and plaster systems.</p>
+          </motion.div>
+        </div>
+      </section>
 
-
-
-          {/* FAQ LIST */}
-
-          <motion.div
-            className="about-questions__list"
-            {...reveal}
-          >
-
+      {/* 03 — Compact FAQs */}
+      <section className="about-faq" aria-labelledby="about-faq-title">
+        <div className="about-container about-faq__grid">
+          <motion.div {...reveal}>
+            <span className="about-eyebrow">02 / FREQUENTLY ASKED QUESTIONS</span>
+            <h2 id="about-faq-title">Good to know<br /><em>before we begin.</em></h2>
+            <p className="about-faq__intro">A few helpful answers about our services and project enquiries.</p>
+          </motion.div>
+          <motion.div className="about-faq__list" {...reveal}>
             {faqs.map((faq, index) => {
-
-              const isOpen = openFaq === index
-
+              const expanded = openFaq === index
               return (
-                <div
-                  key={faq.question}
-                  className={
-                    isOpen
-                      ? 'about-question about-question--open'
-                      : 'about-question'
-                  }
-                >
-
-                  <button
-                    type="button"
-                    className="about-question__button"
-                    onClick={() => toggleFaq(index)}
-                    aria-expanded={isOpen}
-                  >
-
-                    <span className="about-question__index">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-
-                    <span className="about-question__title">
-                      {faq.question}
-                    </span>
-
-                    <span
-                      className="about-question__toggle"
-                      aria-hidden="true"
-                    >
-                      {isOpen ? '−' : '+'}
-                    </span>
-
+                <div className="about-faq__item" key={faq.question}>
+                  <button className="about-faq__question" type="button" aria-expanded={expanded} aria-controls={`about-answer-${index}`} onClick={() => setOpenFaq(expanded ? null : index)}>
+                    <span className="about-faq__number">{String(index + 1).padStart(2, '0')}</span>
+                    <span>{faq.question}</span>
+                    <span className="about-faq__toggle" aria-hidden="true">{expanded ? '−' : '+'}</span>
                   </button>
-
-
                   <AnimatePresence initial={false}>
-
-                    {isOpen && (
-
-                      <motion.div
-                        className="about-question__answer-wrap"
-                        initial={{
-                          height: 0,
-                          opacity: 0,
-                        }}
-                        animate={{
-                          height: 'auto',
-                          opacity: 1,
-                        }}
-                        exit={{
-                          height: 0,
-                          opacity: 0,
-                        }}
-                        transition={{
-                          duration: 0.3,
-                          ease: [0.16, 1, 0.3, 1],
-                        }}
-                      >
-
-                        <div className="about-question__answer">
-                          <p>
-                            {faq.answer}
-                          </p>
-                        </div>
-
+                    {expanded && (
+                      <motion.div id={`about-answer-${index}`} className="about-faq__answer" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.22 }}>
+                        <p>{faq.answer}</p>
                       </motion.div>
-
                     )}
-
                   </AnimatePresence>
-
                 </div>
               )
-
             })}
-
           </motion.div>
-
         </div>
-
       </section>
-
-
-
-      {/* =====================================================
-          STUDIO-STYLE CONTACT ENDING
-          ===================================================== */}
-
-      <section className="about-contact">
-
-        <div className="about-shell">
-
-          <div className="about-contact__top">
-
-            <motion.div {...reveal}>
-
-              <span className="about-contact__small">
-                PREMIUM LINING SOLUTIONS
-              </span>
-
-              <h2>
-                Start a
-                <br />
-                <em>conversation.</em>
-              </h2>
-
-            </motion.div>
-
-
-            <motion.div
-              className="about-contact__arrow"
-              {...reveal}
-              aria-hidden="true"
-            >
-              ↘
-            </motion.div>
-
-          </div>
-
-
-
-          <motion.div
-            className="about-contact__details"
-            {...reveal}
-          >
-
-            <div>
-              <span>LOCATION</span>
-
-              <strong>
-                Melbourne, Victoria
-                <br />
-                Australia
-              </strong>
-            </div>
-
-
-            <div>
-              <span>POSTAL</span>
-
-              <strong>
-                PO Box 1157
-                <br />
-                Kensington VIC 3031
-              </strong>
-            </div>
-
-
-            <div>
-              <span>PROJECT ENQUIRIES</span>
-
-              <a href="mailto:orders@premiumliningsolutions.com.au">
-                orders@premiumliningsolutions.com.au
-              </a>
-
-              <a href="tel:0451215223">
-                0451 215 223
-              </a>
-            </div>
-
-
-            <div className="about-contact__project">
-
-              <Link to="/contact#enquiry">
-
-                <span>
-                  START A PROJECT
-                </span>
-
-                <span aria-hidden="true">
-                  →
-                </span>
-
-              </Link>
-
-            </div>
-
-          </motion.div>
-
-        </div>
-
-      </section>
-
-    </div>
+      {/* Existing global Footer in App/layout follows this page. */}
+    </main>
   )
 }
-
-
-export default About

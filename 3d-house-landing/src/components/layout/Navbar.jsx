@@ -14,7 +14,7 @@ function Navbar() {
 
   const isHome = location.pathname === '/'
   const isAbout = location.pathname === '/about'
-  const isArchitecturalSystems = location.pathname === '/architectural-systems'
+  const isServices = location.pathname === '/services'
   const isContact = location.pathname === '/contact'
 
 
@@ -80,18 +80,20 @@ function Navbar() {
           Home
         </Link>
 
-        <Link
-          to="/architectural-systems"
-          className={isArchitecturalSystems ? 'active' : ''}
-        >
-          Architectural Systems
-        </Link>
+        
 
         <Link
           to="/about"
           className={isAbout ? 'active' : ''}
         >
           About
+        </Link>
+
+        <Link
+          to="/services"
+          className={isServices ? 'active' : ''}
+        >
+          Services
         </Link>
 
         <Link

@@ -12,7 +12,7 @@ function ScrollToTop() {
      * scroll directly to that section.
      *
      * Example:
-     * /architectural-systems#insulation
+     * /services#insulation
      */
 
     if (hash) {

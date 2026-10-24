@@ -8,24 +8,24 @@ const services = [
     name: 'HEBEL',
     description:
       'Lightweight wall systems designed for strength, durability and dependable performance.',
-    image: '/images/systems/hebel.png',
-    to: '/architectural-systems#hebel',
+    image: '/images/systems/hebel.jpeg',
+    to: '/services#hebel',
   },
   {
     number: '02',
     name: 'CLADDING',
     description:
       'Architectural exterior cladding systems that protect the building while defining its finish.',
-    image: '/images/systems/cladding.png',
-    to: '/architectural-systems#cladding',
+    image: '/images/systems/cladding.jpeg',
+    to: '/services#cladding',
   },
   {
     number: '03',
-    name: 'WRAP',
+    name: ' WALL WRAP',
     description:
       'High-performance building wrap supporting moisture management and long-term building protection.',
-    image: '/images/systems/wrap.png',
-    to: '/architectural-systems#wrap',
+    image: '/images/systems/wall wrap.jpeg',
+    to: '/services#wrap',
   },
   {
     number: '04',
@@ -33,24 +33,16 @@ const services = [
     description:
       'Thermal insulation solutions designed to improve comfort and building performance throughout the year.',
     image: '/images/systems/insulation.png',
-    to: '/architectural-systems#insulation',
+    to: '/services#insulation',
   },
   {
     number: '05',
     name: 'PLASTER',
     description:
       'Precision plasterboard installation for clean walls, ceilings and consistently refined interiors.',
-    image: '/images/systems/plaster.png',
-    to: '/architectural-systems#plaster',
-  },
-  {
-    number: '06',
-    name: 'PAINT',
-    description:
-      'Professional finishing that brings every surface together with a clean and durable final result.',
-    image: '/images/systems/paint.png',
-    to: '/architectural-systems#paint',
-  },
+    image: '/images/systems/plaster.jpeg',
+    to: '/services#plaster',
+  }
 ]
 
 /* =========================================================

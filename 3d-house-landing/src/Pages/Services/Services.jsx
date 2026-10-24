@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 
-import './ArchitecturalSystems.css'
+import './Services.css'
 
 
 /* =========================================================
@@ -140,7 +140,7 @@ const reveal = {
    ARCHITECTURAL SYSTEMS
    ========================================================= */
 
-function ArchitecturalSystems() {
+function Services() {
 
   const scrollToSystem = (id) => {
     const element = document.getElementById(id)
@@ -179,7 +179,7 @@ function ArchitecturalSystems() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7 }}
           >
-            <span>ARCHITECTURAL SYSTEMS</span>
+            <span>Services</span>
 
             <span>PLS / MELBOURNE</span>
           </motion.div>
@@ -353,7 +353,7 @@ function ArchitecturalSystems() {
 
                     <img
                       src={system.image}
-                      alt={`${system.name} architectural system`}
+                      alt={`${system.name} service`}
                       className="system-chapter__image"
                       loading={index > 0 ? 'lazy' : 'eager'}
                     />
@@ -676,4 +676,4 @@ function ArchitecturalSystems() {
 }
 
 
-export default ArchitecturalSystems
+export default Services
