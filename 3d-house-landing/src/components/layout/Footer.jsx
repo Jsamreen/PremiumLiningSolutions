@@ -87,7 +87,7 @@ function Footer() {
             <div className="footer__contact">
 
               <a href="tel:+61451215223">
-                0451 215 223
+                0413 550 445
               </a>
 
               <a href="mailto:orders@premiumliningsolutions.com.au">

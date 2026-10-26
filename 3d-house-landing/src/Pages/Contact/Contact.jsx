@@ -84,7 +84,7 @@ function Contact() {
           aria-hidden="true"
         >
           <img
-            src="/images/Contact/contact-hero.png"
+            src="/images/contact/contact-hero.webp"
             alt=""
           />
         </div>
@@ -158,7 +158,7 @@ function Contact() {
                 <span>PHONE</span>
 
                 <strong>
-                  0451 215 223
+                  0413 550 445
                 </strong>
               </a>
 
@@ -703,7 +703,7 @@ function Contact() {
               </span>
 
               <a href="tel:+61451215223">
-                0451 215 223
+                0413 550 445
               </a>
 
             </div>
